@@ -1,0 +1,27 @@
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .label { font: 14px sans-serif; fill: #333; }
+    .math { font: italic 16px serif; fill: #000; }
+  </style>
+
+  <!-- Inputs -->
+  <line x1="100" y1="100" x2="250" y2="150" stroke="black"/>
+  <text x="90" y="100" class="label">x₁</text>
+  <line x1="100" y1="150" x2="250" y2="150" stroke="black"/>
+  <text x="90" y="150" class="label">x₂</text>
+  <line x1="100" y1="200" x2="250" y2="150" stroke="black"/>
+  <text x="90" y="200" class="label">xₙ</text>
+
+  <!-- Neuron -->
+  <circle cx="250" cy="150" r="40" fill="#cce5ff" stroke="black"/>
+  <text x="250" y="155" class="math" text-anchor="middle">∑ + b</text>
+
+  <!-- Activation -->
+  <line x1="290" y1="150" x2="360" y2="150" stroke="black"/>
+  <rect x="360" y="130" width="80" height="40" fill="#d4edda" stroke="black"/>
+  <text x="400" y="155" class="math" text-anchor="middle">f(⋅)</text>
+
+  <!-- Output -->
+  <line x1="440" y1="150" x2="500" y2="150" stroke="black"/>
+  <text x="510" y="150" class="label">y</text>
+</svg>
