@@ -7,7 +7,6 @@ TFG about LLM and minoritary spanish languages
 - [x] De donde vienen los datos en 4.2 Materiales
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano
 - [ ] Añadir figura en 4.2.2 (diagrama...)
-### Hacer el 5:
 - [x] Elegir métricas (Benchmark debajo) => No he encontrado papers sobre esto
 - [ ] Implementar Benchmark
 - [x] Elegir 2 modelos de 1B, uno de 3B y otro más pequeño
