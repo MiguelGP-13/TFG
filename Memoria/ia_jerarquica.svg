@@ -4,7 +4,7 @@
    height="500"
    version="1.1"
    id="svg7"
-   sodipodi:docname="ia_jerarquia.svg"
+   sodipodi:docname="ia_jerarquica.svg"
    inkscape:version="1.4.2 (2aeb623e1d, 2025-05-12)"
    inkscape:export-filename="../db4fc3e8/ia_jerarquica.png"
    inkscape:export-xdpi="172.8"
@@ -25,9 +25,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
-     inkscape:zoom="0.59333334"
-     inkscape:cx="-241.01124"
-     inkscape:cy="16.011236"
+     inkscape:zoom="1.1866667"
+     inkscape:cx="155.89887"
+     inkscape:cy="243.96067"
      inkscape:window-width="1920"
      inkscape:window-height="945"
      inkscape:window-x="1280"
@@ -64,7 +64,9 @@
      y="105"
      class="desc"
      id="text2"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Open Sans', sans-serif">Sistemas que imitan la inteligencia humana</text>
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Open Sans', sans-serif"><tspan
+       style="fill:#ffffff;fill-opacity:1"
+       id="tspan1">Sistemas que imitan la inteligencia humana</tspan></text>
   <!-- ML -->
   <circle
      cx="250"
@@ -83,7 +85,9 @@
      y="235"
      class="desc"
      id="text4"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Open Sans', sans-serif">Modelos que aprenden de datos</text>
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14px;line-height:normal;font-family:'Open Sans', sans-serif"><tspan
+       style="fill:#ffffff;fill-opacity:1"
+       id="tspan2">Modelos que aprenden de datos</tspan></text>
   <!-- DL -->
   <circle
      cx="250"
@@ -106,15 +110,18 @@
        sodipodi:role="line"
        x="250"
        y="355"
-       id="tspan11">Redes basadas en las neuronas</tspan><tspan
+       id="tspan11"
+       style="fill:#ffffff;fill-opacity:1">Redes basadas en las neuronas</tspan><tspan
        sodipodi:role="line"
        x="250"
        y="372.5"
-       id="tspan13">del cerebro humano</tspan><tspan
+       id="tspan13"
+       style="fill:#ffffff;fill-opacity:1">del cerebro humano</tspan><tspan
        sodipodi:role="line"
        x="250"
        y="390"
-       id="tspan12" /></text>
+       id="tspan12"
+       style="fill:#ffffff;fill-opacity:1" /></text>
   <!-- IA Generativa -->
   <circle
      cx="246.51736"

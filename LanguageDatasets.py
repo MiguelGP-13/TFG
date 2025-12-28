@@ -2,6 +2,9 @@ import os, re, json, html, regex
 import pandas as pd
 from datasets import Dataset
 from collections import Counter
+import numpy as np
+import unicodedata
+
 
 lang_code = {
     "asturiano": {
@@ -19,7 +22,7 @@ lang_code = {
 }
 
 class LanguageDatasets():
-    def __init__(self, language, initialize=False, min_words=4):
+    def __init__(self, language, initialize=False, min_words=4, max_words=np.inf):
         if language not in ["aragones", "asturiano", "occitano"]:
             raise KeyError("Lenguaje no contemplado")
         self.raw_datasets = {}
@@ -27,6 +30,7 @@ class LanguageDatasets():
         self.language_codes = lang_code[language]
         self.json = []
         self.MIN_WORDS = min_words
+        self.MAX_WORDS = max_words
         if initialize:
             self.start()
 
@@ -159,8 +163,9 @@ class LanguageDatasets():
         # 5. Remove emojis / non-ASCII symbols (pero mantener letras latinas con tildes y ñ)
         text = regex.sub(r"\p{Emoji}+", " ", text)
 
-        # 6. Replace non-letter/number characters except whitespace/newline and basic punctuation
-        text = regex.sub(r"[^\p{L}\p{N}\s\n!?.,;:]", " ", text)
+        # 6. Replace non-letter/number characters except whitespace/newline and basic punctuation y apostrofes
+        text = unicodedata.normalize("NFC", text) # Normalize to make all ´ equal.
+        text = regex.sub(r"[^\p{L}\p{N}\s\n!?.,;:'’-]", " ", text)
 
 
         # 7. Normalize spaces/tabs
@@ -181,7 +186,7 @@ class LanguageDatasets():
 
         # 11. Filtrar basura: líneas demasiado cortas, repetitivas o sin sentido 
         words = text.split()
-        if len(words) <= self.MIN_WORDS:
+        if len(words) <= self.MIN_WORDS or len(text) >= self.MAX_CHARACTERS:
             return None
         if words and all(w == words[0] for w in words):
             return None
