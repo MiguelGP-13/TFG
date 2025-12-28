@@ -19,6 +19,10 @@ La traducción asturiano ↔ español y aranés ↔ español permite medir compr
 - LLM como juez. (lo prefiero, para evitar sesgos de que haya generado el LLM grande)
 - Métricas automáticas basadas en similitud semántica entre la traducción del modelo y una traducción de referencia generada por un LLM grande.
 
+#### 2.1. Evaluación de consistencia intra‑modelo
+
+Consiste en pedir al modelo que genere un texto en la lengua objetivo, lo traduzca al español, vuelva a traducirlo al asturiano/gallego/aranés, y comparar la versión final con la inicial.
+
 ### 3. Corrección gramatical mediante introducción de errores
 
 Para evaluar la capacidad de corrección, se parte de textos correctos en asturiano o aranés (por ejemplo, de Wikipedia). Un LLM grande introduce errores controlados de ortografía, morfología o sintaxis. El modelo evaluado debe corregirlos. La comparación con el texto original permite medir la calidad de la corrección.
@@ -43,6 +47,3 @@ Se construye un lexicón asturiano o aranés a partir de corpus públicos. Se co
 
 Se toma un corpus real en asturiano o aranés (por ejemplo, Wikipedia). Se extraen sus n‑gramas y se comparan con los n‑gramas generados por el modelo. El modelo no recibe nada en esta fase; simplemente se analizan sus salidas. Un solapamiento bajo indica que el modelo no reproduce patrones característicos de la lengua.
 
-### 5. Evaluación de consistencia intra‑modelo
-
-Consiste en pedir al modelo que genere un texto en la lengua objetivo, lo traduzca al español, vuelva a traducirlo al asturiano/gallego/aranés, y comparar la versión final con la inicial.
