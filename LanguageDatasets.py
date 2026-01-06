@@ -18,12 +18,16 @@ lang_code = {
     "aragones": {
         "tatoeba": "arg",
         "opus": "an"
+    },
+    "gallego" : {
+        "tatoeba" : "glg",
+        "opus" : "gl"
     }
 }
 
-class LanguageDatasets():
-    def __init__(self, language, initialize=False, min_words=4, max_words=np.inf):
-        if language not in ["aragones", "asturiano", "occitano"]:
+class LanguageDataset():
+    def __init__(self, language, initializeTatoeba =False, initializeLocal=False, min_words=4, max_words=np.inf, max_word_len= 25):
+        if language not in ["gallego", "asturiano", "aranes"]:
             raise KeyError("Lenguaje no contemplado")
         self.raw_datasets = {}
         self.language = language
@@ -31,8 +35,11 @@ class LanguageDatasets():
         self.json = []
         self.MIN_WORDS = min_words
         self.MAX_WORDS = max_words
-        if initialize:
-            self.start()
+        self.MAX_WORD_LEN = max_word_len
+        if initializeLocal:
+            self.startLocal()
+        if initializeTatoeba:
+            self.startTatoeba()
 
     def __getitem__(self, key):
         """
@@ -50,6 +57,9 @@ class LanguageDatasets():
             return self.json[bounds["start"]:bounds["end"]]
         else:
             raise TypeError("Key must be int, slice, or str")
+        
+    def __len__(self):
+        return len(self.json)
 
     @property
     def hf_dataset(self):
@@ -76,7 +86,7 @@ class LanguageDatasets():
 
         return self.hf_dataset.map(_tokenize)
 
-    def start(self):
+    def startTatoeba(self):
         print(f"Descargando tatoeba para {self.language}:")
         try:
             self.read_tatoeba_url(
@@ -88,6 +98,7 @@ class LanguageDatasets():
         except Exception as e:
             print("No se pudo completar por:", e)
 
+    def startTLocal(self):
         print(f"Cargando txt locales para {self.language}:")
         self.read_folder(f"datasets/{self.language}")
 
@@ -186,13 +197,13 @@ class LanguageDatasets():
 
         # 11. Filtrar basura: líneas demasiado cortas, repetitivas o sin sentido 
         words = text.split()
-        if len(words) <= self.MIN_WORDS or len(text) >= self.MAX_CHARACTERS:
+        if len(words) <= self.MIN_WORDS or len(words) >= self.MAX_WORDS:
             return None
         if words and all(w == words[0] for w in words):
             return None
         # if not self.is_mostly_latin(text, 0.75):
         #     return None
-        if any(len(w) > 25 for w in words):
+        if any(len(w) > self.MAX_WORD_LEN for w in words):
             return None
 
         one_letter_count = sum(1 for w in words if len(w) == 1)
