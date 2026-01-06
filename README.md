@@ -1,6 +1,9 @@
 # TFG
 TFG about LLM and minoritary spanish languages
 
+## Herramientas
+https://github.com/TALP-UPC/FreeLing/tree/master
+
 ## Pasos a realizar
 - [x] Cambiar color de descripciones en gráfico
 - [x] Como se genera, limpian los datos en 4.2 Materiales
