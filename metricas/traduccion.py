@@ -94,3 +94,13 @@ def roundTripEvaluation(model, tokenizer, text, target_lang, source_lang):
         "BLEU": bleu_score,
         "chrF": chrf_score
     }
+
+def roundTripMulti(model, tokenizer, text, langs, source_lang):
+    resultados = {}
+    for lang in langs:
+        try:
+            res = roundTripEvaluation(model, tokenizer, text, lang, source_lang)
+        except:
+            res = None
+        resultados[lang] = res
+    return resultados

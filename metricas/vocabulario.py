@@ -37,9 +37,31 @@ def buildFillMaskPrompt(masked_sentence, lang):
     }
     return prompts[lang]
 
+def extraer_palabra(decoded, prompt):
+    # Parte del prompt donde empieza la respuesta
+    anchor = prompt.split("\n")[-1]
+
+    if not decoded:
+        return ""
+
+    # Intentar separar por el anchor
+    if anchor in decoded:
+        tail = decoded.split(anchor, 1)[-1].strip()
+    else:
+        # Si no aparece, usar todo el texto generado
+        tail = decoded.strip()
+
+    # Separar en tokens
+    tokens = tail.split()
+
+    if len(tokens) == 0:
+        return ""
+
+    return tokens[0]
+
 
 def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
-                     max_new_tokens=8, top_k=3):
+                     max_new_tokens=30, top_k=3):
     """
     Evalúa la capacidad del modelo para predecir la palabra que falta (<mask>).
     Devuelve:
@@ -64,7 +86,8 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     # 3. Extraer solo la palabra predicha
-    pred = decoded.split(prompt.split("\n")[-1])[-1].strip().split()[0]
+    pred = extraer_palabra(decoded, prompt)
+
 
     # 4. Métricas principales
     accuracy = 1.0 if pred == missing_word else 0.0
@@ -84,7 +107,7 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
             temperature=0.8
         )
         decoded_k = tokenizer.decode(outputs_k[0], skip_special_tokens=True)
-        pred_k = decoded_k.split(prompt.split("\n")[-1])[-1].strip().split()[0]
+        pred_k = extraer_palabra(decoded_k, prompt)
         topk_preds.add(pred_k)
 
     topk_accuracy = 1.0 if missing_word in topk_preds else 0.0

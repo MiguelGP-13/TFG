@@ -74,7 +74,7 @@ def generateDatasetOrtograficoAnotado(
         try:
             prompt = (
                 f"Introduce {n_errors} errores en esta frase. "
-                f"Usa los tipos: ort (ortográfico), lex (léxico), add (añadir palabra), "
+                f"Usa los tipos (elige cual aleatoriamente): ort (ortográfico), lex (léxico), add (añadir palabra), "
                 f"drop (eliminar palabra), reord (reordenar). "
                 f"Marca cada error con <err t=TIPO>...</err>. "
                 f"No cambies el significado general. "
@@ -145,7 +145,7 @@ def generateDatasetHuecos(
 
         res_list.append((text, masked_sentence, missing_word))
 
-    df = pd.DataFrame(res_list, columns=["original", "masked", "missing_word"])
+    df = pd.DataFrame(res_list, columns=["original", "masked_sentence", "missing_word"])
 
     if save:
         date = time.localtime(time.time())

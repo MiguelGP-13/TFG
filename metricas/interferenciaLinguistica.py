@@ -66,63 +66,62 @@ def normalize(x, min_val, max_val):
         return 0.0
     return (x - min_val) / (max_val - min_val)
 
-
 def calidadLengua(
     text,
     lexicon_target,
-    lexicon_spanish,
-    lexicon_french,
     reference_text,
+    lexicons_comparison=None,
     ngram_n=3
 ):
     """
-    Devuelve:
-    - métricas lingüísticas
-    - probabilidad de pertenencia al idioma objetivo
-    - diagnóstico textual
-    Incluye comparación con español y francés.
+    Calcula métricas lingüísticas y compara el texto con n idiomas.
+    lexicons_comparison: dict { 'es': lexicon_es, 'fr': lexicon_fr, ... }
     """
 
-    # 1. Métricas
+    if lexicons_comparison is None:
+        lexicons_comparison = {}
+
+    # 1. Métricas básicas
     ttr_score = ttr(text)
     entropy_score = lexicalEntropy(text)
     ngram_score = ngramOverlap(text, reference_text, n=ngram_n)
 
-    # Frecuencias relativa con español
-    freq_target, freq_spanish = relativeLanguageFrequency(
-        text, lexicon_target, lexicon_spanish
-    )
-    # Frecuencia relativa con francés
-    freq_target, freq_french = relativeLanguageFrequency(
-        text, lexicon_target, lexicon_french
-    )
+    # 2. Frecuencias relativas
+    freq_target = relativeLanguageFrequency(text, lexicon_target, lexicon_target)[0]
 
-    # 2. Normalización 
+    freq_comparison = {}
+    for lang, lexicon in lexicons_comparison.items():
+        _, freq_other = relativeLanguageFrequency(text, lexicon_target, lexicon)
+        freq_comparison[lang] = freq_other
+
+    # 3. Normalización
     ttr_norm = normalize(ttr_score, 0.2, 0.8)
     entropy_norm = normalize(entropy_score, 2.0, 6.0)
     ngram_norm = ngram_score
 
-    freq_target_norm = freq_target
-    freq_spanish_norm = 1 - freq_spanish   
-    freq_french_norm = 1 - freq_french     
-
-    # 3. Score combinado
+    # 4. Score dinámico
+    # pesos base
     score = (
-        0.32 * freq_target_norm +
+        0.32 * freq_target +
         0.22 * ngram_norm +
         0.15 * ttr_norm +
-        0.15 * entropy_norm +
-        0.08 * freq_spanish_norm +
-        0.08 * freq_french_norm
+        0.15 * entropy_norm
     )
+
+    # pesos para idiomas comparados (repartidos equitativamente)
+    if freq_comparison:
+        peso = 0.16 / len(freq_comparison)
+        for lang, freq in freq_comparison.items():
+            score += peso * (1 - freq)
+
     prob = 1 / (1 + math.exp(-5 * (score - 0.5)))
 
     return {
         "ttr": ttr_score,
         "entropy": entropy_score,
-        "freq_target": freq_target,
-        "freq_spanish": freq_spanish,
-        "freq_french": freq_french,
         "ngram_overlap": ngram_score,
+        "freq_target": freq_target,
+        "freq_comparison": freq_comparison,
         "calidad": prob
     }
+
