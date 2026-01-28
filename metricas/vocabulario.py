@@ -10,32 +10,34 @@ chrf = CHRF()
 def buildFillMaskPrompt(masked_sentence, lang):
     prompts = {
         "es": (
-            f"En esta frase falta una palabra. "
-            f"Reemplaza <mask> por la palabra correcta. "
-            f"Devuelve solo la palabra que falta:\n{masked_sentence}\nPalabra:"
+            f"En la siguiente frase falta una palabra, reemplazada por <mask>. "
+            f"Devuelve solo y únicamente la palabra faltante.\n"
+            f"{masked_sentence}\nPalabra:"
         ),
         "ast": (
-            f"Nesta frase falta una pallabra. "
-            f"Rellena <mask> cola pallabra correuta. "
-            f"Devuelve namás la pallabra que falta:\n{masked_sentence}\nPallabra:"
+            f"Na siguiente frase falta una pallabra, reemplazada por <mask>. "
+            f"Devuelve namás la pallabra que falta.\n"
+            f"{masked_sentence}\nPallabra:"
         ),
         "gl": (
-            f"Nesta frase falta unha palabra. "
-            f"Substitúe <mask> pola palabra correcta. "
-            f"Devolve só a palabra que falta:\n{masked_sentence}\nPalabra:"
+            f"Na seguinte frase falta unha palabra, substituída por <mask>. "
+            f"Devolve só a palabra que falta.\n"
+            f"{masked_sentence}\nPalabra:"
         ),
         "aran": (
-            f"En aguesta frasa manque ua paraula. "
-            f"Remplace <mask> pera paraula corrècta. "
-            f"Da sonque era paraula que manque:\n{masked_sentence}\nParaula:"
+            f"En aguesta frasa manque ua paraula, remplaçada per <mask>. "
+            f"Da sonque era paraula que manque.\n"
+            f"{masked_sentence}\nParaula:"
         ),
         "fr": (
-            f"Il manque un mot dans cette phrase. "
-            f"Remplace <mask> par le mot correct. "
-            f"Donne seulement le mot manquant:\n{masked_sentence}\nMot:"
+            f"Dans la phrase suivante il manque un mot, remplacé par <mask>. "
+            f"Donne seulement le mot manquant.\n"
+            f"{masked_sentence}\nMot:"
         ),
     }
     return prompts[lang]
+
+
 
 def extraer_palabra(decoded, prompt):
     # Parte del prompt donde empieza la respuesta
@@ -51,25 +53,19 @@ def extraer_palabra(decoded, prompt):
         # Si no aparece, usar todo el texto generado
         tail = decoded.strip()
 
-    # Separar en tokens
-    tokens = tail.split()
+    clean = re.sub(r"[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]", "", tail)
 
-    if len(tokens) == 0:
-        return ""
-
-    return tokens[0]
+    return clean
 
 
 def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
-                     max_new_tokens=30, top_k=3):
+                     max_new_tokens=50):
     """
     Evalúa la capacidad del modelo para predecir la palabra que falta (<mask>).
     Devuelve:
       - accuracy exacta
       - accuracy ignorando mayúsculas
       - distancia Levenshtein
-      - top-k accuracy
-      - lista de candidatos generados
     """
 
     # 1. Construir prompt
@@ -79,8 +75,7 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
     inputs = tokenizer(prompt, return_tensors="pt")
     outputs = model.generate(
         **inputs,
-        max_new_tokens=max_new_tokens,
-        do_sample=False
+        max_new_tokens=max_new_tokens
     )
 
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
@@ -96,22 +91,6 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
     # 5. Distancia Levenshtein (similaridad)
     lev_distance = Levenshtein.distance(pred, missing_word)
 
-    # 6. Top‑k accuracy (sampling)
-    topk_preds = set([pred])
-    for _ in range(top_k - 1):
-        outputs_k = model.generate(
-            **inputs,
-            max_new_tokens=max_new_tokens,
-            do_sample=True,
-            top_p=0.9,
-            temperature=0.8
-        )
-        decoded_k = tokenizer.decode(outputs_k[0], skip_special_tokens=True)
-        pred_k = extraer_palabra(decoded_k, prompt)
-        topk_preds.add(pred_k)
-
-    topk_accuracy = 1.0 if missing_word in topk_preds else 0.0
-
     return {
         "masked": masked_sentence,
         "missing_word": missing_word,
@@ -120,7 +99,5 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
         # métricas útiles
         "accuracy": accuracy,
         "accuracy_lower": accuracy_lower,
-        "levenshtein": lev_distance,
-        "topk_accuracy": topk_accuracy,
-        "topk_candidates": list(topk_preds)
+        "levenshtein": lev_distance
     }

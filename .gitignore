@@ -1,6 +1,7 @@
 *.pdf
 secrets.env
-
+dictionaries
+lexicons
 datasets
 
 # Byte-compiled / optimized / DLL files

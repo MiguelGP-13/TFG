@@ -68,18 +68,6 @@ def _benchmark(
         raise ValueError("df_textos debe tener 1 o 2 columnas.")
 
     # ---------------------------------------------------------
-    # Helper: generar texto
-    # ---------------------------------------------------------
-    def generar_texto(prompt: str) -> str:
-        inputs = tokenizer(prompt, return_tensors="pt")
-        outputs = model.generate(
-            **inputs,
-            max_new_tokens=max_new_tokens,
-            do_sample=False
-        )
-        return tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-    # ---------------------------------------------------------
     # 1. CALIDAD DE LENGUA (generativa)
     # ---------------------------------------------------------
     calidad_raw = None
@@ -89,24 +77,13 @@ def _benchmark(
 
             textos_generados = []
             for _ in range(n_samples_calidad):
-                prompt = " ".join(
-                    df_textos[col_source]
-                    .sample(min(15, len(df_textos)))
-                    .astype(str)
-                    .tolist()
-                )
-                gen = generar_texto(prompt)
-                textos_generados.append(gen)
-
-            calidad_raw = []
-            for text in textos_generados:
                 res = calidadLengua(
-                    text=text,
+                    model, tokenizer,
                     lexicon_target=lexicon_target,
                     reference_text=reference_text,
                     lexicons_comparison=lexicons_comparison
                 )
-                calidad_raw.append({"texto": text, "metricas": res})
+                calidad_raw.append(res)
         except Exception:
             calidad_raw = None
 
@@ -114,29 +91,29 @@ def _benchmark(
         resultados["calidad_lengua"] = calidad_raw
     else:
         # medias
-        ttr_vals = [r["metricas"]["ttr"] for r in calidad_raw]
-        ent_vals = [r["metricas"]["entropy"] for r in calidad_raw]
-        ngram_vals = [r["metricas"]["ngram_overlap"] for r in calidad_raw]
-        freq_target_vals = [r["metricas"]["freq_target"] for r in calidad_raw]
-        calidad_vals = [r["metricas"]["calidad"] for r in calidad_raw]
+        ttr_vals = [r["ttr"] for r in calidad_raw]
+        ent_vals = [r["entropy"] for r in calidad_raw]
+        ngram_vals = [r["ngram_overlap"] for r in calidad_raw]
+        freq_target_vals = [r["freq_target"] for r in calidad_raw]
+        calidad_vals = [r["calidad"] for r in calidad_raw]
 
         # freq_comparison es dict por idioma
         all_langs = set()
         for r in calidad_raw:
-            all_langs.update(r["metricas"]["freq_comparison"].keys())
+            all_langs.update(r["freq_comparison"].keys())
 
         freq_comp_media = {}
         for lang in all_langs:
             vals = []
             for r in calidad_raw:
-                fc = r["metricas"]["freq_comparison"]
+                fc = r["freq_comparison"]
                 if lang in fc:
                     vals.append(fc[lang])
             if vals:
                 freq_comp_media[lang] = float(np.mean(vals))
 
         resultados["calidad_lengua"] = {
-            "ejemplo": calidad_raw[0]["texto"] if calidad_raw else None,
+            "ejemplo": calidad_raw[0]["text"] if calidad_raw else None,
             "media": {
                 "ttr": float(np.mean(ttr_vals)) if ttr_vals else None,
                 "entropy": float(np.mean(ent_vals)) if ent_vals else None,

@@ -70,26 +70,27 @@ def generateDatasetOrtograficoAnotado(
     for original in dataset:
         callBegin = time.time()
         n_errors = random.randint(min_errors, max_errors)
-
         try:
-            prompt = (
-                f"Introduce {n_errors} errores en esta frase. "
-                f"Usa los tipos (elige cual aleatoriamente): ort (ortográfico), lex (léxico), add (añadir palabra), "
-                f"drop (eliminar palabra), reord (reordenar). "
-                f"Marca cada error con <err t=TIPO>...</err>. "
-                f"No cambies el significado general. "
-                f"Devuelve solo la frase anotada:\n{original['text']}"
-            )
+            if n_errors == 0:
+                annotated = original['text']
+            else:
+                prompt = (
+                    f"Introduce {n_errors} errores en esta frase. "
+                    f"Usa los tipos (elige cual aleatoriamente): ort (ortográfico), lex (léxico), add (añadir palabra), reord (reordenar)."
+                    f"Marca cada error con <err t=TIPO>...</err>. "
+                    f"No cambies el significado general. "
+                    f"Devuelve solo la frase anotada:\n{original['text']}"
+                )
 
-            modified = safe_chat_completion(
-                client,
-                sleep_time=sleep_time,
-                max_retries=max_retries,
-                model=model,
-                messages=[{"role": "user", "content": prompt}]
-            )
-
-            annotated = modified.choices[0].message.content.strip()
+                modified = safe_chat_completion(
+                    client,
+                    sleep_time=sleep_time,
+                    max_retries=max_retries,
+                    model=model,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                annotated = modified.choices[0].message.content.strip()
+                
             res_list.append((original["text"], annotated, n_errors))
             callEnd = time.time()
 
