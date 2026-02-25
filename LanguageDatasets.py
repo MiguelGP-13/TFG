@@ -136,13 +136,23 @@ class LanguageDataset():
         dataset_name = file.split(".")[0]
         if dataset_name in self.raw_datasets.keys():
             raise ValueError(f"El dataset {directory}/{file} ya está cargado")
-
-        json_data = []
-        with open(os.path.join(directory, file), "r", encoding="utf-8") as f:
-            for line in f:
-                clean_line = self.clean_text(line)
-                if clean_line:
-                    json_data.append({"text": clean_line})
+        extension = file.split(".")[-1]
+        if extension=="csv":
+            try:
+                json_data = self.pandas_to_json(pd.read_csv(os.path.join(directory, file)))
+            except Exception as e:
+                raise ValueError("It has to have a text column.\n","Error: ",e)
+        elif extension == "json":
+            json_data = self.pandas_to_json(pd.read_json(os.path.join(directory, file)))
+        elif extension == "txt":
+            json_data = []
+            with open(os.path.join(directory, file), "r", encoding="utf-8") as f:
+                for line in f:
+                    clean_line = self.clean_text(line)
+                    if clean_line:
+                        json_data.append({"text": clean_line})
+        else:
+            raise ValueError("La extensión no se reconoce (txt, json, csv)")
 
         start = len(self.json)
         self.json += json_data

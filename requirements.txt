@@ -4,3 +4,4 @@ peft==0.18.0
 datasets
 accelerate
 bitsandbytes
+groq==1.0.0

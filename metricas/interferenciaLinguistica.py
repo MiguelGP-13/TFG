@@ -33,17 +33,16 @@ def lexicalEntropy(text):
 
     return entropy
 
-def relativeLanguageFrequency(text, lexicon_target, lexicon_spanish):
+def relativeLanguageFrequency(text, lexicon):
     tokens = tokenize(text)
 
-    target_count = sum(1 for t in tokens if t in lexicon_target)
-    spanish_count = sum(1 for t in tokens if t in lexicon_spanish)
+    target_count = sum(1 for t in tokens if t in lexicon)
 
     total = len(tokens)
     if total == 0:
         return 0, 0
 
-    return target_count / total, spanish_count / total
+    return target_count / total
 
 def ngrams(tokens, n):
     return set(tuple(tokens[i:i+n]) for i in range(len(tokens)-n+1))
@@ -140,11 +139,11 @@ def calidadLengua(
     ngram_score = ngramOverlap(text, reference_text, n=ngram_n)
 
     # 2. Frecuencias relativas
-    freq_target = relativeLanguageFrequency(text, lexicon_target, lexicon_target)[0]
+    freq_target = relativeLanguageFrequency(text, lexicon_target)
 
     freq_comparison = {}
     for lang, lexicon in lexicons_comparison.items():
-        _, freq_other = relativeLanguageFrequency(text, lexicon_target, lexicon)
+        freq_other = relativeLanguageFrequency(text, lexicon)
         freq_comparison[lang] = freq_other
 
     # 3. Normalización

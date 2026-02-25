@@ -5,6 +5,12 @@ import pandas as pd
 from groq import Groq
 from LanguageDatasets import LanguageDataset
 
+def quitarYaAnotadas(dataset: LanguageDataset, anotadas: pd.DataFrame):
+    ya = set(anotadas["original"].astype(str))
+    res = LanguageDataset(dataset.language)
+    res.json = [entry for entry in dataset if entry["text"] not in ya]
+    return res
+
 def safe_chat_completion(client, model, messages, sleep_time=0.5, max_retries=5): 
     """ Llama a client.chat.completions.create con reintentos automáticos. Si falla (por ejemplo, error 429 o timeout), espera sleep_time y reintenta. """ 
     for attempt in range(max_retries): 
@@ -29,7 +35,7 @@ def generateDatasetOrtografico(dataset: LanguageDataset, api_key, model="openai/
             modified = safe_chat_completion(client, sleep_time=sleep_time, max_retries=max_retries,
                 model=model,
                 messages=[
-                    {"role": "user", "content": f"Modifica esta frase, añadiendole {n_errors} errores gramaticales, ortográficos o léxicos. No añadas más contenido a la frase ni cambies el significado. Devuelve solo la frase modificada: '{original["text"]}'"}
+                    {"role": "user", "content": f"Modifica esta frase, añadiendole {n_errors} errores gramaticales, ortográficos o léxicos. No añadas más contenido a la frase ni cambies el significado. Devuelve solo la frase modificada: \"{original['text']}\""}
                 ]
             )
             res_list.append((original["text"], modified.choices[0].message.content, n_errors))
@@ -48,7 +54,7 @@ def generateDatasetOrtografico(dataset: LanguageDataset, api_key, model="openai/
     res_df = pd.DataFrame(res_list, columns=["original","modified", "n_errors"])
     if save:
         date = time.localtime(time.time())
-        res_df.to_csv(f"{dataset.language}_{model.split("/")[-1]}_{time.strftime("%m-%d_%H-%M-%S", date)}")
+        res_df.to_csv(f"{dataset.language}_{model.split('/')[-1]}_{time.strftime('%m-%d_%H-%M-%S', date)}")
     return res_df
 
 
@@ -96,6 +102,7 @@ def generateDatasetOrtograficoAnotado(
 
         except Exception as e:
             print(e)
+            print("Guardando progreso actual")
             return pd.DataFrame(res_list, columns=["original", "annotated", "n_errors"])
 
         # progreso

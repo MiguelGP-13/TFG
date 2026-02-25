@@ -9,16 +9,15 @@ https://github.com/TALP-UPC/FreeLing/tree/master
 - [x] Como se genera, limpian los datos en 4.2 Materiales
 - [x] De donde vienen los datos en 4.2 Materiales
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano
-- [ ] Añadir figura en 4.2.2 (diagrama...)
+- [x] Añadir figura en 4.2.2 (diagrama...)
 - [x] Elegir métricas (Benchmark debajo) => No he encontrado papers sobre esto
-- [ ] Implementar Benchmark
+- [x] Implementar Benchmark
 - [x] Elegir 2 modelos de 1B, uno de 3B y otro más pequeño
 - [ ] Evaluar los modelos
 - [ ] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
 
 
 - [ ] Entrenar con LoRA sobre el mejor de los de 1B (o los 2 mejores?)
-- [ ] Entrenar con fine tuning?
 - [ ] Evaluar resultados
 
 ## Benchmark para evaluar LLMs en gallego, asturiano y aranés

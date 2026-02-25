@@ -45,9 +45,14 @@ def _benchmark(
     df_anotado=None,
     lexicon_target=None,
     lexicons_comparison=None,
-    n_samples_calidad=5,
-    max_new_tokens=80,
     roundtrip_langs=None,
+
+    
+    n_samples_calidad=5,
+    max_new_tokens=1000,
+    calidad_ngram_n = 3,
+    max_reference_text = 100,
+
     debug: bool = False
 ):
     """
@@ -73,7 +78,7 @@ def _benchmark(
     calidad_raw = None
     if lexicon_target is not None and col_source is not None:
         try:
-            reference_text = " ".join(df_textos[col_target].astype(str).tolist())
+            reference_text = " ".join(df_textos[col_target][:max_reference_text].astype(str).tolist())
 
             textos_generados = []
             for _ in range(n_samples_calidad):
@@ -81,7 +86,10 @@ def _benchmark(
                     model, tokenizer,
                     lexicon_target=lexicon_target,
                     reference_text=reference_text,
-                    lexicons_comparison=lexicons_comparison
+                    lexicons_comparison=lexicons_comparison,
+                    max_new_tokens=max_new_tokens,
+                    source_lang=lang_eval,
+                    ngram_n=calidad_ngram_n
                 )
                 calidad_raw.append(res)
         except Exception:
@@ -325,15 +333,20 @@ def _benchmark(
 def benchmark(
     model,
     tokenizer,
-    df_textos,
+    df_textos,          # (source, target) o solo target
     lang_eval,
     df_huecos=None,
     df_anotado=None,
     lexicon_target=None,
     lexicons_comparison=None,
-    n_samples_calidad=5,
-    max_new_tokens=80,
     roundtrip_langs=None,
+
+    
+    n_samples_calidad=5,
+    max_new_tokens=1000,
+    calidad_ngram_n = 3,
+    max_reference_text = 100,
+
     debug: bool = False
 ):
     """
@@ -402,9 +415,12 @@ def benchmark(
         df_anotado=df_anotado,
         lexicon_target=lexicon_target,
         lexicons_comparison=lexicons_comparison,
+        roundtrip_langs=roundtrip_langs,
+
         n_samples_calidad=n_samples_calidad,
         max_new_tokens=max_new_tokens,
-        roundtrip_langs=roundtrip_langs,
+        calidad_ngram_n = calidad_ngram_n,
+        max_reference_text = max_reference_text,
         debug=debug
     )
 
