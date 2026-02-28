@@ -8,14 +8,21 @@ https://github.com/TALP-UPC/FreeLing/tree/master
 - [x] Cambiar color de descripciones en gráfico
 - [x] Como se genera, limpian los datos en 4.2 Materiales
 - [x] De donde vienen los datos en 4.2 Materiales
-- [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano
+- [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
+- [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Test]
+- [ ] Añadir pequeña explicacion de Bleue y chrF
+- [x] Crear lexicons
+- [ ] Explicar de donde salen los lexicons
 - [x] Añadir figura en 4.2.2 (diagrama...)
 - [x] Elegir métricas (Benchmark debajo) => No he encontrado papers sobre esto
 - [x] Implementar Benchmark
 - [x] Elegir 2 modelos de 1B, uno de 3B y otro más pequeño
-- [ ] Evaluar los modelos
-- [ ] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
+- [ ] Evaluar los modelos Asturiano
+- [ ] Evaluar los modelos Gallego
+- [ ] Evaluar los modelos Aranés
 
+- [x] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
+L A revisar
 
 - [ ] Entrenar con LoRA sobre el mejor de los de 1B (o los 2 mejores?)
 - [ ] Evaluar resultados
