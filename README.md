@@ -5,27 +5,41 @@ TFG about LLM and minoritary spanish languages
 https://github.com/TALP-UPC/FreeLing/tree/master
 
 ## Pasos a realizar
+### Memoria
 - [x] Cambiar color de descripciones en gráfico
 - [x] Como se genera, limpian los datos en 4.2 Materiales
 - [x] De donde vienen los datos en 4.2 Materiales
+- [ ] Añadir pequeña explicacion de Bleue y chrF
+- [ ] Explicar de donde salen los lexicons
+- [ ] Añadir estadísticas de datasets elegidos y generados
+- [x] Añadir figura en 4.2.2 (diagrama...)
+- [x] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
+L A revisar
+- [ ] Actualizar en la memoria los modelos elegidos y por qué (después de elegir los modelos)
+
+### Datos
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Test]
-- [ ] Añadir pequeña explicacion de Bleue y chrF
 - [x] Crear lexicons
-- [ ] Explicar de donde salen los lexicons
-- [x] Añadir figura en 4.2.2 (diagrama...)
+- [ ] Crear datasets anotados
+
+### Benchmark
 - [x] Elegir métricas (Benchmark debajo) => No he encontrado papers sobre esto
 - [x] Implementar Benchmark
-- [x] Elegir 2 modelos de 1B, uno de 3B y otro más pequeño
+- [ ] Probar Benchmark con Dataset Anotado
+
+### Entrenamiento
+- [ ] Elegir modelos más grandes y ver que se pueden cuantizar y cargar
+- [x] Crear esqueleto QLoRA entrenamiento
+- [ ] Entrenar con LoRA sobre el mejor de los de 1B (o los 2 mejores?)
+
+### Evaluación
 - [ ] Evaluar los modelos Asturiano
 - [ ] Evaluar los modelos Gallego
 - [ ] Evaluar los modelos Aranés
-
-- [x] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
-L A revisar
-
-- [ ] Entrenar con LoRA sobre el mejor de los de 1B (o los 2 mejores?)
-- [ ] Evaluar resultados
+- [ ] Evaluar resultados QLoRA Asturiano
+- [ ] Evaluar resultados QLoRA Gallego
+- [ ] Evaluar resultados QLoRA Aranés
 
 ## Benchmark para evaluar LLMs en gallego, asturiano y aranés
 
