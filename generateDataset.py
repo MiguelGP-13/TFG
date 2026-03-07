@@ -129,7 +129,7 @@ def generateDatasetOrtograficoAnotado(
 
 def generateDatasetHuecos(
         dataset: LanguageDataset,
-        save=True):
+        save=True, directory:str= None):
 
     res_list = []
 
@@ -158,6 +158,8 @@ def generateDatasetHuecos(
     if save:
         date = time.localtime(time.time())
         filename = f"huecos_{dataset.language}_{time.strftime('%m-%d_%H-%M-%S', date)}.csv"
+        if directory:
+            filename = directory + "/" + filename
         df.to_csv(filename, index=False)
 
     return df

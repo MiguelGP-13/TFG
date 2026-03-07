@@ -1,10 +1,9 @@
 import os, re, json, html, regex
 import pandas as pd
 from datasets import Dataset
-from collections import Counter
 import numpy as np
 import unicodedata
-
+import hashlib
 
 lang_code = {
     "asturiano": {
@@ -161,6 +160,22 @@ class LanguageDataset():
         return json_data
     
 
+    def read_dataframe(self, df, dataset_name=None):
+        if not dataset_name: # Hash del dataframe como nombre
+            dataset_name = hashlib.sha256(pd.util.hash_pandas_object(df, index=False).values).hexdigest()
+        if dataset_name in self.raw_datasets.keys():
+            raise ValueError(f"El dataset {dataset_name} ya está cargado")
+        try:
+            json_data = self.pandas_to_json(df)
+        except Exception as e:
+            raise ValueError("It has to have a text column.\n","Error: ",e)
+
+        start = len(self.json)
+        self.json += json_data
+        end = len(self.json)
+        self.raw_datasets[dataset_name] = {"start": start, "end": end}
+        return json_data
+
     # def is_mostly_latin(self, text, threshold=0.8):
     #     letters = regex.findall(r"\p{L}", text)
     #     latin = regex.findall(r"\p{Latin}", text)
@@ -242,7 +257,7 @@ class LanguageDataset():
         return text
 
 
-    def pandas_to_json(self, df, clean=True, save=False):
+    def pandas_to_json(self, df, clean=True, save:str=False):
         json_data = []
         for t in df["text"].tolist():
             clean_line = self.clean_text(t) if clean else t
