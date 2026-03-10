@@ -1,6 +1,4 @@
 import re
-import math
-import random
 from sacrebleu.metrics import BLEU, CHRF
 import Levenshtein
 

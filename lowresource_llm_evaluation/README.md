@@ -1,3 +1,5 @@
+Librería para TFG de Miguel Gómez, conteniendo métricas para evaluar LLMs sin datasets de Q&A
+
 ### 2. Traducción como tarea de evaluación
 
 La traducción gallego ↔ español, asturiano ↔ español y aranés ↔ español permite medir comprensión y generación. Para el aranés puede ser útil incluir también comparaciones con francés, dado su parentesco occitano. 
