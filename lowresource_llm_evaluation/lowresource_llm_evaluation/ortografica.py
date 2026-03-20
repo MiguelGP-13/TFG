@@ -37,7 +37,7 @@ def buildCorrectionPrompt(text, lang):
     return prompts[lang]
 
 
-def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es", max_new_tokens=128):
+def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es", device="cuda", max_new_tokens=128):
     """
     annotated = frase con <err t=...>...</err>
     original  = frase correcta
@@ -55,7 +55,7 @@ def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es
     prompt = buildCorrectionPrompt(incorrect, lang)
 
     # 4. Generar corrección con modelo a evaluar
-    inputs = tokenizer(prompt, return_tensors="pt")
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
     outputs = model.generate(
         **inputs,
         max_new_tokens=max_new_tokens,

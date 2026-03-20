@@ -56,7 +56,7 @@ def extraer_palabra(decoded, prompt):
     return clean
 
 
-def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
+def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es", device="cuda",
                      max_new_tokens=50):
     """
     Evalúa la capacidad del modelo para predecir la palabra que falta (<mask>).
@@ -70,10 +70,11 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
     prompt = buildFillMaskPrompt(masked_sentence, lang)
 
     # 2. Generar predicción determinista (top-1)
-    inputs = tokenizer(prompt, return_tensors="pt")
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
     outputs = model.generate(
         **inputs,
-        max_new_tokens=max_new_tokens
+        max_new_tokens=max_new_tokens,
+        do_sample=True
     )
 
     decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)

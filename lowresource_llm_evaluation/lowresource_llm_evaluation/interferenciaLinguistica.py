@@ -98,12 +98,12 @@ def buildStoryPrompt(lang):
 
 
 
-def generar_texto(model, tokenizer, prompt: str, max_new_tokens=200) -> str:
-    inputs = tokenizer(prompt, return_tensors="pt")
+def generar_texto(model, tokenizer, prompt: str, device, max_new_tokens=200) -> str:
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
     outputs = model.generate(
         **inputs,
         max_new_tokens=max_new_tokens,
-        do_sample=False
+        do_sample=True
     )
 
     # Cortar exactamente los tokens del prompt
@@ -120,7 +120,8 @@ def calidadLengua(
     source_lang,
     lexicons_comparison:dict=None,
     ngram_n=3,
-    max_new_tokens=1000
+    max_new_tokens=1000,
+    device="cuda"
 ):
     """
     Calcula métricas lingüísticas y compara el texto con n idiomas.
@@ -131,7 +132,7 @@ def calidadLengua(
         lexicons_comparison = {}
 
     # 0. Generar historia en la lengua
-    text = generar_texto(model, tokenizer, buildStoryPrompt(source_lang),max_new_tokens)
+    text = generar_texto(model, tokenizer, buildStoryPrompt(source_lang), device,max_new_tokens)
 
     # 1. Métricas básicas
     ttr_score = ttr(text)

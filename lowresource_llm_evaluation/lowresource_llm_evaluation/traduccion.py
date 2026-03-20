@@ -53,9 +53,9 @@ def buildTranslationPrompt(text, target_lang, source_lang):
     return prompts[source_lang]
 
 
-def translate(model, tokenizer, text, target_lang, source_lang, max_new_tokens=128):
+def translate(model, tokenizer, text, target_lang, source_lang, device="cuda", max_new_tokens=128):
     prompt = buildTranslationPrompt(text, target_lang, source_lang)
-    inputs = tokenizer(prompt, return_tensors="pt")
+    inputs = tokenizer(prompt, return_tensors="pt").to(device)
 
     outputs = model.generate(
         **inputs,
@@ -67,50 +67,48 @@ def translate(model, tokenizer, text, target_lang, source_lang, max_new_tokens=1
 
     for marker in [prompt.split("\n")[-1], ":"]:  # última línea del prompt
         decoded = decoded.split(marker)[-1].strip()
-
-    print(prompt)
+    
+    # print(prompt)
 
     return decoded
 
-def evaluateTranslation(model, tokenizer, original, reference, target_lang, source_lang):
+def evaluateTranslation(model, tokenizer, original, reference, target_lang, source_lang, device, max_new_tokens):
     """
     1. Traduce el texto a un idioma
     2. Calcula BLEU y chrF entre ambas traducciones
     """
     
-    translated = translate(model, tokenizer, original, target_lang, source_lang)
+    translated = translate(model, tokenizer, original, target_lang, source_lang, device, max_new_tokens)
 
     # SacreBLEU espera listas
     bleu_score = bleu.corpus_score([translated], [[reference]]).score
     chrf_score = chrf.corpus_score([translated], [[reference]]).score
 
     return {
-        "reference": reference,
         "translated": translated,
         "BLEU": bleu_score,
         "chrF": chrf_score
     }
 
-def roundTripEvaluation(model, tokenizer, text, target_lang, source_lang):
+def roundTripEvaluation(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens):
     """
     1. Traduce del idioma original al español
     2. Traduce del español de vuelta al idioma original
     3. Compara original vs. vuelta con BLEU y chrF
     """
     # 1. Ida
-    intermedio = translate(model, tokenizer, text, target_lang, source_lang)
+    intermedio = translate(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens)
 
     # 2. Vuelta
-    vuelta = translate(model, tokenizer, intermedio, source_lang, target_lang)
+    vuelta = translate(model, tokenizer, intermedio, source_lang, target_lang, device, max_new_tokens)
 
     # 3. Métricas
     bleu_score = bleu.corpus_score([vuelta], [[text]]).score
     chrf_score = chrf.corpus_score([vuelta], [[text]]).score
 
     return {
-        "original": text,
-        "intermedio": intermedio,
-        "vuelta": vuelta,
+        "intermediate": intermedio,
+        "return": vuelta,
         "BLEU": bleu_score,
         "chrF": chrf_score
     }
