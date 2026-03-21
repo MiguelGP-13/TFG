@@ -56,6 +56,10 @@ def buildTranslationPrompt(text, target_lang, source_lang):
 def translate(model, tokenizer, text, target_lang, source_lang, device="cuda", max_new_tokens=128):
     prompt = buildTranslationPrompt(text, target_lang, source_lang)
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    # To avoid warning
+    tokenizer.pad_token = tokenizer.eos_token
+    model.config.pad_token_id = tokenizer.eos_token_id
+    #
 
     outputs = model.generate(
         **inputs,

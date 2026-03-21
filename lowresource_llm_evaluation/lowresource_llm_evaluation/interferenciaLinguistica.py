@@ -100,6 +100,10 @@ def buildStoryPrompt(lang):
 
 def generar_texto(model, tokenizer, prompt: str, device, max_new_tokens=200) -> str:
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    # To avoid warning
+    tokenizer.pad_token = tokenizer.eos_token
+    model.config.pad_token_id = tokenizer.eos_token_id
+    #
     outputs = model.generate(
         **inputs,
         max_new_tokens=max_new_tokens,

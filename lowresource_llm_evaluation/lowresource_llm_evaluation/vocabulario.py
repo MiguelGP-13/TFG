@@ -71,6 +71,10 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
 
     # 2. Generar predicción determinista (top-1)
     inputs = tokenizer(prompt, return_tensors="pt").to(device)
+    # To avoid warning
+    tokenizer.pad_token = tokenizer.eos_token
+    model.config.pad_token_id = tokenizer.eos_token_id
+    #
     outputs = model.generate(
         **inputs,
         max_new_tokens=max_new_tokens,

@@ -6,6 +6,7 @@ from .vocabulario import evaluacionHuecos
 import shutil
 import numpy as np
 import pandas as pd
+import time
 
 
 def _titulo(texto: str):
@@ -83,6 +84,8 @@ def _benchmark(
     # 1. CALIDAD DE LENGUA (generativa)
     # ---------------------------------------------------------
     calidad_raw = []
+    print("Empezando CALIDAD DE LENGUA")
+    begin = time.time()
     if lexicon_target is not None and col_source is not None:
         try:
             reference_text = " ".join(df_textos[col_target][:max_reference_text].astype(str).tolist())
@@ -149,34 +152,37 @@ def _benchmark(
                 "calidad": float(np.mean(calidad_vals)) if calidad_vals else None,
             }
         }
-
+    end = time.time()
+    print(f"CALIDAD DE LENGUA acabada en {round((end - begin)/60, 2)} minutos")
 
     # ---------------------------------------------------------
     # 2. TRADUCCIÓN DIRECTA
     # ---------------------------------------------------------
+    print("Empezando TRADUCCIÓN DIRECTA")
+    begin = time.time()
     trad_raw = None
     if col_source is not None and col_target is not None:
         trad_raw = []
         for _, row in df_textos.iterrows():
-            try:
-                res = evaluateTranslation(
-                    model, tokenizer,
-                    row[col_source],
-                    row[col_target],
-                    target_lang=lang_eval,
-                    source_lang=None,
-                    device= device,
-                    max_new_tokens = max_new_tokens_traduccion
-                )
+            # try:
+            res = evaluateTranslation(
+                model, tokenizer,
+                row[col_source],
+                row[col_target],
+                target_lang=lang_eval,
+                source_lang=col_source,
+                device= device,
+                max_new_tokens = max_new_tokens_traduccion
+            )
                 # {
                 #     "reference": reference,
                 #     "translated": translated,
                 #     "BLEU": bleu_score,
                 #     "chrF": chrf_score
                 # }
-            except Exception as e:
-                print("\n\n\nError en TRADUCCIÓN DIRECTA:\n",e,"\n", row, "\n\n\n")
-                res = None
+            # except Exception as e:
+            #     print("\n\n\nError en TRADUCCIÓN DIRECTA:\n",e,"\n", row, "\n\n\n")
+            #     res = None
             trad_raw.append({
                 "source": row[col_source],
                 "reference": row[col_target],
@@ -212,11 +218,14 @@ def _benchmark(
                 "chrF": float(np.mean(chrf_vals)) if chrf_vals else None
             }
         }
-
+    end = time.time()
+    print(f"TRADUCCIÓN DIRECTA acabada en {round((end - begin)/60, 2)}")
 
     # ---------------------------------------------------------
     # 3. ROUND TRIP
     # ---------------------------------------------------------
+    print("Empezando TRADUCCIÓN ROUND TRIP")
+    begin = time.time()
     round_raw = None
     if col_target is not None and roundtrip_langs is not None and lang_eval is not None:
         round_raw = []
@@ -279,10 +288,13 @@ def _benchmark(
                 "chrF": float(np.mean(chrf_vals)) if chrf_vals else None
             }
         }
-
+    end = time.time()
+    print(f"TRADUCCIÓN ROUND TRIP acabado  en {round((end - begin)/60, 2)}")
     # ---------------------------------------------------------
     # 4. VOCABULARIO
     # ---------------------------------------------------------
+    print("Empezando VOCABULARIO")
+    begin = time.time()
     vocab_raw = None
     if df_huecos is not None:
         vocab_raw = []
@@ -329,58 +341,61 @@ def _benchmark(
             df_ej["resultado"] = vocab_raw[:n]
 
         resultados["vocabulario"] = {
-            "ejemplos": df_ej,
+            "ejemplo": df_ej.to_dict(orient="records"),
             "media": {
                 "accuracy": float(np.mean(acc_vals)) if acc_vals else None,
                 "accuracy_lower": float(np.mean(acc_low_vals)) if acc_low_vals else None,
                 "levenshtein": float(np.mean(lev_vals)) if lev_vals else None
             }
         }
-
+    end = time.time()
+    print(f"VOCABULARIO acabado  en {round((end - begin)/60, 2)}")
 
     # ---------------------------------------------------------
     # 5. ORTOGRAFÍA
     # ---------------------------------------------------------
+    print("Empezando ORTOGRAFÍA")
+    begin = time.time()
     orto_raw = None
     if df_anotado is not None:
         orto_raw = []
         for _, row in df_anotado.iterrows():
-            # try:
-            res = evaluacionOrtograficaAnotado(
-                model, tokenizer,
-                row["annotated"],
-                row["original"],
-                lang=lang_eval,
-                device=device,
-                max_new_tokens=max_new_tokens_ortografia
-            )
-            # {
-            #     "original": original,
-            #     "incorrect": incorrect,
-            #     "corrected": corrected,
+            try:
+                res = evaluacionOrtograficaAnotado(
+                    model, tokenizer,
+                    row["annotated"],
+                    row["original"],
+                    lang=lang_eval,
+                    device=device,
+                    max_new_tokens=max_new_tokens_ortografia
+                )
+                # {
+                #     "original": original,
+                #     "incorrect": incorrect,
+                #     "corrected": corrected,
 
-            #     # métricas clásicas
-            #     "BLEU": bleu_score,
-            #     "chrF": chrf_score,
-            #     "Levenshtein": edit_distance,
+                #     # métricas clásicas
+                #     "BLEU": bleu_score,
+                #     "chrF": chrf_score,
+                #     "Levenshtein": edit_distance,
 
-            #     # anotación
-            #     "errores_totales": n_errores,
-            #     "errores_corregidos": errores_corregidos,
-            #     "errores_no_corregidos": errores_no_corregidos,
-            #     "errores_nuevos": errores_nuevos,
+                #     # anotación
+                #     "errores_totales": n_errores,
+                #     "errores_corregidos": errores_corregidos,
+                #     "errores_no_corregidos": errores_no_corregidos,
+                #     "errores_nuevos": errores_nuevos,
 
-            #     # métricas de corrección
-            #     "precision": precision,
-            #     "recall": recall,
-            #     "F1": f1,
+                #     # métricas de corrección
+                #     "precision": precision,
+                #     "recall": recall,
+                #     "F1": f1,
 
-            #     # errores con tipo
-            #     "errores_detalle": errores
-            # }
-            # except Exception as e:
-            #     print("\n\n\nError en ORTOGRAFÍA:\n",e,"\n", row, "\n\n\n")
-            #     res = None
+                #     # errores con tipo
+                #     "errores_detalle": errores
+                # }
+            except Exception as e:
+                print("\n\n\nError en ORTOGRAFÍA:\n",e,"\n", row, "\n\n\n")
+                res = None
             orto_raw.append(res)
 
     if debug or orto_raw is None:
@@ -414,7 +429,7 @@ def _benchmark(
             df_ej["resultado"] = orto_raw[:n]
 
         resultados["ortografia"] = {
-            "ejemplos": df_ej,
+            "ejemplo": df_ej.to_dict(orient="records"),
             "media": {
                 "BLEU": float(np.mean(bleu_vals)) if bleu_vals else None,
                 "chrF": float(np.mean(chrf_vals)) if chrf_vals else None,
@@ -430,7 +445,8 @@ def _benchmark(
                 "errores_nuevos": float(np.mean(err_nuevos_vals)) if err_nuevos_vals else None
             }
         }
-
+    end = time.time()
+    print(f"ORTOGRAFÍA acabado en {round((end - begin)/60, 2)}")
     return resultados
 
 def benchmark(
