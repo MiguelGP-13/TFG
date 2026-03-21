@@ -26,12 +26,12 @@ L A revisar
 ### Benchmark
 - [x] Elegir métricas (Benchmark debajo) => No he encontrado papers sobre esto
 - [x] Implementar Benchmark
-- [ ] Probar Benchmark con Dataset Anotado
+- [x] Probar Benchmark con Dataset Anotado
 
 ### Entrenamiento
 - [ ] Elegir modelos más grandes y ver que se pueden cuantizar y cargar
 - [x] Crear esqueleto QLoRA entrenamiento
-- [ ] Entrenar con LoRA sobre el mejor de los de 1B (o los 2 mejores?)
+- [ ] Entrenar con LoRA sobre el mejor (de los de 1B?) (o los 2 mejores?)
 
 ### Evaluación
 - [ ] Evaluar los modelos Asturiano
