@@ -1,4 +1,5 @@
 from sacrebleu.metrics import BLEU, CHRF
+from .utils import generar_texto
 
 bleu = BLEU()
 chrf = CHRF()
@@ -53,21 +54,9 @@ def buildTranslationPrompt(text, target_lang, source_lang):
     return prompts[source_lang]
 
 
-def translate(model, tokenizer, text, target_lang, source_lang, device="cuda", max_new_tokens=128):
+def translate(model, tokenizer, text, target_lang, source_lang, device="cuda", max_new_tokens=128, kaggle=False):
     prompt = buildTranslationPrompt(text, target_lang, source_lang)
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)
-    # To avoid warning
-    tokenizer.pad_token = tokenizer.eos_token
-    model.config.pad_token_id = tokenizer.eos_token_id
-    #
-
-    outputs = model.generate(
-        **inputs,
-        max_new_tokens=max_new_tokens,
-        do_sample=False
-    )
-
-    decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    decoded = generar_texto(model, tokenizer, prompt, device, max_new_tokens, kaggle)
 
     for marker in [prompt.split("\n")[-1], ":"]:  # última línea del prompt
         decoded = decoded.split(marker)[-1].strip()
@@ -76,13 +65,13 @@ def translate(model, tokenizer, text, target_lang, source_lang, device="cuda", m
 
     return decoded
 
-def evaluateTranslation(model, tokenizer, original, reference, target_lang, source_lang, device, max_new_tokens):
+def evaluateTranslation(model, tokenizer, original, reference, target_lang, source_lang, device, max_new_tokens, kaggle= False):
     """
     1. Traduce el texto a un idioma
     2. Calcula BLEU y chrF entre ambas traducciones
     """
     
-    translated = translate(model, tokenizer, original, target_lang, source_lang, device, max_new_tokens)
+    translated = translate(model, tokenizer, original, target_lang, source_lang, device, max_new_tokens, kaggle)
 
     # SacreBLEU espera listas
     bleu_score = bleu.corpus_score([translated], [[reference]]).score
@@ -94,17 +83,17 @@ def evaluateTranslation(model, tokenizer, original, reference, target_lang, sour
         "chrF": chrf_score
     }
 
-def roundTripEvaluation(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens):
+def roundTripEvaluation(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens, kaggle=False):
     """
     1. Traduce del idioma original al español
     2. Traduce del español de vuelta al idioma original
     3. Compara original vs. vuelta con BLEU y chrF
     """
     # 1. Ida
-    intermedio = translate(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens)
+    intermedio = translate(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens, kaggle)
 
     # 2. Vuelta
-    vuelta = translate(model, tokenizer, intermedio, source_lang, target_lang, device, max_new_tokens)
+    vuelta = translate(model, tokenizer, intermedio, source_lang, target_lang, device, max_new_tokens, kaggle)
 
     # 3. Métricas
     bleu_score = bleu.corpus_score([vuelta], [[text]]).score

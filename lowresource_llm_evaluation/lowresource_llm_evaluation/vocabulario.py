@@ -1,6 +1,7 @@
 import re
 from sacrebleu.metrics import BLEU, CHRF
 import Levenshtein
+from .utils import generar_texto
 
 bleu = BLEU()
 chrf = CHRF()
@@ -57,7 +58,7 @@ def extraer_palabra(decoded, prompt):
 
 
 def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es", device="cuda",
-                     max_new_tokens=50):
+                     max_new_tokens=50, kaggle =False):
     """
     Evalúa la capacidad del modelo para predecir la palabra que falta (<mask>).
     Devuelve:
@@ -70,18 +71,7 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
     prompt = buildFillMaskPrompt(masked_sentence, lang)
 
     # 2. Generar predicción determinista (top-1)
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)
-    # To avoid warning
-    tokenizer.pad_token = tokenizer.eos_token
-    model.config.pad_token_id = tokenizer.eos_token_id
-    #
-    outputs = model.generate(
-        **inputs,
-        max_new_tokens=max_new_tokens,
-        do_sample=True
-    )
-
-    decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    decoded = generar_texto(model, tokenizer, prompt, device, max_new_tokens, kaggle)
 
     # 3. Extraer solo la palabra predicha
     pred = extraer_palabra(decoded, prompt)

@@ -1,6 +1,7 @@
 import re
 from collections import Counter
 import math
+from .utils import generar_texto
 
 def loadLexicon(file_path):
     with open(file_path, "r", encoding="utf8") as f:
@@ -97,26 +98,6 @@ def buildStoryPrompt(lang):
     return prompts[lang]
 
 
-
-def generar_texto(model, tokenizer, prompt: str, device, max_new_tokens=200) -> str:
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)
-    # To avoid warning
-    tokenizer.pad_token = tokenizer.eos_token
-    model.config.pad_token_id = tokenizer.eos_token_id
-    #
-    outputs = model.generate(
-        **inputs,
-        max_new_tokens=max_new_tokens,
-        do_sample=True
-    )
-
-    # Cortar exactamente los tokens del prompt
-    prompt_len = inputs["input_ids"].shape[1]
-    generated_tokens = outputs[0][prompt_len:]
-
-    return tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
-
-
 def calidadLengua(
     model, tokenizer,
     lexicon_target,
@@ -125,7 +106,8 @@ def calidadLengua(
     lexicons_comparison:dict=None,
     ngram_n=3,
     max_new_tokens=1000,
-    device="cuda"
+    device="cuda",
+    kaggle= False
 ):
     """
     Calcula métricas lingüísticas y compara el texto con n idiomas.
@@ -136,7 +118,7 @@ def calidadLengua(
         lexicons_comparison = {}
 
     # 0. Generar historia en la lengua
-    text = generar_texto(model, tokenizer, buildStoryPrompt(source_lang), device,max_new_tokens)
+    text = generar_texto(model, tokenizer, buildStoryPrompt(source_lang), device,max_new_tokens, kaggle)
 
     # 1. Métricas básicas
     ttr_score = ttr(text)

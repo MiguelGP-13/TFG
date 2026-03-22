@@ -61,7 +61,8 @@ def _benchmark(
     n_ejemplos_vocabulario = 3,
 
     debug: bool = False,
-    device= "cuda"
+    device= "cuda",
+    kaggle = False
 ):
     """
     Benchmark interno. Si debug=False, devuelve solo medias y ejemplos.
@@ -101,6 +102,7 @@ def _benchmark(
                     source_lang=lang_eval,
                     ngram_n=calidad_ngram_n,
                     device= device,
+                    kaggle= kaggle
                 )
                 #      {
                 #     "text":text,
@@ -172,7 +174,8 @@ def _benchmark(
                 target_lang=lang_eval,
                 source_lang=col_source,
                 device= device,
-                max_new_tokens = max_new_tokens_traduccion
+                max_new_tokens = max_new_tokens_traduccion,
+                kaggle = kaggle
             )
                 # {
                 #     "reference": reference,
@@ -239,7 +242,8 @@ def _benchmark(
                         lang,       # lengua intermedia
                         lang_eval,   # lengua a evaluar
                         device,
-                        max_new_tokens_traduccion
+                        max_new_tokens_traduccion,
+                        kaggle
                     )
                     # {
                     #     "original": text,
@@ -306,7 +310,8 @@ def _benchmark(
                     row["missing_word"],
                     lang=lang_eval,
                     device = device,
-                    max_new_tokens = max_new_tokens_huecos
+                    max_new_tokens = max_new_tokens_huecos,
+                    kaggle = kaggle
                 )
                 # {
                 #     "masked": masked_sentence,
@@ -367,7 +372,8 @@ def _benchmark(
                     row["original"],
                     lang=lang_eval,
                     device=device,
-                    max_new_tokens=max_new_tokens_ortografia
+                    max_new_tokens=max_new_tokens_ortografia,
+                    kaggle = kaggle
                 )
                 # {
                 #     "original": original,
@@ -459,7 +465,6 @@ def benchmark(
     lexicon_target=None,
     lexicons_comparison=None,
     roundtrip_langs=None,
-
     
     n_samples_calidad=5,
     max_new_tokens_generate=1000,
@@ -473,7 +478,8 @@ def benchmark(
     n_ejemplos_vocabulario = 3,
 
     debug: bool = False,
-    device= "cuda"
+    device = "cuda",
+    kaggle = False
 ):
     """
     Ejecuta el benchmark completo del modelo lingüístico.
@@ -555,7 +561,8 @@ def benchmark(
         n_ejemplos_vocabulario = n_ejemplos_vocabulario,
 
         debug = debug,
-        device = device
+        device = device,
+        kaggle=kaggle
     )
 
     # ============================

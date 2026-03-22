@@ -1,6 +1,7 @@
 import re
 from sacrebleu.metrics import BLEU, CHRF
 import Levenshtein
+from .utils import generar_texto
 
 bleu = BLEU()
 chrf = CHRF()
@@ -37,7 +38,7 @@ def buildCorrectionPrompt(text, lang):
     return prompts[lang]
 
 
-def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es", device="cuda", max_new_tokens=128):
+def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es", device="cuda", max_new_tokens=128, kaggle= False):
     """
     annotated = frase con <err t=...>...</err>
     original  = frase correcta
@@ -55,18 +56,7 @@ def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es
     prompt = buildCorrectionPrompt(incorrect, lang)
 
     # 4. Generar corrección con modelo a evaluar
-    inputs = tokenizer(prompt, return_tensors="pt").to(device)
-    # To avoid warning
-    tokenizer.pad_token = tokenizer.eos_token
-    model.config.pad_token_id = tokenizer.eos_token_id
-    #
-    outputs = model.generate(
-        **inputs,
-        max_new_tokens=max_new_tokens,
-        do_sample=False
-    )
-
-    decoded = tokenizer.decode(outputs[0], skip_special_tokens=True)
+    decoded = generar_texto(model, tokenizer, prompt, device, max_new_tokens, kaggle)
     corrected = decoded.split(prompt.split("\n")[-1])[-1].strip()
 
     # -----------------------------
