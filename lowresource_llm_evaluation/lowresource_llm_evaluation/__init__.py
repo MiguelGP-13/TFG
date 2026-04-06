@@ -279,7 +279,7 @@ def _benchmark(
                     "intermediate_language": r["intermedio_lang"],
                     "source": r["source"],
                     "intermediate": r["resultado"].get("intermediate", None),
-                    "translated": r["resultado"].get("translated", None),
+                    "return": r["resultado"].get("return", None),
                     "BLEU": r["resultado"].get("BLEU"),
                     "chrF": r["resultado"].get("chrF")
                 }
