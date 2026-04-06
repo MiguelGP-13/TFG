@@ -115,7 +115,7 @@ def _benchmark(
                 #       }
                 calidad_raw.append(res)
         except Exception as e:
-            print("\n\n\nError en CALIDAD DE LENGUA:\n",e,"\n", row, "\n\n\n")
+            print("\n\n\nError en CALIDAD DE LENGUA:\n",e, "\n\n\n")
             calidad_raw = []
 
     if debug or len(calidad_raw) == 0:
@@ -166,26 +166,26 @@ def _benchmark(
     if col_source is not None and col_target is not None:
         trad_raw = []
         for _, row in df_textos.iterrows():
-            # try:
-            res = evaluateTranslation(
-                model, tokenizer,
-                row[col_source],
-                row[col_target],
-                target_lang=lang_eval,
-                source_lang=col_source,
-                device= device,
-                max_new_tokens = max_new_tokens_traduccion,
-                kaggle = kaggle
-            )
+            try:
+                res = evaluateTranslation(
+                    model, tokenizer,
+                    row[col_source],
+                    row[col_target],
+                    target_lang=lang_eval,
+                    source_lang=col_source,
+                    device= device,
+                    max_new_tokens = max_new_tokens_traduccion,
+                    kaggle = kaggle
+                )
                 # {
                 #     "reference": reference,
                 #     "translated": translated,
                 #     "BLEU": bleu_score,
                 #     "chrF": chrf_score
                 # }
-            # except Exception as e:
-            #     print("\n\n\nError en TRADUCCIÓN DIRECTA:\n",e,"\n", row, "\n\n\n")
-            #     res = None
+            except Exception as e:
+                print("\n\n\nError en TRADUCCIÓN DIRECTA:\n",e, "\n\n\n")
+                res = None
             trad_raw.append({
                 "source": row[col_source],
                 "reference": row[col_target],
@@ -253,7 +253,7 @@ def _benchmark(
                     #     "chrF": chrf_score
                     # }
                 except Exception as e:
-                    print("\n\n\nError en ROUND TRIP:\n",e,"\n", row, "\n\n\n")
+                    print("\n\n\nError en ROUND TRIP:\n",e, "\n\n\n")
                     res = None
 
                 round_raw.append({
@@ -322,7 +322,7 @@ def _benchmark(
                 #     "levenshtein": lev_distance
                 # }
             except Exception as e:
-                print("\n\n\nError en VOCABULARIO:\n",e,"\n", row, "\n\n\n")
+                print("\n\n\nError en VOCABULARIO:\n",e, "\n\n\n")
                 res = None
             vocab_raw.append(res)
 
@@ -400,7 +400,7 @@ def _benchmark(
                 #     "errores_detalle": errores
                 # }
             except Exception as e:
-                print("\n\n\nError en ORTOGRAFÍA:\n",e,"\n", row, "\n\n\n")
+                print("\n\n\nError en ORTOGRAFÍA:\n",e, "\n\n\n")
                 res = None
             orto_raw.append(res)
 
