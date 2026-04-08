@@ -4,6 +4,9 @@ from datasets import Dataset
 import numpy as np
 import unicodedata
 import hashlib
+import requests
+import gzip
+import io
 
 lang_code = {
     "asturiano": {
@@ -25,9 +28,23 @@ lang_code = {
 }
 
 class LanguageDataset():
-    def __init__(self, language, initializeTatoeba =False, initializeLocal=False, min_words=4, max_words=np.inf, max_word_len= 25):
+    def __init__(self, language=None, path=None,
+             initializeTatoeba=False, initializeLocal=False,
+             min_words=4, max_words=np.inf, max_word_len=25):
+
+        # --- Caso 1: cargar desde archivo ---
+        if path is not None:
+            if language is not None:
+                raise ValueError("No puede pasar 'language' y 'path' a la vez.")
+            self.load_dataset(path)
+
+        # --- Caso 2: inicialización normal ---
+        elif language is None:
+            raise ValueError("Debe pasar 'language' o 'path' obligatoriamente.")
+
         if language not in ["gallego", "asturiano", "aranes"]:
-            raise KeyError("Lenguaje no contemplado")
+            raise KeyError('Lenguaje no contemplado (["gallego", "asturiano", "aranes"])\n Si quiere crearlo desde un dataset previamente guardado, necesita poner path="path_to_your_dataset"')
+
         self.raw_datasets = {}
         self.language = language
         self.language_codes = lang_code[language]
@@ -35,10 +52,12 @@ class LanguageDataset():
         self.MIN_WORDS = min_words
         self.MAX_WORDS = max_words
         self.MAX_WORD_LEN = max_word_len
+
         if initializeLocal:
             self.startLocal()
         if initializeTatoeba:
             self.startTatoeba()
+
 
     def __getitem__(self, key):
         """
@@ -176,6 +195,69 @@ class LanguageDataset():
         self.raw_datasets[dataset_name] = {"start": start, "end": end}
         return json_data
 
+    def read_list(self, list_of_strings, dataset_name=None):
+        """
+        Carga una lista de strings como dataset.
+        Si no se pasa dataset_name, se genera un hash único.
+        """
+        if dataset_name is None:
+            joined = "\n".join(list_of_strings[:20])
+            dataset_name = hashlib.sha256(joined.encode("utf-8")).hexdigest()
+
+        if dataset_name in self.raw_datasets:
+            raise ValueError(f"El dataset '{dataset_name}' ya está cargado")
+
+        json_data = []
+        for line in list_of_strings:
+            clean = self.clean_text(line)
+            if clean:
+                json_data.append({"text": clean})
+
+        start = len(self.json)
+        self.json += json_data
+        end = len(self.json)
+
+        self.raw_datasets[dataset_name] = {"start": start, "end": end}
+        return json_data
+
+    def read_opus(self, source="NLLB", version=1):
+        """
+        Descarga y carga un corpus OPUS monolingüe en RAM.
+        source puede ser: 'NLLB', 'OpenSubtitles', 'JW300', etc.
+        version según el dataset que querais descargar (en OPUS)
+        """
+        source = source.lower()
+        url = f"https://object.pouta.csc.fi/OPUS-{source}/v{version}/mono/{self.language_codes['opus']}.txt.gz"
+        dataset_name = f"opus_{source}_{version}"
+        if dataset_name in self.raw_datasets:
+            raise ValueError(f"El dataset '{dataset_name}' ya está cargado")
+
+        # Descargar en RAM
+        r = requests.get(url, stream=True)
+        if r.status_code != 200:
+            raise RuntimeError(f"No se pudo descargar OPUS desde {url}")
+
+        gz_bytes = io.BytesIO(r.content)
+
+        # Descomprimir en RAM
+        with gzip.GzipFile(fileobj=gz_bytes, mode="rb") as f:
+            text = f.read().decode("utf-8")
+
+        # Procesar líneas
+        json_data = []
+        for line in text.split("\n"):
+            clean = self.clean_text(line)
+            if clean:
+                json_data.append({"text": clean})
+
+        # Registrar dataset
+        start = len(self.json)
+        self.json += json_data
+        end = len(self.json)
+
+        self.raw_datasets[dataset_name] = {"start": start, "end": end}
+        return json_data
+
     # def is_mostly_latin(self, text, threshold=0.8):
     #     letters = regex.findall(r"\p{L}", text)
     #     latin = regex.findall(r"\p{Latin}", text)
@@ -267,3 +349,90 @@ class LanguageDataset():
             with open(save, "w", encoding="utf-8") as f:
                 f.write(json.dumps(json_data, ensure_ascii=False))
         return json_data
+    
+    def save(self, path):
+        data = {
+            "language": self.language,
+            "language_codes": self.language_codes,
+            "MIN_WORDS": self.MIN_WORDS,
+            "MAX_WORDS": self.MAX_WORDS,
+            "MAX_WORD_LEN": self.MAX_WORD_LEN,
+            "raw_datasets": self.raw_datasets,
+            "json": self.json
+        }
+
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+        print(f"Dataset guardado en {path}")
+
+    def load_dataset(self, path):
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        self.language = data["language"]
+        self.language_codes = data["language_codes"]
+        self.MIN_WORDS = data["MIN_WORDS"]
+        self.MAX_WORDS = data["MAX_WORDS"]
+        self.MAX_WORD_LEN = data["MAX_WORD_LEN"]
+
+        self.raw_datasets = data["raw_datasets"]
+        self.json = data["json"]
+
+        print(f"Dataset cargado desde {path} ({len(self.json)} líneas)")
+
+    def _summary(self):
+        total = len(self.json)
+        lines = []
+        lines.append(f"\nResumen del dataset para '{self.language}':")
+        lines.append(f"Total de líneas: {total}\n")
+
+        # --- Resumen por dataset ---
+        for name, bounds in self.raw_datasets.items():
+            count = bounds["end"] - bounds["start"]
+            pct = (count / total) * 100 if total > 0 else 0
+            lines.append(f"- {name}: {count} líneas ({pct:.2f}%)")
+
+        # --- Parámetros internos ---
+        lines.append("\nParámetros internos:")
+        lines.append(f"  MIN_WORDS: {self.MIN_WORDS}")
+        lines.append(f"  MAX_WORDS: {self.MAX_WORDS}")
+        lines.append(f"  MAX_WORD_LEN: {self.MAX_WORD_LEN}")
+
+        # --- Códigos de idioma ---
+        lines.append("\nCódigos de idioma:")
+        lines.append(f"  {self.language_codes}")
+
+        # --- Ejemplos globales ---
+        lines.append("\nEjemplos del dataset (primeras 3 líneas):")
+        for ex in self.json[:3]:
+            lines.append(f"  • {ex['text']}")
+
+        # --- Ejemplos por dataset ---
+        lines.append("\nEjemplo por dataset:")
+        for name, bounds in self.raw_datasets.items():
+            start = bounds["start"]
+            if start < len(self.json):
+                example = self.json[start]["text"]
+                lines.append(f"  [{name}] → {example}")
+
+        # --- Lista de datasets cargados ---
+        lines.append("\nDatasets cargados:")
+        lines.append(f"  {list(self.raw_datasets.keys())}")
+
+        return "\n".join(lines)
+
+
+
+    def summary(self):
+        """
+        Muestra un resumen completo del dataset:
+        - número de líneas por dataset
+        - porcentaje del total
+        - parámetros internos
+        - códigos de idioma
+        """
+        print(self._summary())
+
+    def __str__(self):
+        return self._summary()
