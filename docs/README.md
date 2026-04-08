@@ -18,6 +18,7 @@ L A revisar
 - [x] Actualizar en la memoria los modelos elegidos y por qué (después de elegir los modelos)
 L A revisar
 - [ ] Escribir resultados en memoria
+- [ ] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
 
 ### Datos
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
