@@ -15,13 +15,14 @@ https://github.com/TALP-UPC/FreeLing/tree/master
 - [x] Añadir figura en 4.2.2 (diagrama...)
 - [x] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
 L A revisar
-- [ ] Actualizar en la memoria los modelos elegidos y por qué (después de elegir los modelos)
+- [x] Actualizar en la memoria los modelos elegidos y por qué (después de elegir los modelos)
+L A revisar
+- [ ] Escribir resultados en memoria
 
 ### Datos
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
-- [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Test]
 - [x] Crear lexicons
-- [ ] Crear datasets anotados
+- [x] Crear datasets anotados
 
 ### Benchmark
 - [x] Elegir métricas (Benchmark debajo) => No he encontrado papers sobre esto
@@ -29,9 +30,9 @@ L A revisar
 - [x] Probar Benchmark con Dataset Anotado
 
 ### Entrenamiento
-- [ ] Elegir modelos más grandes y ver que se pueden cuantizar y cargar
+- [x] Elegir modelos más grandes y ver que se pueden cuantizar y cargar
 - [x] Crear esqueleto QLoRA entrenamiento
-- [ ] Entrenar con LoRA sobre el mejor (de los de 1B?) (o los 2 mejores?)
+- [ ] Entrenar con LoRA sobre el mejor (o los 2 mejores?)
 
 ### Evaluación
 - [ ] Evaluar los modelos Asturiano
