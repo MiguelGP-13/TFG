@@ -40,8 +40,9 @@ def _tabla(diccionario):
 def _benchmark(
     model,
     tokenizer,
-    df_textos,          # (source, target) o solo target
     lang_eval,
+    df_textos,          # (source, target) o solo target
+    df_textos_round=None,
     df_huecos=None,
     df_anotado=None,
     lexicon_target=None,
@@ -59,6 +60,9 @@ def _benchmark(
 
     n_ejemplos_ortografico = 3,
     n_ejemplos_vocabulario = 3,
+
+    cortar_ortografico = False,
+    cortar_vocabulario = False,
 
     debug: bool = False,
     device= "cuda",
@@ -80,6 +84,10 @@ def _benchmark(
         col_source, col_target = df_textos.columns.tolist()
     else:
         raise ValueError("df_textos debe tener 1 o 2 columnas.")
+    if df_textos_round is not None:
+        col_target_round = df_textos_round.columns[0]
+    else:
+        col_target_round = col_target
 
     # ---------------------------------------------------------
     # 1. CALIDAD DE LENGUA (generativa)
@@ -230,10 +238,10 @@ def _benchmark(
     print("Empezando TRADUCCIÓN ROUND TRIP")
     begin = time.time()
     round_raw = None
-    if col_target is not None and roundtrip_langs is not None and lang_eval is not None:
+    if col_target_round is not None and roundtrip_langs is not None and lang_eval is not None:
         round_raw = []
-        for _, row in df_textos.iterrows():
-            text = row[col_target]
+        for _, row in df_textos_round.iterrows():
+            text = row[col_target_round]
             for lang in roundtrip_langs:
                 try:
                     res = roundTripEvaluation(
@@ -311,7 +319,8 @@ def _benchmark(
                     lang=lang_eval,
                     device = device,
                     max_new_tokens = max_new_tokens_huecos,
-                    kaggle = kaggle
+                    kaggle = kaggle,
+                    cortar = cortar_vocabulario
                 )
                 # {
                 #     "masked": masked_sentence,
@@ -373,7 +382,8 @@ def _benchmark(
                     lang=lang_eval,
                     device=device,
                     max_new_tokens=max_new_tokens_ortografia,
-                    kaggle = kaggle
+                    kaggle = kaggle,
+                    cortar = cortar_ortografico
                 )
                 # {
                 #     "original": original,
@@ -458,8 +468,9 @@ def _benchmark(
 def benchmark(
     model,
     tokenizer,
-    df_textos,          # (source, target) o solo target
     lang_eval,
+    df_textos,          # (source, target) o solo target
+    df_textos_round=None,
     df_huecos=None,
     df_anotado=None,
     lexicon_target=None,
@@ -476,6 +487,9 @@ def benchmark(
 
     n_ejemplos_ortografico = 3,
     n_ejemplos_vocabulario = 3,
+
+    cortar_ortografico = False,
+    cortar_vocabulario = False,
 
     debug: bool = False,
     device = "cuda",
@@ -542,6 +556,7 @@ def benchmark(
         model=model,
         tokenizer = tokenizer,
         df_textos = df_textos,
+        df_textos_round = df_textos_round,
         lang_eval = lang_eval,
         df_huecos = df_huecos,
         df_anotado = df_anotado,
@@ -559,6 +574,9 @@ def benchmark(
 
         n_ejemplos_ortografico = n_ejemplos_ortografico,
         n_ejemplos_vocabulario = n_ejemplos_vocabulario,
+
+        cortar_ortografico = cortar_ortografico,
+        cortar_vocabulario = cortar_vocabulario,
 
         debug = debug,
         device = device,

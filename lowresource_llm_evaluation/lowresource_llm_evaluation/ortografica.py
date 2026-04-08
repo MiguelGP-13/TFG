@@ -38,7 +38,7 @@ def buildCorrectionPrompt(text, lang):
     return prompts[lang]
 
 
-def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es", device="cuda", max_new_tokens=128, kaggle= False):
+def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es", device="cuda", max_new_tokens=128, kaggle= False, cortar=False):
     """
     annotated = frase con <err t=...>...</err>
     original  = frase correcta
@@ -58,6 +58,8 @@ def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es
     # 4. Generar corrección con modelo a evaluar
     decoded = generar_texto(model, tokenizer, prompt, device, max_new_tokens, kaggle)
     corrected = decoded.split(prompt.split("\n")[-1])[-1].strip()
+    if cortar:
+        corrected = corrected.split(".", 1)[0].strip()
 
     # -----------------------------
     # 5. Métricas original vs errores corregidos

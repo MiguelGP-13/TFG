@@ -38,7 +38,7 @@ def buildFillMaskPrompt(masked_sentence, lang):
 
 
 
-def extraer_palabra(decoded, prompt):
+def extraer_palabra(decoded, prompt, cortar=False):
     # Parte del prompt donde empieza la respuesta
     anchor = prompt.split("\n")[-1]
 
@@ -47,18 +47,23 @@ def extraer_palabra(decoded, prompt):
 
     # Intentar separar por el anchor
     if anchor in decoded:
-        tail = decoded.split(anchor, 1)[-1].strip()
+        clean = decoded.split(anchor, 1)[-1].strip()
     else:
         # Si no aparece, usar todo el texto generado
-        tail = decoded.strip()
+        clean = decoded.strip()
+    if cortar:
 
-    clean = re.sub(r"[^A-Za-zÁÉÍÓÚÜÑáéíóúüñ ]", "", tail)
+            m = re.match(r"[^\W\d_]+", clean, flags=re.UNICODE)
+            if m:
+                clean = m.group(0)
+            else:
+                clean = decoded.strip() 
 
     return clean
 
 
 def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es", device="cuda",
-                     max_new_tokens=50, kaggle =False):
+                     max_new_tokens=50, kaggle =False, cortar= False):
     """
     Evalúa la capacidad del modelo para predecir la palabra que falta (<mask>).
     Devuelve:
@@ -74,7 +79,7 @@ def evaluacionHuecos(model, tokenizer, masked_sentence, missing_word, lang="es",
     decoded = generar_texto(model, tokenizer, prompt, device, max_new_tokens, kaggle)
 
     # 3. Extraer solo la palabra predicha
-    pred = extraer_palabra(decoded, prompt)
+    pred = extraer_palabra(decoded, prompt, cortar)
 
 
     # 4. Métricas principales
