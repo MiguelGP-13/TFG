@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lowresource-llm-evaluation"
-version = "0.5.3"
+version = "0.6.1"
 description = "Métricas para evaluar LLMs en su capacidad de hablar una lengua sin datasets de Q&A"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = "MIT"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 
 authors = [
     {name = "Miguel Gómez Prieto", email = "miguel.gprieto@alumnos.upm.es"}
@@ -21,7 +21,9 @@ dependencies = [
     "pandas",
     "regex",
     "sacrebleu>=2.0",
-    "python-Levenshtein"
+    "python-Levenshtein",
+    "groq",
+    "fasttext-wheel"
 ]
 
 [project.urls]
