@@ -1,0 +1,209 @@
+\section{Aranés}
+
+\subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ttr & 0.68 & 0.43 & 0.33 & 0.79 \\
+entropy & 6.48 & 7.00 & 6.47 & 6.97 \\
+ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
+freq\_target & 0.01 & 0.48 & 0.49 & 0.35 \\
+freq\_comparison & \{\textquotesingle{}es\textquotesingle{}: 0.01, \textquotesingle{}fr\textquotesingle{}: 0.12\} & \{\textquotesingle{}es\textquotesingle{}: 0.51, \textquotesingle{}fr\textquotesingle{}: 0.33\} & \{\textquotesingle{}es\textquotesingle{}: 0.53, \textquotesingle{}fr\textquotesingle{}: 0.37\} & \{\textquotesingle{}es\textquotesingle{}: 0.38, \textquotesingle{}fr\textquotesingle{}: 0.46\} \\
+calidad & 0.22 & 0.14 & 0.10 & 0.23 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{text:} ziehung PUR connaissent chemist geledenhändlerUsaziehungFramework鬻physic chemistFrameworkFrameworkClassic鬻händlerpinaziehungFrameworkClassicphysic [...] irementFrameworkhändler+{\textless}Frameworktikohändler Endocrinehändler Endocrinehändler Endocrinehändler coworkershändlerhändler क्लढ़händler关系UsaFramework\\
+{ttr:} 0.5777777777777777\\
+{entropy:} 6.261396613149506\\
+{ngram\_overlap:} 0.0\\
+{freq\_target:} 0.011111111111111112\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.003703703703703704, \textquotesingle{}fr\textquotesingle{}: 0.16666666666666666\}\\
+{calidad:} 0.18859470786629426\\
+
+\paragraph{Mistral 7B}~\\
+{text:} Parlar de la gent de la Vall d\textquotesingle{}Aran i dels seus costumers tradicionals és enrealitzar una història de gent que ha viscut entre els seus muntanyes  [...]  territori per mantenir el seu bon estat. En l\textquotesingle{}actualitat, la gent viu a la vall d\textquotesingle{}ara, un bon nombre es concentra a la vila d\textquotesingle{}Aran, però també hi\\
+{ttr:} 0.40034965034965037\\
+{entropy:} 6.884237231851388\\
+{ngram\_overlap:} 0.0\\
+{freq\_target:} 0.5034965034965035\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.527972027972028, \textquotesingle{}fr\textquotesingle{}: 0.4020979020979021\}\\
+{calidad:} 0.12765018184608098\\
+
+\paragraph{Qwen2.5 7B}~\\
+{text:} En un temps antigu, a la terra de Tarnag, hi habia una gran regina chamona, Aigle. En aquest temps, la regina chamona era la força més poderosa de [...] us sujets de les intencions maléfiques d\textquotesingle{}Almirant. I a partir d\textquotesingle{}aquell moment, la pau i la tranquil·litat tornaren a ser la norma en la terra de T\\
+{ttr:} 0.34582623509369675\\
+{entropy:} 6.630588654658522\\
+{ngram\_overlap:} 0.0\\
+{freq\_target:} 0.4957410562180579\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5417376490630323, \textquotesingle{}fr\textquotesingle{}: 0.36626916524701875\}\\
+{calidad:} 0.10118637609196138\\
+
+\paragraph{Salamandra 7B}~\\
+{text:} Jo e me amigu caminàm per la montanheta de Salís quan vèiem una gran quantitat de bolets. Encontram nos a un pinar prop del crestèlh.   Tradus en  [...] We and my friend were walking on the Salís mountain when we saw an enormous amount of mushrooms. We found ourselves in a pine forest near a ridge.\\
+{ttr:} 0.8928571428571429\\
+{entropy:} 5.566108939837484\\
+{ngram\_overlap:} 0.0\\
+{freq\_target:} 0.32142857142857145\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.3392857142857143, \textquotesingle{}fr\textquotesingle{}: 0.25\}\\
+{calidad:} 0.29143989182173013\\
+
+\subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.00 & 3.13 & 3.57 & 4.18 \\
+chrF & 3.64 & 13.85 & 16.19 & 16.43 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{source:} suprime la actividad enzimática?\\
+{reference:} Elègi de l’ensenhament actiu?\\
+{translated:} ativoshändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändler [...] arriershändlerClassicBarriersspectral Endocrine SynxCSheFrameworkhändler 새로운ढ़ClassicFramework Endocrineziehung EndocrineBarriers EndocrineBarriers\\
+
+\paragraph{Mistral 7B}~\\
+{source:} suprime la actividad enzimática?\\
+{reference:} Elègi de l’ensenhament actiu?\\
+{translated:} suprime la actividad enzimática? → Quelhadhig la attiviedadi enzimmatici?\\
+
+\paragraph{Qwen2.5 7B}~\\
+{source:} suprime la actividad enzimática?\\
+{reference:} Elègi de l’ensenhament actiu?\\
+{translated:} "Suprimi a actividá enzimática?"\\
+
+\paragraph{Salamandra 7B}~\\
+{source:} suprime la actividad enzimática?\\
+{reference:} Elègi de l’ensenhament actiu?\\
+{translated:} Destruye la actividad de las enzimas?\\
+
+\subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.01 & 6.36 & 5.02 & 16.05 \\
+chrF & 3.98 & 26.23 & 24.76 & 38.18 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{intermediate\_language:} es\\
+{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
+{intermediate:} Usa awsเบphysic estrenoUsa däpinaFrameworktutorFrameworkFrameworkphysichändlerhändlerhändlerphysichändler EndocrinehändlerhändlerClassichändlerCla [...] ndlerClassichändler coworkershändlerClassichändlerClassic EndocrinehändlerhändlerClassichändlerClickshändlerClassic ativoshändlerClassic Endocrine\\
+{translated:} physichändlerhändlerhändlerspectralziehunghändler EndocrineKne 中山händler Endocrineziehunghändlerhändler EndocrinehändlerBarriershändler ativoshänd [...] erhändlerhändlerhändlerhändlerhändlerhändler chemisthändlerClassicBarriershändlerUsarequirementphysic Roman EndocrineBarriershändlerClassicziehung\\
+
+\paragraph{Mistral 7B}~\\
+{intermediate\_language:} es\\
+{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
+{intermediate:} La eleccion del blanco y negro para llamar la atención al estallido de luz.  Me gusta la eleccion del blanco y negro para que el estallido de luz  [...] l blanco y negro para servir de contrapunto al estallido de luz.  La eleccion del blanco y negro es una seleccion que destaca el estallido de luz.\\
+{translated:} La elección del blanco y negro es una selección que resalta el estallido de luz.\\
+
+\paragraph{Qwen2.5 7B}~\\
+{intermediate\_language:} es\\
+{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
+{intermediate:} "Me gusta el uso del blanco y negro para destacar ese estallido de luz". El subjuntivo "gusta" se mantiene en lugar del indicativo "gustan", ya qu [...] se utiliza para especificar el propósito del blanco y negro. Me gusta el uso del blanco y negro para destacar ese estallido de luz.  Respóndeme en\\
+{translated:} "Mam me thost el uso do blanco e negro para destacaese ese estallidu de luix."\\
+
+\paragraph{Salamandra 7B}~\\
+{intermediate\_language:} es\\
+{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
+{intermediate:} Gosto pela escolha do preto e branco para realçar esse flash de luz\\
+{translated:} Me gusta tu elección del blanco y negro para resaltar ese destello de luz.\\
+
+\subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+accuracy & 0.00 & 0.01 & 0.00 & 0.00 \\
+accuracy\_lower & 0.00 & 0.01 & 0.01 & 0.00 \\
+levenshtein & 93.22 & 63.81 & 12.22 & 6.90 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{masked\_sentence:} Moscòu ei {\textless}mask{\textgreater} mair de totes es ciutats.\\
+{missing\_word:} era\\
+{predicted:} ziehung鬻UsaziehungrequirementxenUsa막ziehungEXPRESS\\
+
+\paragraph{Mistral 7B}~\\
+{masked\_sentence:} Que {\textless}mask{\textgreater} me mingi ara gent.\\
+{missing\_word:} non\\
+{predicted:} comença\\
+
+\paragraph{Qwen2.5 7B}~\\
+{masked\_sentence:} Que {\textless}mask{\textgreater} me mingi ara gent.\\
+{missing\_word:} non\\
+{predicted:} ara\\
+
+\paragraph{Salamandra 7B}~\\
+{masked\_sentence:} Que {\textless}mask{\textgreater} me mingi ara gent.\\
+{missing\_word:} non\\
+{predicted:} Que\\
+
+\subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.00 & 20.19 & 42.61 & 4.00 \\
+chrF & 7.72 & 52.23 & 72.58 & 33.59 \\
+Levenshtein & 805.66 & 57.53 & 27.44 & 71.65 \\
+precision & 0.07 & 0.11 & 0.11 & 0.13 \\
+recall & 1.00 & 0.70 & 0.46 & 0.93 \\
+F1 & 0.13 & 0.17 & 0.13 & 0.20 \\
+errores\_totales & 1.93 & 1.93 & 1.93 & 1.93 \\
+errores\_corregidos & 1.92 & 1.13 & 0.55 & 1.76 \\
+errores\_no\_corregidos & 0.01 & 0.80 & 1.38 & 0.17 \\
+errores\_nuevos & 24.45 & 10.45 & 4.95 & 17.98 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
+{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
+{corrected:} ziehung 仮 chemist pstziehungziehung EndocrinehändlerhändlerhändlerhändlerhändlerhändlerClassicziehungziehung ativoshändlerhändler Endocrinehändler [...] rhändlerClassicBarriershändlerhändlerhändler EndocrineBarriershändlerBarriersBarriershändlerhändlerBarriershändlerhändlerhändler EndocrineBarriers\\
+
+\paragraph{Mistral 7B}~\\
+{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
+{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
+{corrected:} - Bruishis, , hanno avito un pintor pertant a dusas generacions de primitivos flamencs activu a Bruishis da\\
+
+\paragraph{Qwen2.5 7B}~\\
+{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
+{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
+{corrected:} Bruishes, anèc un pintor dera dusau generacón des primitius flamencs actiu a Bruishes des de\\
+
+\paragraph{Salamandra 7B}~\\
+{original:} pr\textquotesingle{}amor que ja hè temps qu\textquotesingle{}èm maridadi e non senti fecondades pera vida es mies entralhes.\\
+{incorrect:} pr\textquotesingle{}amor que ja {\textless}err t=ort{\textgreater}he{\textless}/err{\textgreater} temps qu\textquotesingle{}èm {\textless}err t=reord{\textgreater}e maridadi{\textless}/err{\textgreater} non {\textless}err t=add{\textgreater}muy{\textless}/err{\textgreater} senti fecondades pera vida es mies entralhes.\\
+{corrected:} Perqué ya ha tiempo que estoy casado y no siento deseos de tener hijos con mi esposa\\

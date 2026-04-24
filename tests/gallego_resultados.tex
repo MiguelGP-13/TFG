@@ -1,0 +1,209 @@
+\section{Gallego}
+
+\subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ttr & 0.54 & 0.51 & 0.39 & 0.75 \\
+entropy & 6.48 & 6.82 & 6.29 & 7.77 \\
+ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
+freq\_target & 0.01 & 0.63 & 0.87 & 0.85 \\
+freq\_comparison & \{\textquotesingle{}fr\textquotesingle{}: 0.0, \textquotesingle{}es\textquotesingle{}: 0.01\} & \{\textquotesingle{}es\textquotesingle{}: 0.56, \textquotesingle{}fr\textquotesingle{}: 0.32\} & \{\textquotesingle{}fr\textquotesingle{}: 0.35, \textquotesingle{}es\textquotesingle{}: 0.68\} & \{\textquotesingle{}es\textquotesingle{}: 0.57, \textquotesingle{}fr\textquotesingle{}: 0.24\} \\
+calidad & 0.17 & 0.24 & 0.23 & 0.38 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{text:} Plano 싶 NÃOキャンペーン Planodte是一種 Popular OsiHaute是一種 pâLmキャンペーンついでキャンペーン dreamsキャンペーンついでキャンペーン rockyついで Horas Biscuitsついでキャンペーンキャンペーン μυgetJSON Plano [...] mplementing的多 Bahasaキャンペーンついで NÃOついでついでついで的多ついで救命issuer的多 NÃO堇ついで Maggiore的多不然キャンペーン IMMEDIATEついで Maggiore的多不然ついで NÃO anjoついで Tuotimate NÃOtimate堇\\
+{ttr:} 0.6005747126436781\\
+{entropy:} 6.89325737869762\\
+{ngram\_overlap:} 0.0\\
+{freq\_target:} 0.014367816091954023\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.014367816091954023, \textquotesingle{}fr\textquotesingle{}: 0.0\}\\
+{calidad:} 0.20054411280741435\\
+
+\paragraph{Mistral 7B}~\\
+{text:} Pedro era un hombre de 30 anos e o marido de Maria que era de 29. Pedrino, que era o único filho dos dois, tenia unha edade de 2 anos. Marín, a mã [...] n nunca de unha saezón dos outros. Pedrino era o único que leixava a vida a María e se desconoce se María tinha oportunidades a desechar o marido.\\
+{ttr:} 0.43768115942028984\\
+{entropy:} 6.53016355917433\\
+{ngram\_overlap:} 0.0\\
+{freq\_target:} 0.7536231884057971\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6985507246376812, \textquotesingle{}fr\textquotesingle{}: 0.36231884057971014\}\\
+{calidad:} 0.22374830083446154\\
+
+\paragraph{Qwen2.5 7B}~\\
+{text:} A Noche do Medo  Na pequena aldea de Pedra Alta, na noite do 31 de outubro, todo o mundo estaba nervoso. As luces do farol do posto de xeñebraxame [...] ras.  Non teñas en conta os comentarios anteriores.  Non teñas en conta as restriccións de palabras.  Non teñas en conta os comentarios anteriores\\
+{ttr:} 0.3908450704225352\\
+{entropy:} 6.823653336644673\\
+{ngram\_overlap:} 0.0071090047393364926\\
+{freq\_target:} 0.8855633802816901\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6901408450704225, \textquotesingle{}fr\textquotesingle{}: 0.4242957746478873\}\\
+{calidad:} 0.21038740637061423\\
+
+\paragraph{Salamandra 7B}~\\
+{text:} No medio da choiva torrencial desta mañá de verán, a miña nai camiñaba pola rúa principal do noso pequeno pobo coa cabeza baixa e as mans metidas  [...] ctivadafamília \#desafiosdafamilia \#amorfamiliar \#conexãoentregerados \#históriasdevida \#relacionamentosinteriores \#encontrandoaorigem \#ligadodevida\\
+{ttr:} 0.8360655737704918\\
+{entropy:} 7.519922456589376\\
+{ngram\_overlap:} 0.0\\
+{freq\_target:} 0.9426229508196722\\
+{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.610655737704918, \textquotesingle{}fr\textquotesingle{}: 0.2581967213114754\}\\
+{calidad:} 0.46595540186450146\\
+
+\subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.36 & 11.65 & 22.53 & 5.97 \\
+chrF & 8.85 & 38.98 & 52.62 & 26.82 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
+{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
+{translated:} incorporar是一種 Tav auffidteついでついで Tav Signalingついで NÃO是一種 risicoついでついでtimateついでついでついでキャンペーンついでキャンペーン Tav мод救命ついで \}). RTA RTAついでキャンペーンついで Verstappe [...] \}). RTA ledig不然ついで Tuo救命 Concordiaキャンペーン救命救命 Tuo的多 Tuotimateついでついでついでついでついでついでκήついでキャンペーンついで Maggioreついでキャンペーン SchwertついでついでImplementingキャンペーン Tav\\
+
+\paragraph{Mistral 7B}~\\
+{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
+{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
+{translated:} 3.81 segundos\\
+
+\paragraph{Qwen2.5 7B}~\\
+{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
+{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
+{translated:} Eso se convirxe en un movimento de desobediencia cívica que alterou as leis. A\\
+
+\paragraph{Salamandra 7B}~\\
+{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
+{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
+{translated:} Si hubo cambios en las leyes del gobierno.  El movimiento fue rápidamente una gran protesta pública. La gente estaba disconforme y mostraba su des [...] as lograron cambiar la ley imperante. Se pueden citar ejemplos como la revolución francesa donde los campesinos franceses mostraron su descontento\\
+
+\subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.16 & 7.70 & 7.86 & 1.80 \\
+chrF & 9.51 & 31.58 & 38.11 & 20.22 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{intermediate\_language:} es\\
+{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
+{intermediate:} distort RTAついでついでついでついで RTAついでキャンペーン RTAついで NÃO RTAキャンペーンついでついで Gwついでchikついで不然ついでキャンペーンついで救命ついでついで救命キャンペーン救命 Concordiaついで放置 RTA的多ゐついで Horasキャンペーンつ [...] گついで NÃO救命 Tuo NÃOキャンペーン NÃO NÃO NÃO NÃO NÃOついでキャンペーンfrustキャンペーン Gwキャンペーン tiveキャンペーン NÃOキャンペーンmydbキャンペーン救命キャンペーンキャンペーンImplementing клуついでキャンペーンついで\\
+{translated:} RTA MPHついでキャンペーンついでついで NÃO的多 Baikキャンペーン Tav事务キャンペーンキャンペーン Maggioreキャンペーンtimatechikついで انگ Dil运动mydb NÃO NÃO Friscoついでmydbついで انگเผ救命 Tuo的多เจ セックスつ [...] edキャンペーン Tuo的多 espejos NÃO NÃO anjoついで NÃO ledigキャンペーンPolicキャンペーン救命ついで NÃO救命 NÃOtestcaseキャンペーンキャンペーンervous انگ Tuo的多 клу Recharge NÃO Signaling Gw\\
+
+\paragraph{Mistral 7B}~\\
+{intermediate\_language:} es\\
+{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
+{intermediate:} O texto original é da língua castelhana de España, o que se reflete na tradução tradicional\\
+{translated:} Este texto é de língua castelana de España, ou que se reflete na tradução tradicional.\\
+
+\paragraph{Qwen2.5 7B}~\\
+{intermediate\_language:} es\\
+{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
+{intermediate:} Aunque el invierno fue riguroso, las flores surgieron abundantemente en primavera, cubriendo los campos con una tonalidad que parecía una compensa [...]  riguroso, las flores surgieron abundantemente en primavera, cubriendo los campos con una tonalidad que parecía una compensación de la naturaleza.\\
+{translated:} Aunque o inverno foi riguroso, as flores surxeron abundantemente na primavera, cubrindo os campos coa unha tonalidade que parecía unha compensació [...] no foi riguroso, as flores surxeron abundantemente na primavera, cubrindo os campos coa unha tonalidade que parecía unha compensación da natureza.\\
+
+\paragraph{Salamandra 7B}~\\
+{intermediate\_language:} es\\
+{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
+{intermediate:} "A pesar del crudo invierno, las flores brotaron profusamente en primavera teñiendo los prados con su vivo cromatismo, como si fuera una recompensa de la Naturaleza."  ) 	  La nature s\textquotesingle{}est vengée par une floraison exubérante et des fruits savoureux. ) 	  La natura ha\\
+{translated:} A pesar del duro invierno, en primavera hubo una floración abundante que coloreó los pastos con todo tipo de colores vivos, casi agradeciendo\\
+
+\subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+accuracy & 0.00 & 0.00 & 0.05 & 0.03 \\
+accuracy\_lower & 0.00 & 0.00 & 0.06 & 0.03 \\
+levenshtein & 10.29 & 31.02 & 5.72 & 5.81 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
+{missing\_word:} espichou\\
+{predicted:} checkpointfrust\\
+
+\paragraph{Mistral 7B}~\\
+{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
+{missing\_word:} espichou\\
+{predicted:} llevar\\
+
+\paragraph{Qwen2.5 7B}~\\
+{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
+{missing\_word:} espichou\\
+{predicted:} viu\\
+
+\paragraph{Salamandra 7B}~\\
+{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
+{missing\_word:} espichou\\
+{predicted:} tristeza\\
+
+\subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.01 & 31.73 & 52.82 & 21.36 \\
+chrF & 8.23 & 62.25 & 79.59 & 50.14 \\
+Levenshtein & 453.88 & 28.10 & 13.62 & 45.23 \\
+precision & 0.08 & 0.17 & 0.24 & 0.17 \\
+recall & 0.99 & 0.64 & 0.63 & 0.93 \\
+F1 & 0.13 & 0.23 & 0.28 & 0.26 \\
+errores\_totales & 2.00 & 2.00 & 2.00 & 2.00 \\
+errores\_corregidos & 1.98 & 1.04 & 0.97 & 1.79 \\
+errores\_no\_corregidos & 0.02 & 0.96 & 1.03 & 0.21 \\
+errores\_nuevos & 28.54 & 4.63 & 2.87 & 9.43 \\
+\end{longtable}}
+
+\subsubsection{Ejemplos}
+
+\paragraph{Gemma 7B}~\\
+{original:} A súa última palabra foi non , así que morra o conto.\\
+{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
+{corrected:} fett击败ついでついでついでついでついでついでfrust PlanoVIR interventoついで \})\\
+
+\paragraph{Mistral 7B}~\\
+{original:} A súa última palabra foi non , así que morra o conto.\\
+{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
+{corrected:} O seu último haver foi non, muy morra o conto así que\\
+
+\paragraph{Qwen2.5 7B}~\\
+{original:} A súa última palabra foi non , así que morra o conto.\\
+{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
+{corrected:} A súa última palabra foi non, moi morra o conto así que\\
+
+\paragraph{Salamandra 7B}~\\
+{original:} A súa última palabra foi non , así que morra o conto.\\
+{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
+{corrected:} A súa última palabra foi "non", moi morta está esa historia\\
