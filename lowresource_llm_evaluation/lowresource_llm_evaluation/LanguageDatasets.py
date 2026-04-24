@@ -195,14 +195,15 @@ class LanguageDataset():
         Reutilizable por LanguageDataset.tokenize() y por split().
         """
         if tokenizer.pad_token is None:
-            tokenizer.pad_token = tokenizer.eos_token
+            tokenizer.add_special_tokens({"pad_token": "<pad>"})
+
 
         def _fn(batch):
             out = tokenizer(
                 batch["text"],
                 truncation=True,
                 max_length=max_length,
-                padding="max_length",
+                padding="longest",
             )
             out["labels"] = out["input_ids"].copy()
             return out
