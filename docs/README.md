@@ -20,7 +20,7 @@ L A revisar
 L A revisar
 - [ ] Escribir resultados en memoria
 - [ ] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
-- [ ] Revisar aspectos legales y eticos (8) y metodología (4.1)
+- [x] Revisar aspectos legales y eticos (8) y metodología (4.1)
 - [ ] Redactar sección 1
 - [ ] Escribir 6.2 y 6.3
 - [ ] Escribir 7.2 y 7.3
