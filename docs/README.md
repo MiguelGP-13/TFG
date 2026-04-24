@@ -9,7 +9,7 @@ https://github.com/TALP-UPC/FreeLing/tree/master
 - [x] Cambiar color de descripciones en gráfico
 - [x] Como se genera, limpian los datos en 4.2 Materiales
 - [x] De donde vienen los datos en 4.2 Materiales
-- [ ] Añadir pequeña explicacion de Bleue y chrF
+- [x] Añadir pequeña explicacion de Bleue y chrF
 - [ ] Explicar de donde salen los lexicons
 - [ ] Añadir estadísticas de datasets elegidos y generados
 - [ ] Citar de donde vienen los lexicon -> FreeLing
