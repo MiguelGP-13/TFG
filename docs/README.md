@@ -21,12 +21,16 @@ L A revisar
 - [ ] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
 - [x] Revisar aspectos legales y eticos (8) y metodología (4.1)
 - [ ] Redactar sección 1
-- [ ] Escribir 6.2 y 6.3
+- [ ] Poner estadísticas de los datos
+- [ ] Revisar 6.2 y 6.3
+- [ ] Continuar con 6.3
 - [ ] Escribir 7.2 y 7.3
 - [ ] Comentar pad token
-- [ ] Explicar bien a que capas vamos a aplicarlo
-- [ ] Contar primer entrenamiento que devolvía siempre EOS al principio
-- [ ] Poner que vamos a reocrtar en el percentil 95
+- [x] Explicar bien a que capas vamos a aplicarlo
+L Revisarlo
+- [ ] Explicar las capas de los LLM en el Marco teórico 
+- [x] Contar primer entrenamiento que devolvía siempre EOS al principio
+- [ ] Poner que vamos a reocrtar en el percentil 95, para evitar tanto EOS
 
 ### Datos
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
@@ -44,9 +48,9 @@ L A revisar
 - [ ] Entrenar con LoRA sobre el mejor (o los 2 mejores?)
 
 ### Evaluación
-- [ ] Evaluar los modelos Asturiano
-- [ ] Evaluar los modelos Gallego
-- [ ] Evaluar los modelos Aranés
+- [x] Evaluar los modelos base Asturiano
+- [x] Evaluar los modelos base Gallego
+- [x] Evaluar los modelos base Aranés
 - [ ] Evaluar resultados QLoRA Asturiano
 - [ ] Evaluar resultados QLoRA Gallego
 - [ ] Evaluar resultados QLoRA Aranés
