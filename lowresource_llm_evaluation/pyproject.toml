@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lowresource-llm-evaluation"
-version = "0.7.1"
+version = "0.8.3.2"
 description = "Métricas para evaluar LLMs en su capacidad de hablar una lengua sin datasets de Q&A"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = "MIT"

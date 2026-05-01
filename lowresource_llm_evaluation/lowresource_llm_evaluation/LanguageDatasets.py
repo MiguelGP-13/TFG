@@ -31,19 +31,12 @@ lang_code = {
 
 
 class LanguageDataset():
-    def __init__(self, language=None, path=None,
-             initializeTatoeba=False, initializeLocal=False,
+    def __init__(self, language=None,
              min_words=4, max_words=np.inf, max_word_len=25, 
-             do_anonymize=True, filter_language_thr: int = False):
+             do_anonymize=True, filter_language_thr: int = False,
+             initializeTatoeba=False, initializeLocal=False):
 
-        # --- Caso 1: cargar desde archivo ---
-        if path is not None:
-            if language is not None:
-                raise ValueError("No puede pasar 'language' y 'path' a la vez.")
-            self.load_dataset(path)
-
-        # --- Caso 2: inicialización normal ---
-        elif language is None:
+        if language is None:
             raise ValueError("Debe pasar 'language' o 'path' obligatoriamente.")
 
         if language not in lang_code.keys():
@@ -245,7 +238,65 @@ class LanguageDataset():
 
         return train_tok, test_tok
 
+    def concatenate(self, tokenizer, max_tokens=1024):
+        """
+        Concatena líneas respetando el origen de cada dataset.
+        No mezcla textos de distintos datasets en el mismo bloque.
+        """
+        if not self.json or not self.raw_datasets:
+            print("Error inesperado en el concatenate!!")
+            return self
 
+        print(f"🔗 Concatenando por orígenes...")
+        
+        # 1. Estimación de ratio (igual que antes, para velocidad)
+        sample_text = " ".join([self.json[i]['text'] for i in range(min(500, len(self.json)))])
+        num_tokens = len(tokenizer.encode(sample_text, add_special_tokens=False))
+        chars_per_token = len(sample_text) / num_tokens if num_tokens > 0 else 3.5
+        max_chars = max_tokens * chars_per_token
+
+        new_json = []
+        new_raw_datasets = {}
+
+        # 2. Procesamos cada dataset por separado
+        for name, bounds in self.raw_datasets.items():
+            start_idx = len(new_json) # Nuevo inicio para este dataset
+            
+            # Extraemos las líneas que pertenecen a este dataset original
+            subset = self.json[bounds["start"]:bounds["end"]]
+            
+            current_batch = []
+            current_chars = 0
+
+            for item in subset:
+                line = item["text"].strip()
+                line_chars = len(line)
+
+                if current_chars + line_chars > max_chars and current_batch:
+                    new_json.append({"text": "\n".join(current_batch)})
+                    current_batch = []
+                    current_chars = 0
+                
+                current_batch.append(line)
+                current_chars += line_chars + 1
+
+            if current_batch:
+                new_json.append({"text": "\n".join(current_batch)})
+
+            # 3. Guardamos los nuevos límites para este dataset específico
+            new_raw_datasets[name] = {
+                "start": start_idx, 
+                "end": len(new_json),
+                "anonymous": bounds.get("anonymous", self.do_anonymize)
+            }
+
+        # 4. Actualizamos la instancia con los datos agrupados
+        self.json = new_json
+        self.raw_datasets = new_raw_datasets
+
+        print(f"✅ Concatenación finalizada respetando orígenes.")
+        self.summary() # Para ver cómo han quedado los nuevos tamaños
+        return self
 
     def startTatoeba(self):
         print(f"Descargando tatoeba para {self.language}:")
@@ -508,6 +559,8 @@ class LanguageDataset():
             "MAX_WORD_LEN": self.MAX_WORD_LEN,
             "do_anonymize": self.do_anonymize,
             "raw_datasets": self.raw_datasets,
+            "ft_model": self.ft_model,
+            "filter_language_thr": self.filter_language_thr,
             "json": self.json
         }
 
@@ -516,22 +569,51 @@ class LanguageDataset():
 
         print(f"Dataset guardado en {path}")
 
-    def load_dataset(self, path):
+    @classmethod
+    def from_json(cls, path):
+        """
+        Carga un archivo JSON guardado previamente y devuelve 
+        una instancia completa de LanguageDataset.
+        """
         with open(path, "r", encoding="utf-8") as f:
             data = json.load(f)
 
-        self.language = data["language"]
-        self.language_codes = data["language_codes"]
-        self.MIN_WORDS = data["MIN_WORDS"]
-        self.MAX_WORDS = data["MAX_WORDS"]
-        self.MAX_WORD_LEN = data["MAX_WORD_LEN"]        
-        self.do_anonymize = data["do_anonymize"]
+        # Usamos __new__ para evitar que el __init__ pida 'language' obligatoriamente
+        instance = cls.__new__(cls)
 
-        self.raw_datasets = data["raw_datasets"]
-        self.json = data["json"]
+        # Mapeamos los datos del JSON directamente a la instancia
+        instance.language = data["language"]
+        instance.language_codes = data["language_codes"]
+        instance.MIN_WORDS = data["MIN_WORDS"]
+        instance.MAX_WORDS = data["MAX_WORDS"]
+        instance.MAX_WORD_LEN = data["MAX_WORD_LEN"]        
+        instance.do_anonymize = data["do_anonymize"]
+        instance.raw_datasets = data["raw_datasets"]
+        instance.ft_model = data["ft_model"] 
+        instance.filter_language_thr = data["filter_language_thr"] 
+        instance.json = data["json"]
 
-        print(f"Dataset cargado desde {path} ({len(self.json)} líneas)")
-        return self
+        print(f"Dataset cargado desde {path} ({len(instance.json)} líneas)")
+        return instance
+    
+    @classmethod
+    def from_hf_dataset(cls, hf_ds, language, **kwargs):
+        """
+        Crea una instancia de LanguageDataset a partir de un Dataset de HuggingFace.
+        """
+        # Creamos la instancia (esto inicializa atributos base)
+        instance = cls(language=language, **kwargs)
+        
+        # Convertimos el Dataset de HF a nuestra estructura de lista de dicts
+        # Asumimos que el dataset tiene una columna llamada 'text'
+        instance.json = hf_ds.to_list()
+        
+        # Registramos este bloque en raw_datasets para mantener la coherencia
+        dataset_name = f"hf_imported_{hashlib.md5(language.encode()).hexdigest()[:6]}"
+        instance._saveIndexer(dataset_name, 0, len(instance.json))
+        
+        print(f"[INFO] Dataset importado desde HuggingFace: {len(instance.json)} líneas.")
+        return instance
 
     def _summary(self):
         total = len(self.json)
@@ -589,3 +671,47 @@ class LanguageDataset():
 
     def __str__(self):
         return self._summary()
+
+    def get_stats(self, tokenizer, N_max=20000, do_print=True):
+        """
+        Calcula estadísticas de tokens del dataset actual.
+        """
+        if not self.json:
+            print("[Vacio] No hay datos para analizar.")
+            return None
+
+        # 1. Seleccionar subconjunto para no eternizarnos si el dataset es gigante
+        n_to_analyze = min(N_max, len(self.json))
+        subset_texts = [self.json[i]["text"] for i in range(n_to_analyze)]
+
+        if do_print:
+            print(f"\n📊 Analizando estadísticas de tokens (N={n_to_analyze})...")
+
+        # 2. Tokenización en batch (esto es mucho más rápido que uno a uno)
+        # Usamos fast tokenizer si está disponible
+        tokenized = tokenizer(subset_texts, truncation=False, padding=False, add_special_tokens=False)
+        lengths = np.array([len(ids) for ids in tokenized["input_ids"]])
+
+        # 3. Cálculos
+        mean_val = lengths.mean()
+        median_val = np.median(lengths)
+        p95 = np.percentile(lengths, 95)
+        p98 = np.percentile(lengths, 98)
+
+        if do_print:
+            print("------------------------------------------------")
+            print(f"Total líneas en dataset: {len(self.json)}")
+            print(f"Media: {mean_val:.2f} | Mediana: {median_val:.2f}")
+            print(f"Percentil 95: {p95:.2f} (recomendado para max_length)")
+            print(f"Percentil 98: {p98:.2f}")
+            print(f"Máximo: {lengths.max()} | Mínimo: {lengths.min()}")
+        
+        # Moda aproximada
+        from collections import Counter
+        bins = Counter((lengths // 10) * 10)
+        moda = bins.most_common(1)[0][0]
+        if do_print:
+            print(f"Moda (aprox): {moda} tokens")
+            print("------------------------------------------------\n")
+
+        return lengths

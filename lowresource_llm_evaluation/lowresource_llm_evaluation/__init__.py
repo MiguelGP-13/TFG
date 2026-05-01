@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import time
 
-__version__ = "0.7.1"
+__version__ = "0.8.3.2"
 
 def _titulo(texto: str):
     ancho = shutil.get_terminal_size().columns
