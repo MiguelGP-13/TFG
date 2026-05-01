@@ -10,7 +10,6 @@ https://github.com/TALP-UPC/FreeLing/tree/master
 - [x] Como se genera, limpian los datos en 4.2 Materiales
 - [x] De donde vienen los datos en 4.2 Materiales
 - [x] Añadir pequeña explicacion de Bleue y chrF
-- [ ] Añadir estadísticas de datasets elegidos y generados
 - [x] Citar de donde vienen los lexicon -> FreeLing
 - [x] Añadir figura en 4.2.2 (diagrama...)
 - [x] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
@@ -21,16 +20,17 @@ L A revisar
 - [ ] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
 - [x] Revisar aspectos legales y eticos (8) y metodología (4.1)
 - [ ] Redactar sección 1
-- [ ] Poner estadísticas de los datos
+- [ ] Añadir estadísticas de datasets elegidos y generados
+- [ ] Explicar las capas de los LLM en el Marco teórico 
 - [ ] Revisar 6.2 y 6.3
 - [ ] Continuar con 6.3
 - [ ] Escribir 7.2 y 7.3
-- [ ] Comentar pad token
+- [x] Comentar pad token
+L Revisar
 - [x] Explicar bien a que capas vamos a aplicarlo
 L Revisarlo
-- [ ] Explicar las capas de los LLM en el Marco teórico 
 - [x] Contar primer entrenamiento que devolvía siempre EOS al principio
-- [ ] Poner que vamos a reocrtar en el percentil 95, para evitar tanto EOS
+- [x] Poner que vamos a reocrtar en el percentil 95, para evitar tanto EOS
 
 ### Datos
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
