@@ -31,6 +31,8 @@ L Revisar
 L Revisarlo
 - [x] Contar primer entrenamiento que devolvía siempre EOS al principio
 - [x] Poner que vamos a reocrtar en el percentil 95, para evitar tanto EOS
+- [ ] Comentar los resultados
+- [ ] Reducir entonces resultados no interesantes
 
 ### Datos
 - [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
