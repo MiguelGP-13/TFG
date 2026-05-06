@@ -1,9 +1,12 @@
-import os, re, json, html, hashlib, gzip, io, unicodedata
+import os, re, json, html, hashlib, gzip, io, unicodedata, random
 import regex
 import pandas as pd
 from datasets import Dataset
 import numpy as np
-import fasttext
+try:
+    import fasttext
+except:
+    print("FastText no encontrado")
 import requests
 
 lang_code = {
@@ -33,7 +36,7 @@ lang_code = {
 class LanguageDataset():
     def __init__(self, language=None,
              min_words=4, max_words=np.inf, max_word_len=25, 
-             do_anonymize=True, filter_language_thr: int = False,
+             do_anonymize=True, 
              initializeTatoeba=False, initializeLocal=False):
 
         if language is None:
@@ -54,39 +57,42 @@ class LanguageDataset():
         self.MAX_WORDS = max_words
         self.MAX_WORD_LEN = max_word_len
         self.do_anonymize = do_anonymize
-        self.filter_language_thr = filter_language_thr
+        self.special_tags = ["<|user|>", "<|assistant|>", "<|im_start|>", "<|im_end|>", "<|system|>"]
 
         # --- FastText model ---
         self.ft_model = None
 
-        if self.filter_language_thr:
-            # Validar soporte FastText
-            if self.language_codes["fasttext"] is None:
-                raise ValueError(
-                    f"La lengua '{self.language}' no está soportada por FastText LID-176. "
-                    "No se puede activar filter_language_thr=True."
-                )
+        # Validar soporte FastText
+        if self.language_codes["fasttext"] is None:
+            print(
+                f"La lengua '{self.language}' no está soportada por FastText LID-176. "
+                "No se puede filtrar por pertenencia a lengua"
+            )
+        else:
+            try:
+                # Ruta interna del modelo dentro del paquete
+                model_dir = os.path.join(os.path.dirname(__file__), "models")
+                os.makedirs(model_dir, exist_ok=True)
 
-            # Ruta interna del modelo dentro del paquete
-            model_dir = os.path.join(os.path.dirname(__file__), "models")
-            os.makedirs(model_dir, exist_ok=True)
+                self.model_path = os.path.join(model_dir, "lid.176.ftz")
 
-            self.model_path = os.path.join(model_dir, "lid.176.ftz")
+                # Descargar si no existe
+                if not os.path.exists(self.model_path):
+                    print(f"[INFO] Descargando FastText LID-176 a {self.model_path} ...")
+                    url = "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz"
+                    import requests
+                    r = requests.get(url, stream=True)
+                    r.raise_for_status()
+                    with open(self.model_path, "wb") as f:
+                        for chunk in r.iter_content(chunk_size=8192):
+                            f.write(chunk)
+                    print("[INFO] Modelo FastText descargado correctamente.")
 
-            # Descargar si no existe
-            if not os.path.exists(self.model_path):
-                print(f"[INFO] Descargando FastText LID-176 a {self.model_path} ...")
-                url = "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.ftz"
-                import requests
-                r = requests.get(url, stream=True)
-                r.raise_for_status()
-                with open(self.model_path, "wb") as f:
-                    for chunk in r.iter_content(chunk_size=8192):
-                        f.write(chunk)
-                print("[INFO] Modelo FastText descargado correctamente.")
-
-            # Cargar modelo
-            self.ft_model = fasttext.load_model(self.model_path)
+                # Cargar modelo
+                self.ft_model = fasttext.load_model(self.model_path)
+            except Exception as e:
+                print(e)
+                print("WARNING: FastText Model no disponible", "\nNo se puede filtrar por pertenencia a lengua")
 
         # --- Inicializaciones opcionales ---
         if initializeLocal:
@@ -124,13 +130,13 @@ class LanguageDataset():
     def _saveIndexer(self, name, start, end):
         self.raw_datasets[name] = {"start": start, "end": end, "anonymous":self.do_anonymize}
 
-    def is_target_language(self, text):
+    def is_target_language(self, text, filter_language_thr):
         """Devuelve True si el texto está en la lengua objetivo usando FastText."""
         ft_code = self.language_codes["fasttext"]
         lang, prob = self.ft_model.predict(text)
-        return lang[0] == ft_code and prob[0] > self.filter_language_thr
+        return lang[0] == ft_code and prob[0] > filter_language_thr
     
-    def filter_by_language(self, batch_size=512, top_k=3):
+    def filter_by_language(self, filter_language_thr, batch_size=512, top_k=3):
         """
         Filtra self.json por idioma respetando los índices de cada dataset.
         Recorre cada dataset por separado, filtra sus líneas y reconstruye
@@ -141,11 +147,10 @@ class LanguageDataset():
 
         if self.ft_model is None:
             raise RuntimeError(
-                "FastText no está cargado. Active filter_language_thr en el __init__."
+                "FastText no está cargado. O le lengua no lo soporta o se ha cargado mal. Revise los logs del init o reinicie el dataset."
             )
 
         ft_code = self.language_codes["fasttext"]
-        thr = self.filter_language_thr
 
         new_json = []
         new_raw = {}
@@ -167,7 +172,7 @@ class LanguageDataset():
                 for j in range(len(batch)):
                     if ft_code in langs[j]:
                         idx = langs[j].index(ft_code)
-                        if probs[j][idx] >= thr:
+                        if probs[j][idx] >= filter_language_thr:
                             keep.append(subset[i + j])
 
             # Guardar nuevos índices usando tu función
@@ -182,7 +187,7 @@ class LanguageDataset():
 
         return self
 
-    def tokenize_batch(self, tokenizer, max_length=512):
+    def tokenize_batch(self, tokenizer, max_length=160):
         """
         Devuelve una función que tokeniza un batch de textos.
         Reutilizable por LanguageDataset.tokenize() y por split().
@@ -196,7 +201,7 @@ class LanguageDataset():
                 batch["text"],
                 truncation=True,
                 max_length=max_length,
-                padding="longest",
+                padding="max_length",
             )
             out["labels"] = out["input_ids"].copy()
             return out
@@ -297,6 +302,57 @@ class LanguageDataset():
         print(f"✅ Concatenación finalizada respetando orígenes.")
         self.summary() # Para ver cómo han quedado los nuevos tamaños
         return self
+    
+    def to_pseudo_instruct(self, ratio_or_n=1.0, template_type="random"):
+        """
+        Convierte el dataset a formato instructivo optimizado.
+        
+        ratio_or_n: proporción (0-1) o número entero de ejemplos a convertir.
+        template_type: 'random' para variar el prompt, o 'fixed' para usar siempre el mismo.
+        """
+        total = len(self.json)
+        if total == 0:
+            return self
+
+        # 1. Cálculo rápido de cantidad
+        n = int(total * ratio_or_n) if ratio_or_n <= 1 else int(min(ratio_or_n, total))
+        
+        print(f"[Pseudo-Instruct] Transformando {n} ejemplos para {self.language}...")
+
+        # 2. Definición de plantillas (Variabilidad para mejor generalización)
+        templates = [
+            "Continúa esti testu n'{lang}, respetando'l tonu:",
+            "Sigue escribiendo en {lang} dende equí:",
+            "Completa la siguiente secuencia en llingua {lang}:",
+            "Escribe la continuación d'esti fragmentu ({lang}):"
+        ] if template_type == "random" else ["Continúa esti testu n'{lang}:"]
+
+        lang_name = self.language # Usa el nombre de la lengua de la instancia
+
+        # 3. Transformación in-place parcial
+        # Solo iteramos y modificamos los primeros 'n' elementos
+        
+        for i in range(n):
+            text = self.json[i]["text"].strip()
+            
+            # Elegimos una plantilla al azar y reemplazamos el placeholder del idioma
+            prompt_base = random.choice(templates).format(lang=lang_name)
+            
+            # Formato de chat optimizado (ChatML o similar)
+            full_text = (
+                f"<|user|>\n{prompt_base}\n\n{text}\n\n"
+                f"<|assistant|>\n{text}"
+            )
+            
+            self.json[i]["text"] = full_text
+
+        print(f"Transformación completada. Ejemplo:\n{self.json[0]['text'][:200]}...")
+        # 4. Mezclar (Opcional pero recomendado)
+        # Para que los ejemplos instructivos no queden todos al principio del entrenamiento
+        random.shuffle(self.json)
+
+        return self
+
 
     def startTatoeba(self):
         print(f"Descargando tatoeba para {self.language}:")
@@ -316,7 +372,7 @@ class LanguageDataset():
         print(f"Cargando txt locales para {self.language}:")
         self.read_folder(f"datasets/{self.language}")
 
-    def read_tatoeba_url(self, url):
+    def read_tatoeba_url(self, url, do_clean=True):
         df = pd.read_csv(
             url,
             sep="\t",
@@ -329,23 +385,23 @@ class LanguageDataset():
         elif "tatoeba" in self.raw_datasets:
             raise ValueError("El dataset tatoeba ya está cargado")
 
-        json_data = self.pandas_to_json(df)
+        json_data = self.pandas_to_json(df, do_clean=do_clean)
         start = len(self.json)
         self.json += json_data
         end = len(self.json)
         self._saveIndexer("tatoeba", start, end)
         return df
 
-    def read_folder(self, directory):
+    def read_folder(self, directory, do_clean=True):
         for file in os.listdir(directory):
             if file.endswith(".txt"):
                 try:
-                    self.read_local_file(directory, file)
+                    self.read_local_file(directory, file, do_clean=do_clean)
                     print(f"\rArchivo {file} cargado")
                 except Exception as e:
                     print(f"\rFallo al cargar el archivo {file}: {e}")
 
-    def read_local_file(self, directory, file):
+    def read_local_file(self, directory, file, do_clean=True):
         dataset_name = file.split(".")[0]
         if dataset_name in self.raw_datasets.keys():
             raise ValueError(f"El dataset {directory}/{file} ya está cargado")
@@ -353,11 +409,11 @@ class LanguageDataset():
         print(f"Leyendo archivo {file}...")
         if extension=="csv":
             try:
-                json_data = self.pandas_to_json(pd.read_csv(os.path.join(directory, file)))
+                json_data = self.pandas_to_json(pd.read_csv(os.path.join(directory, file)), do_clean=do_clean)
             except Exception as e:
                 raise ValueError("It has to have a text column.\n","Error: ",e)
         elif extension == "json":
-            json_data = self.pandas_to_json(pd.read_json(os.path.join(directory, file)))
+            json_data = self.pandas_to_json(pd.read_json(os.path.join(directory, file)), do_clean=do_clean)
         elif extension == "txt":
             json_data = []
             with open(os.path.join(directory, file), "r", encoding="utf-8") as f:
@@ -375,14 +431,14 @@ class LanguageDataset():
         return self
     
 
-    def read_dataframe(self, df, dataset_name=None):
+    def read_dataframe(self, df, dataset_name=None, do_clean=True):
         if not dataset_name: # Hash del dataframe como nombre
             dataset_name = hashlib.sha256(pd.util.hash_pandas_object(df, index=False).values).hexdigest()
         if dataset_name in self.raw_datasets.keys():
             raise ValueError(f"El dataset {dataset_name} ya está cargado")
         print("Preparando líneas")
         try:
-            json_data = self.pandas_to_json(df)
+            json_data = self.pandas_to_json(df, do_clean=do_clean, save=False)
         except Exception as e:
             raise ValueError("It has to have a text column.\n","Error: ",e)
         print("Dataset preparado")
@@ -392,7 +448,7 @@ class LanguageDataset():
         self._saveIndexer(dataset_name, start, end)
         return self
 
-    def read_list(self, list_of_strings, dataset_name=None):
+    def read_list(self, list_of_strings, dataset_name=None, do_clean=True):
         """
         Carga una lista de strings como dataset.
         Si no se pasa dataset_name, se genera un hash único.
@@ -406,9 +462,9 @@ class LanguageDataset():
 
         json_data = []
         for line in list_of_strings:
-            clean = self.clean_text(line)
-            if clean:
-                json_data.append({"text": clean})
+            clean_line = self.clean_text(line) if do_clean else line
+            if clean_line:
+                json_data.append({"text": clean_line})
 
         start = len(self.json)
         self.json += json_data
@@ -417,11 +473,9 @@ class LanguageDataset():
         self._saveIndexer(dataset_name, start, end)
         return self
 
-    def read_opus(self, source="NLLB", version=1):
+    def read_opus(self, source="NLLB", version=1, do_clean=True):
         """
-        Descarga y carga un corpus OPUS monolingüe en RAM.
-        source puede ser: 'NLLB', 'OpenSubtitles', 'JW300', etc.
-        version según el dataset que querais descargar (en OPUS)
+        Descarga y carga un corpus OPUS monolingüe en RAM de forma eficiente.
         """
         url = f"https://object.pouta.csc.fi/OPUS-{source}/v{version}/mono/{self.language_codes['opus']}.txt.gz"
 
@@ -433,26 +487,43 @@ class LanguageDataset():
         r = requests.get(url, stream=True)
         if r.status_code != 200:
             raise RuntimeError(f"No se pudo descargar OPUS desde {url}")
-        print("Empezando descarga")
+        
+        print(f"Empezando descarga de {source}...")
+        
+        # Guardamos el contenido comprimido en un buffer
         gz_bytes = io.BytesIO(r.content)
+        del r # Liberamos la respuesta de requests inmediatamente
 
-        # Descomprimir en RAM
-        with gzip.GzipFile(fileobj=gz_bytes, mode="rb") as f:
-            text = f.read().decode("utf-8")
-        print("Descarga completada. \nProcesando las líneas")
-        # Procesar líneas
         json_data = []
-        for line in text.split("\n"):
-            clean = self.clean_text(line)
-            if clean:
-                json_data.append({"text": clean})
+        
+        print("Procesando líneas directamente desde el flujo comprimido...")
+        
+        # Descomprimir e iterar línea a línea para ahorrar RAM
+        with gzip.GzipFile(fileobj=gz_bytes, mode="rb") as f:
+            for line in f:
+                try:
+                    # Decodificamos solo la línea actual
+                    line = line.decode("utf-8").strip()
+                    
+                    clean_line = self.clean_text(line) if do_clean else line
+                        
+                    if clean_line:
+                        json_data.append({"text": clean_line})
+                except UnicodeDecodeError:
+                    continue # Ignorar líneas corruptas si las hay
+
+        # Liberar el buffer de bytes comprimidos
+        gz_bytes.close()
+        del gz_bytes
 
         # Registrar dataset
         start = len(self.json)
         self.json += json_data
         end = len(self.json)
-        print("Dataset cargado")
+        
+        print(f"Dataset cargado: {len(json_data)} líneas nuevas.")
         self._saveIndexer(dataset_name, start, end)
+        
         return self
 
     # def is_mostly_latin(self, text, threshold=0.8):
@@ -463,6 +534,19 @@ class LanguageDataset():
 
     def clean_text(self, text):
         
+        # Enmascaramos etiquetas aceptadas para que no se borren
+        # Enmascaramos con letras (A=0, B=1, etc) para que \p{L} lo proteja 100%
+        protected_map = {}
+        import string
+        for i, tag in enumerate(self.special_tags):
+            # Usamos una letra del abecedario en lugar de un número
+            letra_idx = string.ascii_uppercase[i] if i < 26 else i
+            placeholder = f"TAGPROTECT{letra_idx}X" 
+            
+            if tag in text:
+                text = text.replace(tag, placeholder)
+                protected_map[placeholder] = tag
+
         # 1. Remove hashtags and the word following them
         text = re.sub(r"#\S+", "", text)
 
@@ -488,6 +572,10 @@ class LanguageDataset():
 
         # 8. Limit character repetitions (más de 5 → 5)
         text = re.sub(r"(.)\1{5,}", r"\1"*5, text)
+
+        # Desenmascaramos los tokens permitidos
+        for placeholder, original_tag in protected_map.items():
+            text = text.replace(placeholder, original_tag)
 
         # 9. Limit word repetitions (más de 5 → 5)
         def limit_word_reps(match):
@@ -539,10 +627,10 @@ class LanguageDataset():
         return text
 
 
-    def pandas_to_json(self, df, clean=True, save:str=False):
+    def pandas_to_json(self, df, do_clean=True, save:str=False):
         json_data = []
         for t in df["text"].tolist():
-            clean_line = self.clean_text(t) if clean else t
+            clean_line = self.clean_text(t) if do_clean else t
             if clean_line:
                 json_data.append({"text": clean_line})
         if save:
@@ -560,7 +648,6 @@ class LanguageDataset():
             "do_anonymize": self.do_anonymize,
             "raw_datasets": self.raw_datasets,
             "ft_model": self.ft_model,
-            "filter_language_thr": self.filter_language_thr,
             "json": self.json
         }
 
@@ -590,7 +677,6 @@ class LanguageDataset():
         instance.do_anonymize = data["do_anonymize"]
         instance.raw_datasets = data["raw_datasets"]
         instance.ft_model = data["ft_model"] 
-        instance.filter_language_thr = data["filter_language_thr"] 
         instance.json = data["json"]
 
         print(f"Dataset cargado desde {path} ({len(instance.json)} líneas)")
