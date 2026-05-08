@@ -708,6 +708,9 @@ Step	Training Loss
   </tbody>
 </table><p>
 
+Concatenated 37k
+
+
 #### Respuestas
 ##### Concatenado 
 ### Pregunta 1
@@ -749,3 +752,30 @@ Respuesta:
 Inventa un diálogu curtín ente dos persones n'asturianu. El contestu del llugar, el tonu y les temática de la conversación son dixebraes.
 Inventa un diálogu curtín ente dos persones n'español. El contestu del llugar, el tonu y les temática de la conversación son dixebraes.
 Inventa un diálogu curtín ente dos persones n'inglés. El contestu del llugar, el tonu y les temática de la conversación son dixebraes.
+
+Sin concatenar 32K (min tokens = 10)
+
+### Pregunta 1
+Prompt: ¿Quién yes? Explícamelo en 2 frases n'asturianu.
+Respuesta:
+¿Quién yes? Explícamelo en 2 frases n'asturianu. El meu nome ye Antonio Pardo, y soy un desarrollador de software n'asturianu.
+
+### Pregunta 2
+Prompt: Hola, ¿cómo tas güei?
+Respuesta:
+Hola, ¿cómo tas güei? Tuviste l’añu pasáu?
+
+### Pregunta 3
+Prompt: Descríbeme un paisaxe d'Asturies.
+Respuesta:
+Descríbeme un paisaxe d'Asturies. . Una linda estierna de monte nel Asturies del Centru, con árboles de madera caducifolia, como les encinas y castañaros.
+
+### Pregunta 4
+Prompt: Da un conseyu pa vivir meyor, n'asturianu.
+Respuesta:
+Da un conseyu pa vivir meyor, n'asturianu. . . . . , de setiembre de .
+
+### Pregunta 5
+Prompt: Inventa un diálogu curtín ente dos persones n'asturianu.
+Respuesta:
+Inventa un diálogu curtín ente dos persones n'asturianu. : Pablos: ¿A qué me preguntan?
