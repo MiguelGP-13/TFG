@@ -167,42 +167,66 @@ def generateDatasetHuecos(
 
 TEMPLATES = {
     "asturiano": [
+        # ——— ALARGAR / AMPLIAR ———
+        "Amplía esti testu añadiendo detalles, exemplos y esplicaciones:",
+        "Desarrolla esti conteníu con una versión más llarga y completa:",
+        "Esplica esti testu con más fondura y razonamientu:",
+        "Amplía esti fragmentu como si fuera pa un adultu interesáu nel tema:",
+        "Da una interpretación detallada y razonada d'esti conteníu:",
+        "Crea una versión más estensa d'esti testu, añadiendo matices:",
+        "Inventa un cuentu más llargu inspiráu nesti fragmentu:",
+        "Crea un diálogu más desarrolláu basáu nesti conteníu:",
+        "Da exemplos prácticos y amplía la información d'esti testu:",
+        "Elabora una esplicación más completa d'esti conteníu:",
+
+        # ——— VARIEDAD / REFORMULAR ———
+        "Reformula esti testu con otres pallabres:",
         "Resume esti testu n'asturiano:",
-        "Descríbeme esti conteníu con otres pallabres:",
         "Cambia esti testu a un tonu más formal:",
-        "Cambia esti testu a un tonu más informal:",
-        "Esplica esti conteníu como si fuera pa un neñu:",
-        "Esplica esti conteníu como si fuera pa un adultu:",
-        "Inventa un diálogu curtín inspiráu nesti testu:",
-        "Inventa un cuentu curtín basáu nesti fragmentu:",
-        "Da un conseyu relacionáu con esti conteníu:",
-        "Resume esti testu como si fuera un titular:"
+        "Cambia esti testu a un tonu más informal:"
     ],
+
     "gallego": [
+        # ——— ALARGAR / AMPLIAR ———
+        "Amplía este texto engadindo detalles, exemplos e explicacións:",
+        "Desenvolve este contido cunha versión máis longa e completa:",
+        "Explica este texto con máis profundidade e razoamento:",
+        "Amplía este fragmento como se fose para un adulto interesado no tema:",
+        "Dá unha interpretación detallada e razoada deste contido:",
+        "Crea unha versión máis extensa deste texto, engadindo matices:",
+        "Inventa un conto máis longo inspirado neste fragmento:",
+        "Crea un diálogo máis desenvolvido baseado neste contido:",
+        "Dá exemplos prácticos e amplía a información deste texto:",
+        "Elabora unha explicación máis completa deste contido:",
+
+        # ——— VARIEDAD / REFORMULAR ———
+        "Reformula este texto con outras palabras:",
         "Resume este texto en galego:",
-        "Descríbeme este contido con outras palabras:",
         "Cambia este texto a un ton máis formal:",
-        "Cambia este texto a un ton máis informal:",
-        "Explica este contido como se fose para un neno:",
-        "Explica este contido como se fose para un adulto:",
-        "Inventa un diálogo curto inspirado neste texto:",
-        "Inventa un conto curto baseado neste fragmento:",
-        "Dá un consello relacionado con este contido:",
-        "Resume este texto como se fose un titular:"
+        "Cambia este texto a un ton máis informal:"
     ],
+
     "aranes": [
+        # ——— ALARGAR / AMPLIAR ———
+        "Amplie aguest tèxte en tot includir detalhs, exemples e explicacions:",
+        "Desvolòpe aguest contengut damb ua version mès longa e completa:",
+        "Explique aguest tèxte damb mès prigondor e rasonament:",
+        "Amplie aguest fragment coma entà un adult interessat en eth tèma:",
+        "Done ua interpretacion detalhada e rasonada d'aguest contengut:",
+        "Cree ua version mès estensa d'aguest tèxte, includint matices:",
+        "Invente un raconte mès long inspirat en aguest fragment:",
+        "Cree un dialòg mès desvolopat basat en aguest contengut:",
+        "Done exemples practics e amplie era informacion d'aguest tèxte:",
+        "Elabòre ua explicacion mès completa d'aguest contengut:",
+
+        # ——— VARIEDAD / REFORMULAR ———
+        "Reformule aguest tèxte damb d'autes paraules:",
         "Resumís aguest tèxte en aranés:",
-        "Descriu aguest contengut damb d'autes paraules:",
         "Càmbia aguest tèxte a un ton mès formau:",
-        "Càmbia aguest tèxte a un ton mès informau:",
-        "Explique aguest contengut coma entà un mainatge:",
-        "Explique aguest contengut coma entà un adult:",
-        "Invente un dialòg brac inspirat en aguest tèxte:",
-        "Invente un petit raconte basat en aguest fragment:",
-        "Done un conselh relacionat damb aguest contengut:",
-        "Resumís aguest tèxte coma s'ère un titular:"
+        "Càmbia aguest tèxte a un ton mès informau:"
     ]
 }
+
 
 QA_TEMPLATES = {
     "asturiano": [
@@ -256,15 +280,13 @@ def generateInstructivoDataset(
         try:
             original = item["text"]
             template = random.choice(templates)
-
+            instr = template + '\n' + original
             prompt_user = (
-                f"{template}\n\n"
-                f"Texto base:\n{original}\n\n"
-                "Devuelve SOLO en este formato EXACTO:\n"
-                "<instruccion> ... </instruccion>\n"
+                f"{instr}\n\n"
+                f"Devuelve SOLO en este formato EXACTO y respondiendo solo en {language}:\n"
                 "<respuesta> ... </respuesta>"
             )
-
+            print(prompt_user)
             # Llamada segura
             modified = safe_chat_completion_groq(client, sleep_time=sleep_time, max_retries=max_retries,
                 model=model,
@@ -277,13 +299,9 @@ def generateInstructivoDataset(
 
             content = modified.strip()
 
-            # Parseo seguro
-            if "<instruccion>" not in content or "</instruccion>" not in content:
-                continue
             if "<respuesta>" not in content or "</respuesta>" not in content:
                 continue
-
-            instr = content.split("<instruccion>")[1].split("</instruccion>")[0].strip()
+            
             resp  = content.split("<respuesta>")[1].split("</respuesta>")[0].strip()
 
             if len(instr) < 3 or len(resp) < 3:
@@ -357,9 +375,9 @@ def generateInstructivoQA(
             prompt_user = (
                 f"{template}\n\n"
                 f"Texto base:\n{original}\n\n"
-                "Devuelve SOLO en este formato EXACTO:\n"
-                "<pregunta> ... </pregunta>\n"
-                "<respuesta> ... </respuesta>"
+                f"Devuelve SOLO en este formato EXACTO, todo en {language}:\n"
+                "<pregunta> GENERA SIEMPRE PREGUNTA </pregunta>\n"
+                "<respuesta> GENERA SIEMPRE RESUPESTA </respuesta>"
             )
 
             modified = modified = safe_chat_completion_groq(client, sleep_time=sleep_time, max_retries=max_retries,
