@@ -29,6 +29,9 @@ L A revisar
 - [x] Explicar las capas de los LLM en el Marco teórico
 L A revisar
 - [ ] Añadir estadísticas de datasets elegidos y generados
+- [ ] Poner perdidas loss de los entrenamientos en 6.3
+- [ ] Terminar de escribir pruebas realizadas.
+- [ ] Comentar en el 6.3 los test realizados con asturiano y entrenar igual con gallego y aranes, sacar resultados y ponerlos
 - [ ] Revisar 6.2 y 6.3
 - [ ] Continuar con 6.3
 - [ ] Escribir 7.2 y 7.3
