@@ -1,0 +1,186 @@
+\section{Asturiano}
+
+\subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+ttr & \textbf{0.93} & 0.46 & 0.40 & 0.83 \\
+entropy & 6.03 & 7.05 & 6.44 & \textbf{8.13} \\
+ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
+freq\_target & 0.01 & 0.53 & \textbf{0.61} & 0.47 \\
+freq\_comparison\_es & 0.07 & 0.77 & \textbf{0.90} & 0.76 \\
+freq\_comparison\_fr & 0.03 & 0.36 & \textbf{0.37} & 0.24 \\
+calidad & \textbf{0.23} & 0.15 & 0.13 & 0.17 \\
+\end{longtable}}
+
+\subsubsection{Ejemplo representativo}
+
+\paragraph{Gemma 7B}~\\
+\textbf{text:} Cascade luegoasse？】 вну tornado tornado tornadoplayedにあplayedCascadeplayedにあ teethingasseasseasseasseasseasseplayedCascadeasseplayedasseplayedplay [...] durbedurbedurbedasseasseurbederstishurbedurbedurbedurbedurbedurbedurbedurbed 田asseasseurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedasse\\
+\textbf{ttr:} 0.9305555555555556\\
+\textbf{entropy:} 6.020551563912269\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.013888888888888888\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.05555555555555555, \textquotesingle{}fr\textquotesingle{}: 0.041666666666666664\}\\
+\textbf{calidad:} 0.23801898077496778\\
+
+\paragraph{Mistral 7B}~\\
+\textbf{text:} Nadie en el pueblo de Candia conocía al hombre que se llamaba Alonso. Era un ser misterioso, el que vivía solitario y retiro del pueblo, en una ma [...] empre. Todos en el pueblo sabían cómo encontrarse en la mansión de Alonso. Pero nadie se atrevía, porque todo aquel que las visitaba había muerto.\\
+\textbf{ttr:} 0.4326241134751773\\
+\textbf{entropy:} 6.77404288413227\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.574468085106383\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.9290780141843972, \textquotesingle{}fr\textquotesingle{}: 0.41134751773049644\}\\
+\textbf{calidad:} 0.13155763096067624\\
+
+\paragraph{Qwen2.5 7B}~\\
+\textbf{text:} En un día de primavera, la familia Pérez se fue a caminar al bosque. Xa estaban en el bosque, vieron un arroyu que cantaba alegremente. Decidieron [...] tá ben! Si tienes alguna otra pregunta o necesitas ayuda con algo más, no dudes en decírmelo. ¿Hay algo más que quieras saber hoy? ¡Está ben! ¡Est\\
+\textbf{ttr:} 0.36666666666666664\\
+\textbf{entropy:} 6.992173658379043\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.625\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.935, \textquotesingle{}fr\textquotesingle{}: 0.37333333333333335\}\\
+\textbf{calidad:} 0.1007357493552855\\
+
+\paragraph{Salamandra 7B}~\\
+\textbf{text:} Nuna aldea asturiana nun se sabe too sobre lo qu\textquotesingle{}ocorrió no nuevu añu. Nun ye porque nun queran contar nada, sino pola falta de comunicación entre [...] gis beneplaciti benevolentiae propitius positus positura positio praeconizata praeconizatione praefecturus praefectura prefecture prefactura praef\\
+\textbf{ttr:} 0.9171875\\
+\textbf{entropy:} 9.126781449591151\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.3421875\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5828125, \textquotesingle{}fr\textquotesingle{}: 0.228125\}\\
+\textbf{calidad:} 0.0726407712997659\\
+
+\subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.02 & \textbf{4.87} & 3.69 & 1.59 \\
+chrF & 9.30 & 23.63 & \textbf{24.19} & 18.81 \\
+\end{longtable}}
+
+\subsubsection{Ejemplo representativo}
+\textbf{source:} Faltan pocos días para el comienzo de las clases en los colegios de Primaria.\\
+\textbf{reference:} Falten pocos díes pal empiezu de les clases nes escueles de Primaria.\\
+
+\paragraph{Gemma 7B}~\\
+\textbf{translated:} playedCascade nobleOLDS nonlinear tornado tornado tornadoasseasseгибаplayedurbed tornadoasseasseurbed tornadourbedasse معرضCascade معرضurbedasseги [...] rbedurbedurbedasseurbedurbedurbedasseCascadeasse tornadourbedassedibujosurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedasse\\
+
+\paragraph{Mistral 7B}~\\
+\textbf{translated:} Por un pocos días restantes hasta que empiecen las clases en las escuelas de Primaria.  ¡Buena suerte con tu encargo! Recuerda que a la hora de tr [...] o y la intención de éste. Sigue el ejemplo y escribe únicamente la frase traducida con la traducción correcta, sin añadir nada más. Si encontraste\\
+
+\paragraph{Qwen2.5 7B}~\\
+\textbf{translated:} Falten poucos días pa\textquotesingle{}l comenzo das clases nos coellos de Primaria.\\
+
+\paragraph{Salamandra 7B}~\\
+\textbf{translated:} Quedan poucos días para o inicio das clases nas escolas primarias.  ¿Te ha sido útil esta respuesta? ¿Tienes alguna otra pregunta a la que te gust [...] , explícita o de cualquier tipo. No asumimos responsabilidad alguna derivada del uso de este sitio web, incluidos, entre otros, los daños causados\\
+
+\subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.03 & \textbf{10.86} & 10.72 & 3.13 \\
+chrF & 8.31 & 33.21 & \textbf{42.19} & 25.86 \\
+\end{longtable}}
+
+\subsubsection{Ejemplo representativo}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} Aunque se usan los mismos nombres para los doce signos astrológicos que para doce de las catorce constelaciones astronómicas del Zodiaco, hay una importante diferencia.\\
+
+\paragraph{Gemma 7B}~\\
+\textbf{intermediate:} Hendrixesian encodeplayedesianasseVictimCascadeにあ Diab chapterCascade noble tornadoasseasseasseasseグリップにあ معرضasseVictim explainedCascadeasseassea [...] ба tornado tornadoasseasseasseasseasseplayedplayedplayedasseasseasseにあurbedasseasseplayedurbedurbedurbedasseurbedasseasseasseurbedгибаasseassetish\\
+\textbf{translated:} esianurbedurbedurbedurbedurbedurbedurbedurbedurbed croppedurbedurbedurbedurbedurbedurbed вероятplayedurbedurbedurbedurbedurbedurbedurbedurbedaling [...] edurbedasseanserbbyurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedasseurbedurbedurbedurbedurbedurbedadianserurbed\\
+
+\paragraph{Mistral 7B}~\\
+\textbf{intermediate:} signos astrológicos - signos astrales constelaciones astronómicas - constelaciones astronomicas zodi\\
+\textbf{translated:} zodiaco\\
+
+\paragraph{Qwen2.5 7B}~\\
+\textbf{intermediate:} Aunque se usan los mismos nombres para los doce signos astrológicos que para doce de las catorce constelaciones astronómicas del Zodiaco, hay una importante diferencia.\\
+\textbf{translated:} Aunque se usen os mesmo nomes pa los dousce signos astrolóxicos que pa dousce de las catorce constelaciones astronómiques do Zodiaco, hai unha imp [...] mo nomes pa los dousce signos astrolóxicos que pa dousce de las catorce constelaciones astronómiques do Zodiaco, hai unha importantíma diferencia.\\
+
+\paragraph{Salamandra 7B}~\\
+\textbf{intermediate:} Los 12 signos del Zodíaco son Aries, Tauro, Géminis, Cáncer, Leo, Virgo, Libra, Escorpio, Sagitario, Capricornio, Acuario y Piscis. Cada signo dur [...] menores en el calendario pueden alterar este dato). Se dice popularmente que cada persona pertenece a su propio signo según la fecha de nacimiento\\
+\textbf{translated:} Los doce signos zodiacales son Aries, Tauro, Géminis, Cáncer, Leo, Virgo, Libra, Escorpión, Sagitario, Capricornio, Acuario y Piscis. La duración  [...] ependiendo de cuándo hayan nacido  ¿Qué te parecen estas frases? ¿Te gusta cómo se ha hecho la traducción? Si tienes alguna duda o sugerencia no d\\
+
+\subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+accuracy & 0.00 & \textbf{0.01} & \textbf{0.01} & 0.00 \\
+accuracy\_lower & 0.00 & \textbf{0.01} & \textbf{0.01} & 0.00 \\
+levenshtein & 31.73 & 28.37 & \textbf{6.75} & 11.83 \\
+\end{longtable}}
+
+\subsubsection{Ejemplo representativo}
+\textbf{masked\_sentence:} È d\textquotesingle{}èster aquiu entà {\textless}mask{\textgreater} es tonos de gris.\\
+\textbf{missing\_word:} ensenhar-te\\
+
+\paragraph{Gemma 7B}~\\
+\textbf{predicted:} asseplayed\\
+
+\paragraph{Mistral 7B}~\\
+\textbf{predicted:} es\\
+
+\paragraph{Qwen2.5 7B}~\\
+\textbf{predicted:} en\\
+
+\paragraph{Salamandra 7B}~\\
+\textbf{predicted:} Es\\
+
+\subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
+{\def\LTcaptype{none}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+BLEU & 0.02 & 30.69 & \textbf{54.95} & 7.71 \\
+chrF & 10.22 & 68.55 & \textbf{81.29} & 44.10 \\
+Levenshtein & 575.75 & 36.87 & \textbf{20.50} & 73.79 \\
+precision & 0.09 & 0.11 & \textbf{0.17} & 0.11 \\
+recall & \textbf{0.99} & 0.58 & 0.47 & 0.90 \\
+F1 & 0.16 & 0.15 & \textbf{0.18} & \textbf{0.18} \\
+errores\_totales & 2.03 & 2.03 & 2.03 & 2.03 \\
+errores\_corregidos & \textbf{2.02} & 0.94 & 0.65 & 1.79 \\
+errores\_no\_corregidos & \textbf{0.01} & 1.09 & 1.38 & 0.24 \\
+errores\_nuevos & 21.69 & 9.20 & \textbf{4.34} & 17.53 \\
+\end{longtable}}
+
+\subsubsection{Ejemplo representativo}
+\textbf{original:} El so tamañu ye variable.\\
+\textbf{incorrect:} El so {\textless}err t=ort{\textgreater}tamanyu{\textless}/err{\textgreater} ye variable.\\
+
+\paragraph{Gemma 7B}~\\
+\textbf{corrected:} маєCascadeplayed tornado🅵 encode tornado tornado encodeбвамає tornadoplayedにあsudadera вну tornadoмаєasseplayedplayedplayedplayedplayedplayed вну в [...] rbedasseurbedasseurbedCascadeasseurbedasseurbedOLDSCascadeasseurbedasseurbedasseurbedasseurbedasseurbedasseurbedasseurbedasseurbedasse Xie tornado\\
+
+\paragraph{Mistral 7B}~\\
+\textbf{corrected:} El tamanyu de lu so es variable\\
+
+\paragraph{Qwen2.5 7B}~\\
+\textbf{corrected:} El su tamaño ye variable\\
+
+\paragraph{Salamandra 7B}~\\
+\textbf{corrected:} O seu tamaño é variable\\
