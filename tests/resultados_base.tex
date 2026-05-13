@@ -12,51 +12,52 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-ttr & 0.68 & 0.43 & 0.33 & \textbf{0.79} \\
-entropy & 6.48 & \textbf{7.00} & 6.47 & 6.97 \\
+ttr & 0.22 & 0.47 & 0.42 & \textbf{0.72} \\
+entropy & 4.42 & 6.89 & 6.35 & \textbf{7.43} \\
 ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
-freq\_target & 0.01 & 0.48 & \textbf{0.49} & 0.35 \\
-freq\_comparison & \{\textquotesingle{}es\textquotesingle{}: 0.01, \textquotesingle{}fr\textquotesingle{}: 0.12\} & \{\textquotesingle{}es\textquotesingle{}: 0.51, \textquotesingle{}fr\textquotesingle{}: 0.33\} & \{\textquotesingle{}es\textquotesingle{}: 0.53, \textquotesingle{}fr\textquotesingle{}: 0.37\} & \{\textquotesingle{}es\textquotesingle{}: 0.38, \textquotesingle{}fr\textquotesingle{}: 0.46\} \\
-calidad & 0.22 & 0.14 & 0.10 & \textbf{0.23} \\
+freq\_target & 0.01 & \textbf{0.47} & 0.46 & 0.40 \\
+freq\_comparison\_es & 0.02 & 0.47 & \textbf{0.51} & 0.45 \\
+freq\_comparison\_fr & 0.16 & 0.30 & 0.30 & \textbf{0.40} \\
+calidad & 0.03 & 0.18 & 0.15 & \textbf{0.22} \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
 
 \paragraph{Gemma 7B}~\\
-{text:} ziehung PUR connaissent chemist geledenhändlerUsaziehungFramework鬻physic chemistFrameworkFrameworkClassic鬻händlerpinaziehungFrameworkClassicphysic [...] irementFrameworkhändler+{\textless}Frameworktikohändler Endocrinehändler Endocrinehändler Endocrinehändler coworkershändlerhändler क्लढ़händler关系UsaFramework\\
-{ttr:} 0.5777777777777777\\
-{entropy:} 6.261396613149506\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.011111111111111112\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.003703703703703704, \textquotesingle{}fr\textquotesingle{}: 0.16666666666666666\}\\
-{calidad:} 0.18859470786629426\\
+\textbf{text:} الذ علىsucces快捷 Mundo moons Mundo BOOTmet Bär快捷快捷快捷快捷快捷快捷 контроли落 Mundotappe快捷快捷快捷快捷 Broom Mundo BOOT,\,\ Bär落 BOOT २०快捷快捷快捷 २०快捷快捷 २०快捷 २०快捷快捷快 [...] BOOT BOOT BOOT BOOT २० २० Muscat�快捷 BOOT BOOT २० BOOT BOOT BOOT BOOT BOOT २० २०快捷快捷LOCATION快捷快捷詞快捷 sintering快捷 BOOT BOOT Bär快捷 BOOT २०快捷 BOOT २०快捷\\
+\textbf{ttr:} 0.2971698113207547\\
+\textbf{entropy:} 4.924308183454258\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.01179245283018868\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.01179245283018868, \textquotesingle{}fr\textquotesingle{}: 0.3490566037735849\}\\
+\textbf{calidad:} 0.03978483427960723\\
 
 \paragraph{Mistral 7B}~\\
-{text:} Parlar de la gent de la Vall d\textquotesingle{}Aran i dels seus costumers tradicionals és enrealitzar una història de gent que ha viscut entre els seus muntanyes  [...]  territori per mantenir el seu bon estat. En l\textquotesingle{}actualitat, la gent viu a la vall d\textquotesingle{}ara, un bon nombre es concentra a la vila d\textquotesingle{}Aran, però també hi\\
-{ttr:} 0.40034965034965037\\
-{entropy:} 6.884237231851388\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.5034965034965035\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.527972027972028, \textquotesingle{}fr\textquotesingle{}: 0.4020979020979021\}\\
-{calidad:} 0.12765018184608098\\
+\textbf{text:} En els primers temps de la seva existència, l\textquotesingle{}Aragon era una terra desolada i salvatge, habitada per uns primitius homes nòmades, coneguts com els [...] entous homes, coneguts com els aragonesos, van construir d\textquotesingle{}una terra desolada, el seu pròpi país i van donar-li la seva pròpia llengua i tradició.\\
+\textbf{ttr:} 0.47306791569086654\\
+\textbf{entropy:} 6.908985512841516\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.48009367681498827\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.47540983606557374, \textquotesingle{}fr\textquotesingle{}: 0.3255269320843091\}\\
+\textbf{calidad:} 0.18066158847216107\\
 
 \paragraph{Qwen2.5 7B}~\\
-{text:} En un temps antigu, a la terra de Tarnag, hi habia una gran regina chamona, Aigle. En aquest temps, la regina chamona era la força més poderosa de [...] us sujets de les intencions maléfiques d\textquotesingle{}Almirant. I a partir d\textquotesingle{}aquell moment, la pau i la tranquil·litat tornaren a ser la norma en la terra de T\\
-{ttr:} 0.34582623509369675\\
-{entropy:} 6.630588654658522\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.4957410562180579\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5417376490630323, \textquotesingle{}fr\textquotesingle{}: 0.36626916524701875\}\\
-{calidad:} 0.10118637609196138\\
+\textbf{text:} Unamunia, un gran filòsof de l\textquotesingle{}Arany, era nascuda en una famillia modesta de la vila de Llauró. Des del seu temps d\textquotesingle{}enfant, mostrava un gran inter [...] tència humana. Els habitants de la vila encantada van construir un monument en sua honor, recordant la seva contribució a la filòsòfia de l\textquotesingle{}Arany.\\
+\textbf{ttr:} 0.4496124031007752\\
+\textbf{entropy:} 6.187408162133985\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5271317829457365\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5736434108527132, \textquotesingle{}fr\textquotesingle{}: 0.41472868217054265\}\\
+\textbf{calidad:} 0.17579758117723013\\
 
 \paragraph{Salamandra 7B}~\\
-{text:} Jo e me amigu caminàm per la montanheta de Salís quan vèiem una gran quantitat de bolets. Encontram nos a un pinar prop del crestèlh.   Tradus en  [...] We and my friend were walking on the Salís mountain when we saw an enormous amount of mushrooms. We found ourselves in a pine forest near a ridge.\\
-{ttr:} 0.8928571428571429\\
-{entropy:} 5.566108939837484\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.32142857142857145\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.3392857142857143, \textquotesingle{}fr\textquotesingle{}: 0.25\}\\
-{calidad:} 0.29143989182173013\\
+\textbf{text:} Eth student de l\textquotesingle{}institut Juan Carlos I va anar a la biblioteca per fer els treballs escolars i es va trobar amb una dona gran que estava llegint  [...] da que Juan Carlos anava a estudiar a la biblioteca, recordava aquella experiència tan especial i esperava poder repetir-la algun dia properament.\\
+\textbf{ttr:} 0.7391304347826086\\
+\textbf{entropy:} 6.599299176612612\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.4472049689440994\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.4720496894409938, \textquotesingle{}fr\textquotesingle{}: 0.33540372670807456\}\\
+\textbf{calidad:} 0.31151872220191895\\
 
 \subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
 {\def\LTcaptype{none}
@@ -67,31 +68,25 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.00 & 3.13 & 3.57 & \textbf{4.18} \\
-chrF & 3.64 & 13.85 & 16.19 & \textbf{16.43} \\
+BLEU & 0.08 & 3.07 & 4.10 & \textbf{4.52} \\
+chrF & 4.85 & 14.80 & 16.86 & \textbf{17.04} \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{source:} suprime la actividad enzimática?\\
+\textbf{reference:} Elègi de l’ensenhament actiu?\\
 
 \paragraph{Gemma 7B}~\\
-{source:} suprime la actividad enzimática?\\
-{reference:} Elègi de l’ensenhament actiu?\\
-{translated:} ativoshändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändlerhändler [...] arriershändlerClassicBarriersspectral Endocrine SynxCSheFrameworkhändler 새로운ढ़ClassicFramework Endocrineziehung EndocrineBarriers EndocrineBarriers\\
+\textbf{translated:} 偿 pesa chihuahua reimet reimet rei reiGrupo rei rei rei Bär Bär rei快捷伀 Bär контроли rei maîtrise rei快捷 marl rei proses Bär Bär Bär Bär Bär blessés [...] Donald BärDonald IO २० Bär Broom Bär BOOT २०快捷詞 २० Survivor Bärtappe Bärtappe BärDonald IO,\,\ Bär Mundo BOOT २०快捷هام २०Donald IO २० २० blessésهام\\
 
 \paragraph{Mistral 7B}~\\
-{source:} suprime la actividad enzimática?\\
-{reference:} Elègi de l’ensenhament actiu?\\
-{translated:} suprime la actividad enzimática? → Quelhadhig la attiviedadi enzimmatici?\\
+\textbf{translated:} "supprime la actividad enzimática" = "suprime a enzima"\\
 
 \paragraph{Qwen2.5 7B}~\\
-{source:} suprime la actividad enzimática?\\
-{reference:} Elègi de l’ensenhament actiu?\\
-{translated:} "Suprimi a actividá enzimática?"\\
+\textbf{translated:} "Suprimi a actividá enzimática?"\\
 
 \paragraph{Salamandra 7B}~\\
-{source:} suprime la actividad enzimática?\\
-{reference:} Elègi de l’ensenhament actiu?\\
-{translated:} Destruye la actividad de las enzimas?\\
+\textbf{translated:} Suprime a actividade das encimas?  A resposta é si.\\
 
 \subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
 {\def\LTcaptype{none}
@@ -102,35 +97,29 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.01 & 6.36 & 5.02 & \textbf{16.05} \\
-chrF & 3.98 & 26.23 & 24.76 & \textbf{38.18} \\
+BLEU & 0.09 & 4.45 & \textbf{4.53} & 4.29 \\
+chrF & 4.96 & 19.34 & \textbf{20.23} & 18.79 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} Voliáu tornar au negre e blanc per marcar l’elegància d’aqueste\\
 
 \paragraph{Gemma 7B}~\\
-{intermediate\_language:} es\\
-{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
-{intermediate:} Usa awsเบphysic estrenoUsa däpinaFrameworktutorFrameworkFrameworkphysichändlerhändlerhändlerphysichändler EndocrinehändlerhändlerClassichändlerCla [...] ndlerClassichändler coworkershändlerClassichändlerClassic EndocrinehändlerhändlerClassichändlerClickshändlerClassic ativoshändlerClassic Endocrine\\
-{translated:} physichändlerhändlerhändlerspectralziehunghändler EndocrineKne 中山händler Endocrineziehunghändlerhändler EndocrinehändlerBarriershändler ativoshänd [...] erhändlerhändlerhändlerhändlerhändlerhändler chemisthändlerClassicBarriershändlerUsarequirementphysic Roman EndocrineBarriershändlerClassicziehung\\
+\textbf{intermediate:} Donald�快捷 Mundo IO快捷快捷快捷Donald快捷Donald IO IO快捷 Mundo २० Bär IO strix rei Bär Bär快捷快捷快捷 Mundo IODonald IO २० Bär Bär Bär technik快捷 २० IO快捷Donald Bä [...] d快捷 २० IO快捷快捷 контроли Survivor Bär Bär Bär Bär快捷 bolsaDonaldDonaldtappe Bär Bär Bär快捷 bolsaDonald IOهام快捷Donald २० २० Bär Bär Bär Bär fascinating\\
+\textbf{translated:} Donald IOrj MundoDonaldBilly mengucapDonald IO CUNള് IO technikﻫ,\,\ Bär快捷 Republikrj Mundo rei Bär山形Feld快捷 MundoDonaldDonald BOOT伀快捷 २० Bär Bär B [...] OOT BOOT,\,\ Bär BOOT outrage rei pagare Bär BOOT २० Bär Bär Bär Bär BOOT BOOT २०快捷 dress Bär २० Bär Bär २० Bär Bär Broom快捷 Mundo Mundo Bär Bär २०\\
 
 \paragraph{Mistral 7B}~\\
-{intermediate\_language:} es\\
-{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
-{intermediate:} La eleccion del blanco y negro para llamar la atención al estallido de luz.  Me gusta la eleccion del blanco y negro para que el estallido de luz  [...] l blanco y negro para servir de contrapunto al estallido de luz.  La eleccion del blanco y negro es una seleccion que destaca el estallido de luz.\\
-{translated:} La elección del blanco y negro es una selección que resalta el estallido de luz.\\
+\textbf{intermediate:} Wanted to return to the black and white tunnel to mark the elegance of this.  Note that the "this" at the end refers to the phrase "la elegancia d [...] s a small error in your original sentence "Voliáu tornar au negre e blanc per marcar l’elegància d’aqueste". The correct translation should be "Qu\\
+\textbf{translated:} Voliai tornar al túnnel negre e blau per marcar l’elegáncia d’aqueste.\\
 
 \paragraph{Qwen2.5 7B}~\\
-{intermediate\_language:} es\\
-{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
-{intermediate:} "Me gusta el uso del blanco y negro para destacar ese estallido de luz". El subjuntivo "gusta" se mantiene en lugar del indicativo "gustan", ya qu [...] se utiliza para especificar el propósito del blanco y negro. Me gusta el uso del blanco y negro para destacar ese estallido de luz.  Respóndeme en\\
-{translated:} "Mam me thost el uso do blanco e negro para destacaese ese estallidu de luix."\\
+\textbf{intermediate:} La traducción se ha adaptado ligeramente para que sea más natural en español. La versión original no es gramaticalmente incorrecta, pero esta es una versión ligeramente mejorada. Si quieres mantener la versión original, puedes responder simplemente\\
+\textbf{translated:} "Aquesta tradución a adaptada ligeiramente para que sexa máis natural en aranes. A versión orixinal non é gramaticalmente incorrecta, pero esta é  [...] anes. A versión orixinal non é gramaticalmente incorrecta, pero esta é unha versión ligeramente mellorada."   Pero dado que has pedido traducir al\\
 
 \paragraph{Salamandra 7B}~\\
-{intermediate\_language:} es\\
-{source:} Me gusta la elección del blanco y negro para destacar ese estallido de luz\\
-{intermediate:} Gosto pela escolha do preto e branco para realçar esse flash de luz\\
-{translated:} Me gusta tu elección del blanco y negro para resaltar ese destello de luz.\\
+\textbf{intermediate:} "Me gustaría volver al negro y blanco para enfatizar la elegancia de este"\\
+\textbf{translated:} "Gustaríame voltar ao preto e branco para realçar a elegância deste."\\
 
 \subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
 {\def\LTcaptype{none}
@@ -141,32 +130,26 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-accuracy & 0.00 & \textbf{0.01} & 0.00 & 0.00 \\
-accuracy\_lower & 0.00 & \textbf{0.01} & \textbf{0.01} & 0.00 \\
-levenshtein & 93.22 & 63.81 & 12.22 & \textbf{6.90} \\
+accuracy & 0.00 & 0.00 & 0.00 & 0.00 \\
+accuracy\_lower & 0.00 & 0.00 & \textbf{0.02} & 0.00 \\
+levenshtein & 17.46 & 54.97 & 16.85 & \textbf{8.49} \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{masked\_sentence:} Moscòu ei {\textless}mask{\textgreater} mair de totes es ciutats.\\
+\textbf{missing\_word:} era\\
 
 \paragraph{Gemma 7B}~\\
-{masked\_sentence:} Moscòu ei {\textless}mask{\textgreater} mair de totes es ciutats.\\
-{missing\_word:} era\\
-{predicted:} ziehung鬻UsaziehungrequirementxenUsa막ziehungEXPRESS\\
+\textbf{predicted:} itory\\
 
 \paragraph{Mistral 7B}~\\
-{masked\_sentence:} Que {\textless}mask{\textgreater} me mingi ara gent.\\
-{missing\_word:} non\\
-{predicted:} comença\\
+\textbf{predicted:} gran\\
 
 \paragraph{Qwen2.5 7B}~\\
-{masked\_sentence:} Que {\textless}mask{\textgreater} me mingi ara gent.\\
-{missing\_word:} non\\
-{predicted:} ara\\
+\textbf{predicted:} és\\
 
 \paragraph{Salamandra 7B}~\\
-{masked\_sentence:} Que {\textless}mask{\textgreater} me mingi ara gent.\\
-{missing\_word:} non\\
-{predicted:} Que\\
+\textbf{predicted:} Moscou\\
 
 \subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
 {\def\LTcaptype{none}
@@ -177,39 +160,33 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.00 & 20.19 & \textbf{42.61} & 4.00 \\
-chrF & 7.72 & 52.23 & \textbf{72.58} & 33.59 \\
-Levenshtein & 805.66 & 57.53 & \textbf{27.44} & 71.65 \\
-precision & 0.07 & 0.11 & 0.11 & \textbf{0.13} \\
-recall & \textbf{1.00} & 0.70 & 0.46 & 0.93 \\
-F1 & 0.13 & 0.17 & 0.13 & \textbf{0.20} \\
+BLEU & 0.11 & 20.25 & \textbf{44.26} & 3.92 \\
+chrF & 7.95 & 54.08 & \textbf{73.94} & 32.11 \\
+Levenshtein & 472.69 & 50.48 & \textbf{21.20} & 75.43 \\
+precision & 0.03 & 0.11 & \textbf{0.13} & \textbf{0.13} \\
+recall & \textbf{1.00} & 0.70 & 0.48 & 0.95 \\
+F1 & 0.06 & 0.17 & 0.14 & \textbf{0.21} \\
 errores\_totales & 1.93 & 1.93 & 1.93 & 1.93 \\
-errores\_corregidos & \textbf{1.92} & 1.13 & 0.55 & 1.76 \\
-errores\_no\_corregidos & \textbf{0.01} & 0.80 & 1.38 & 0.17 \\
-errores\_nuevos & 24.45 & 10.45 & \textbf{4.95} & 17.98 \\
+errores\_corregidos & \textbf{1.93} & 1.19 & 0.58 & 1.78 \\
+errores\_no\_corregidos & \textbf{0.00} & 0.74 & 1.35 & 0.15 \\
+errores\_nuevos & 71.14 & 11.55 & \textbf{4.53} & 17.36 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
+\textbf{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
 
 \paragraph{Gemma 7B}~\\
-{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
-{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
-{corrected:} ziehung 仮 chemist pstziehungziehung EndocrinehändlerhändlerhändlerhändlerhändlerhändlerClassicziehungziehung ativoshändlerhändler Endocrinehändler [...] rhändlerClassicBarriershändlerhändlerhändler EndocrineBarriershändlerBarriersBarriershändlerhändlerBarriershändlerhändlerhändler EndocrineBarriers\\
+\textbf{corrected:} Bär quindi Bärmet ASEAN reimet Bärmet快捷多了 BärDonald IO reimet,\,\ Bär BärDonald IO BärDonaldDonald IO ASEAN BärDonald BärDonald Bär BärDonald BärD [...]  २०詞快捷DonaldDonald २०快捷づくり快捷DonaldDonald快捷DonaldDonaldDonaldDonaldDonald BärDonald IODonaldDonaldDonald BärDonaldDonald IO╙快捷快捷 २० BärهامDonald IO\\
 
 \paragraph{Mistral 7B}~\\
-{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
-{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
-{corrected:} - Bruishis, , hanno avito un pintor pertant a dusas generacions de primitivos flamencs activu a Bruishis da\\
+\textbf{corrected:} - *Broodhes,* *ha* *habia* *un pintor* *activo* *dos* *generaciones* *de* *primitivos* *flamencos* *activo* *en* *Bruges* *desde* *1480\\
 
 \paragraph{Qwen2.5 7B}~\\
-{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
-{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
-{corrected:} Bruishes, anèc un pintor dera dusau generacón des primitius flamencs actiu a Bruishes des de\\
+\textbf{corrected:} "Bruishes, anèc un pintor dera dusau generacón des primitius flamencs actiu a Bruishes des de\\
 
 \paragraph{Salamandra 7B}~\\
-{original:} pr\textquotesingle{}amor que ja hè temps qu\textquotesingle{}èm maridadi e non senti fecondades pera vida es mies entralhes.\\
-{incorrect:} pr\textquotesingle{}amor que ja {\textless}err t=ort{\textgreater}he{\textless}/err{\textgreater} temps qu\textquotesingle{}èm {\textless}err t=reord{\textgreater}e maridadi{\textless}/err{\textgreater} non {\textless}err t=add{\textgreater}muy{\textless}/err{\textgreater} senti fecondades pera vida es mies entralhes.\\
-{corrected:} Perqué ya ha tiempo que estoy casado y no siento deseos de tener hijos con mi esposa\\
+\textbf{corrected:} - Bruses, Jan van der Weyden, és un pintor de la segona generació dels Primitives Flamenques que va treballar a Brussel·les durant el segle XV\\
 
 \vspace{1em}
 
@@ -224,51 +201,52 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-ttr & \textbf{0.93} & 0.46 & 0.40 & 0.83 \\
-entropy & 6.03 & 7.05 & 6.44 & \textbf{8.13} \\
+ttr & 0.40 & 0.47 & 0.43 & \textbf{0.76} \\
+entropy & 6.35 & 6.96 & 5.90 & \textbf{7.58} \\
 ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
-freq\_target & 0.01 & 0.53 & \textbf{0.61} & 0.47 \\
-freq\_comparison & \{\textquotesingle{}es\textquotesingle{}: 0.07, \textquotesingle{}fr\textquotesingle{}: 0.03\} & \{\textquotesingle{}es\textquotesingle{}: 0.77, \textquotesingle{}fr\textquotesingle{}: 0.36\} & \{\textquotesingle{}es\textquotesingle{}: 0.9, \textquotesingle{}fr\textquotesingle{}: 0.37\} & \{\textquotesingle{}es\textquotesingle{}: 0.76, \textquotesingle{}fr\textquotesingle{}: 0.24\} \\
-calidad & \textbf{0.23} & 0.15 & 0.13 & 0.17 \\
+freq\_target & 0.05 & 0.51 & \textbf{0.60} & 0.55 \\
+freq\_comparison\_fr & 0.04 & 0.33 & \textbf{0.43} & 0.26 \\
+freq\_comparison\_es & 0.05 & 0.74 & \textbf{0.92} & 0.89 \\
+calidad & 0.11 & 0.15 & 0.14 & \textbf{0.21} \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
 
 \paragraph{Gemma 7B}~\\
-{text:} Cascade luegoasse？】 вну tornado tornado tornadoplayedにあplayedCascadeplayedにあ teethingasseasseasseasseasseasseplayedCascadeasseplayedasseplayedplay [...] durbedurbedurbedasseasseurbederstishurbedurbedurbedurbedurbedurbedurbedurbed 田asseasseurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedasse\\
-{ttr:} 0.9305555555555556\\
-{entropy:} 6.020551563912269\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.013888888888888888\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.05555555555555555, \textquotesingle{}fr\textquotesingle{}: 0.041666666666666664\}\\
-{calidad:} 0.23801898077496778\\
+\textbf{text:} больбольбольmeleonболь Stimmen̆招呼 выпе مهارت выпе модибольболь索尼 مهارت ujar🥈 مهارت̆ giovanni выпе выпе giả🥈 выпе🥈 выпестераensibility giovanniстер [...] диزيل Bogaumma therapiesزيل моди моди鍍стера выпе модиزيل модиزيلhlungen выпе索尼 модистера Boga модиزيل выпеHIR моди索尼 CG therapies моди моди моди索尼\\
+\textbf{ttr:} 0.40540540540540543\\
+\textbf{entropy:} 6.372779665833772\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.04684684684684685\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.05045045045045045, \textquotesingle{}fr\textquotesingle{}: 0.03063063063063063\}\\
+\textbf{calidad:} 0.1120356635924981\\
 
 \paragraph{Mistral 7B}~\\
-{text:} Nadie en el pueblo de Candia conocía al hombre que se llamaba Alonso. Era un ser misterioso, el que vivía solitario y retiro del pueblo, en una ma [...] empre. Todos en el pueblo sabían cómo encontrarse en la mansión de Alonso. Pero nadie se atrevía, porque todo aquel que las visitaba había muerto.\\
-{ttr:} 0.4326241134751773\\
-{entropy:} 6.77404288413227\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.574468085106383\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.9290780141843972, \textquotesingle{}fr\textquotesingle{}: 0.41134751773049644\}\\
-{calidad:} 0.13155763096067624\\
+\textbf{text:} Un jove de noma Carlos va a pueblo para saber qué le ocurré al amoreu del sueno, que nunca hai reixu contactar, que nunca hai saber se vèía, a cai [...] a del lugar, y sus amigos están orgullosos de decir que eran ellos. Han pasado años y han llegado a la muerte, pero su amor no se extinguió nunca.\\
+\textbf{ttr:} 0.5172413793103449\\
+\textbf{entropy:} 6.630435777820923\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.6068965517241379\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.9241379310344827, \textquotesingle{}fr\textquotesingle{}: 0.3724137931034483\}\\
+\textbf{calidad:} 0.20166065393748156\\
 
 \paragraph{Qwen2.5 7B}~\\
-{text:} En un día de primavera, la familia Pérez se fue a caminar al bosque. Xa estaban en el bosque, vieron un arroyu que cantaba alegremente. Decidieron [...] tá ben! Si tienes alguna otra pregunta o necesitas ayuda con algo más, no dudes en decírmelo. ¿Hay algo más que quieras saber hoy? ¡Está ben! ¡Est\\
-{ttr:} 0.36666666666666664\\
-{entropy:} 6.992173658379043\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.625\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.935, \textquotesingle{}fr\textquotesingle{}: 0.37333333333333335\}\\
-{calidad:} 0.1007357493552855\\
+\textbf{text:} En un villu del Asturies, hai un muchacho chamado Eneko. Eneko ama la montaña y pasa tolos veranos subiendu a la cumbre a veure los paisajes e res [...] tor de la naturaleza y una guía famosa entre los amantes de la montaña, todo gracias a la ayuda de María e a la Flor de la Montaña que tanto aman.\\
+\textbf{ttr:} 0.5125448028673835\\
+\textbf{entropy:} 6.462956732217847\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5698924731182796\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.910394265232975, \textquotesingle{}fr\textquotesingle{}: 0.3942652329749104\}\\
+\textbf{calidad:} 0.1906146281351\\
 
 \paragraph{Salamandra 7B}~\\
-{text:} Nuna aldea asturiana nun se sabe too sobre lo qu\textquotesingle{}ocorrió no nuevu añu. Nun ye porque nun queran contar nada, sino pola falta de comunicación entre [...] gis beneplaciti benevolentiae propitius positus positura positio praeconizata praeconizatione praefecturus praefectura prefecture prefactura praef\\
-{ttr:} 0.9171875\\
-{entropy:} 9.126781449591151\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.3421875\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5828125, \textquotesingle{}fr\textquotesingle{}: 0.228125\}\\
-{calidad:} 0.0726407712997659\\
+\textbf{text:} Nesti mundu, nun hai ninuna frontera. Tóis tósos nos mueves per to país en busca de la vida qu’a ti te parezca más adecuada pa tus gustos e intere [...] ente alrededor del planeta entero ♻️ Así pues, parece ser que cambiando pequeños hábitos diarios podríamos contribuir significativamente hacia mit\\
+\textbf{ttr:} 0.6834532374100719\\
+\textbf{entropy:} 8.531928388379347\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5366906474820143\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.7755395683453238, \textquotesingle{}fr\textquotesingle{}: 0.25755395683453236\}\\
+\textbf{calidad:} 0.14216394091037762\\
 
 \subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
 {\def\LTcaptype{none}
@@ -279,31 +257,25 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.02 & \textbf{4.87} & 3.69 & 1.59 \\
-chrF & 9.30 & 23.63 & \textbf{24.19} & 18.81 \\
+BLEU & 0.00 & \textbf{5.64} & 4.89 & 1.70 \\
+chrF & 10.98 & \textbf{25.39} & 25.35 & 19.85 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{source:} Faltan pocos días para el comienzo de las clases en los colegios de Primaria.\\
+\textbf{reference:} Falten pocos díes pal empiezu de les clases nes escueles de Primaria.\\
 
 \paragraph{Gemma 7B}~\\
-{source:} Faltan pocos días para el comienzo de las clases en los colegios de Primaria.\\
-{reference:} Falten pocos díes pal empiezu de les clases nes escueles de Primaria.\\
-{translated:} playedCascade nobleOLDS nonlinear tornado tornado tornadoasseasseгибаplayedurbed tornadoasseasseurbed tornadourbedasse معرضCascade معرضurbedasseги [...] rbedurbedurbedasseurbedurbedurbedasseCascadeasse tornadourbedassedibujosurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedasse\\
+\textbf{translated:} 平面Ltbehavioralbehavioral embracesbehavioralגת выпебольболь assignmentsushed{\textless}/strong{\textgreater}behavioral Stimmen索尼🥈 giovanni Notice Stimmen索尼索尼索尼 выпе accel [...] и Notice🥈绑定 assignments completenessстера выпе completeness🥈 azértutura🥈🥈 azért Notice Policy meeste giả Pharaohhringer Notice completeness giảزيل\\
 
 \paragraph{Mistral 7B}~\\
-{source:} Faltan pocos días para el comienzo de las clases en los colegios de Primaria.\\
-{reference:} Falten pocos díes pal empiezu de les clases nes escueles de Primaria.\\
-{translated:} Por un pocos días restantes hasta que empiecen las clases en las escuelas de Primaria.  ¡Buena suerte con tu encargo! Recuerda que a la hora de tr [...] o y la intención de éste. Sigue el ejemplo y escribe únicamente la frase traducida con la traducción correcta, sin añadir nada más. Si encontraste\\
+\textbf{translated:} Faltan pocos días para o comienzo das clases en las escueles de Primaría.\\
 
 \paragraph{Qwen2.5 7B}~\\
-{source:} Faltan pocos días para el comienzo de las clases en los colegios de Primaria.\\
-{reference:} Falten pocos díes pal empiezu de les clases nes escueles de Primaria.\\
-{translated:} Falten poucos días pa\textquotesingle{}l comenzo das clases nos coellos de Primaria.\\
+\textbf{translated:} Falta poucas dazas pa l\textquotesingle{}incipiu das clases nos coellos de Primaria.\\
 
 \paragraph{Salamandra 7B}~\\
-{source:} Faltan pocos días para el comienzo de las clases en los colegios de Primaria.\\
-{reference:} Falten pocos díes pal empiezu de les clases nes escueles de Primaria.\\
-{translated:} Quedan poucos días para o inicio das clases nas escolas primarias.  ¿Te ha sido útil esta respuesta? ¿Tienes alguna otra pregunta a la que te gust [...] , explícita o de cualquier tipo. No asumimos responsabilidad alguna derivada del uso de este sitio web, incluidos, entre otros, los daños causados\\
+\textbf{translated:} Dentro de poucos días empezarán as clases nas escolas primarias.   ¿Te gustaría que tradujese algún otro fragmento del texto?  😊 ¿Hay algo más qué quieras saber sobre este tema? Puedes preguntarme todo lo relacionado a ello. Espero tu respuesta. ✍️\\
 
 \subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
 {\def\LTcaptype{none}
@@ -314,35 +286,29 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.03 & \textbf{10.86} & 10.72 & 3.13 \\
-chrF & 8.31 & 33.21 & \textbf{42.19} & 25.86 \\
+BLEU & 0.02 & 6.99 & \textbf{13.65} & 3.35 \\
+chrF & 11.50 & 30.04 & \textbf{44.16} & 25.45 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} El xuegu Nanobreaker de Konami tien una secuencia d\textquotesingle{}apertura na que les nanomáquinas amenorguen tolos organismos vivientes nuna islla a plaga gris.\\
 
 \paragraph{Gemma 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque se usan los mismos nombres para los doce signos astrológicos que para doce de las catorce constelaciones astronómicas del Zodiaco, hay una importante diferencia.\\
-{intermediate:} Hendrixesian encodeplayedesianasseVictimCascadeにあ Diab chapterCascade noble tornadoasseasseasseasseグリップにあ معرضasseVictim explainedCascadeasseassea [...] ба tornado tornadoasseasseasseasseasseplayedplayedplayedasseasseasseにあurbedasseasseplayedurbedurbedurbedasseurbedasseasseasseurbedгибаasseassetish\\
-{translated:} esianurbedurbedurbedurbedurbedurbedurbedurbedurbed croppedurbedurbedurbedurbedurbedurbed вероятplayedurbedurbedurbedurbedurbedurbedurbedurbedaling [...] edurbedasseanserbbyurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedurbedasseurbedurbedurbedurbedurbedurbedadianserurbed\\
+\textbf{intermediate:} ž madonnabehavioral kampus giả🥈🥈的形式 giovanni 儿 Notice Stimmen的形式xg的形式索尼索尼🥈🥈索尼索尼索尼索尼索尼 Notice автомобиль🥈 azértزيلбольстера meeste🥈whis giả的形式索尼索尼  [...] выпе索尼 azértHIR🥈🥈索尼زيل دیگه دیگه دیگه выпеHIR выпеHIR выпе索尼 моди索尼 выпе выпеArtisan kallauchung выпе выпе моди моди моди выпе madonnaVotre索尼 выпе\\
+\textbf{translated:} истин giả giả慈 पृष्ठ🥈 obsolete completeness выпе Dawn giả моди Boga索尼 моди модиزيل моди croixстераزيل выпе модиزيل therapiesiff моди دیگه моди Bog [...] pies pegawai выпе completenessزيل выпеزيلزيل моди выпеزيل моди Notice completeness модиزيل🥈 выпе fluent obsoleteбольphirбольболь Pharaohbióстера索尼\\
 
 \paragraph{Mistral 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque se usan los mismos nombres para los doce signos astrológicos que para doce de las catorce constelaciones astronómicas del Zodiaco, hay una importante diferencia.\\
-{intermediate:} signos astrológicos - signos astrales constelaciones astronómicas - constelaciones astronomicas zodi\\
-{translated:} zodiaco\\
+\textbf{intermediate:} La apertura del juego Nanobreaker de Konami muestra cómo las nanomáquinas amenazan a toda la vida en una isla con una plaga gris.\\
+\textbf{translated:} El juego Nanobreaker de Konami muestra la apertura de las nanomáquinas que amenazan a toda la vida en una isla con una plaga gris.\\
 
 \paragraph{Qwen2.5 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque se usan los mismos nombres para los doce signos astrológicos que para doce de las catorce constelaciones astronómicas del Zodiaco, hay una importante diferencia.\\
-{intermediate:} Aunque se usan los mismos nombres para los doce signos astrológicos que para doce de las catorce constelaciones astronómicas del Zodiaco, hay una importante diferencia.\\
-{translated:} Aunque se usen os mesmo nomes pa los dousce signos astrolóxicos que pa dousce de las catorce constelaciones astronómiques do Zodiaco, hai unha imp [...] mo nomes pa los dousce signos astrolóxicos que pa dousce de las catorce constelaciones astronómiques do Zodiaco, hai unha importantíma diferencia.\\
+\textbf{intermediate:} El juego Nanobreaker de Konami tiene una secuencia de apertura en la que las nanomáquinas reduzcan a todos los organismos vivientes en una isla a una plaga gris.\\
+\textbf{translated:} Nanobreaker d Konami tien unha secuencia de abertura na que as nanomáquinas reducían a todos os organismos viventes nunha ilha a unha plaga grise.\\
 
 \paragraph{Salamandra 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque se usan los mismos nombres para los doce signos astrológicos que para doce de las catorce constelaciones astronómicas del Zodiaco, hay una importante diferencia.\\
-{intermediate:} Los 12 signos del Zodíaco son Aries, Tauro, Géminis, Cáncer, Leo, Virgo, Libra, Escorpio, Sagitario, Capricornio, Acuario y Piscis. Cada signo dur [...] menores en el calendario pueden alterar este dato). Se dice popularmente que cada persona pertenece a su propio signo según la fecha de nacimiento\\
-{translated:} Los doce signos zodiacales son Aries, Tauro, Géminis, Cáncer, Leo, Virgo, Libra, Escorpión, Sagitario, Capricornio, Acuario y Piscis. La duración  [...] ependiendo de cuándo hayan nacido  ¿Qué te parecen estas frases? ¿Te gusta cómo se ha hecho la traducción? Si tienes alguna duda o sugerencia no d\\
+\textbf{intermediate:} La apertura del videojuego Nanobreaker de Konami muestra cómo las nanobombas eliminan todo organismo vivo dentro de una isla dejándola totalmente  [...]  creados por la empresa japonesa Konami para recreativas. Fue lanzado en Japón durante el año 1982 como "Metal Slader Glory", y posteriormente fue\\
+\textbf{translated:} )       Si necesitas alguna otra información o tienes otras preguntas sobre este tema u otros temas\\
 
 \subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
 {\def\LTcaptype{none}
@@ -353,32 +319,26 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-accuracy & 0.00 & \textbf{0.01} & \textbf{0.01} & 0.00 \\
-accuracy\_lower & 0.00 & \textbf{0.01} & \textbf{0.01} & 0.00 \\
-levenshtein & 31.73 & 28.37 & \textbf{6.75} & 11.83 \\
+accuracy & 0.00 & 0.00 & \textbf{0.02} & 0.00 \\
+accuracy\_lower & 0.00 & 0.00 & \textbf{0.02} & 0.00 \\
+levenshtein & 15.63 & 21.96 & \textbf{7.98} & 18.42 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{masked\_sentence:} È d\textquotesingle{}èster aquiu entà {\textless}mask{\textgreater} es tonos de gris.\\
+\textbf{missing\_word:} ensenhar-te\\
 
 \paragraph{Gemma 7B}~\\
-{masked\_sentence:} È d\textquotesingle{}èster aquiu entà {\textless}mask{\textgreater} es tonos de gris.\\
-{missing\_word:} ensenhar-te\\
-{predicted:} asseplayed\\
+\textbf{predicted:} žpractices\\
 
 \paragraph{Mistral 7B}~\\
-{masked\_sentence:} È d\textquotesingle{}èster aquiu entà {\textless}mask{\textgreater} es tonos de gris.\\
-{missing\_word:} ensenhar-te\\
-{predicted:} es\\
+\textbf{predicted:} colores\\
 
 \paragraph{Qwen2.5 7B}~\\
-{masked\_sentence:} È d\textquotesingle{}èster aquiu entà {\textless}mask{\textgreater} es tonos de gris.\\
-{missing\_word:} ensenhar-te\\
-{predicted:} en\\
+\textbf{predicted:} a\\
 
 \paragraph{Salamandra 7B}~\\
-{masked\_sentence:} È d\textquotesingle{}èster aquiu entà {\textless}mask{\textgreater} es tonos de gris.\\
-{missing\_word:} ensenhar-te\\
-{predicted:} Es\\
+\textbf{predicted:} \\
 
 \subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
 {\def\LTcaptype{none}
@@ -389,39 +349,33 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.02 & 30.69 & \textbf{54.95} & 7.71 \\
-chrF & 10.22 & 68.55 & \textbf{81.29} & 44.10 \\
-Levenshtein & 575.75 & 36.87 & \textbf{20.50} & 73.79 \\
-precision & 0.09 & 0.11 & \textbf{0.17} & 0.11 \\
-recall & \textbf{0.99} & 0.58 & 0.47 & 0.90 \\
-F1 & 0.16 & 0.15 & \textbf{0.18} & \textbf{0.18} \\
+BLEU & 0.00 & 32.23 & \textbf{54.78} & 7.15 \\
+chrF & 12.04 & 69.61 & \textbf{81.51} & 43.73 \\
+Levenshtein & 567.85 & 36.09 & \textbf{19.92} & 77.11 \\
+precision & 0.03 & 0.11 & \textbf{0.13} & 0.10 \\
+recall & \textbf{0.98} & 0.63 & 0.44 & 0.92 \\
+F1 & 0.06 & 0.16 & 0.15 & \textbf{0.17} \\
 errores\_totales & 2.03 & 2.03 & 2.03 & 2.03 \\
-errores\_corregidos & \textbf{2.02} & 0.94 & 0.65 & 1.79 \\
-errores\_no\_corregidos & \textbf{0.01} & 1.09 & 1.38 & 0.24 \\
-errores\_nuevos & 21.69 & 9.20 & \textbf{4.34} & 17.53 \\
+errores\_corregidos & \textbf{2.00} & 1.01 & 0.60 & 1.80 \\
+errores\_no\_corregidos & \textbf{0.03} & 1.02 & 1.43 & 0.23 \\
+errores\_nuevos & 62.05 & 9.48 & \textbf{4.81} & 18.43 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{original:} El so tamañu ye variable.\\
+\textbf{incorrect:} El so {\textless}err t=ort{\textgreater}tamanyu{\textless}/err{\textgreater} ye variable.\\
 
 \paragraph{Gemma 7B}~\\
-{original:} El so tamañu ye variable.\\
-{incorrect:} El so {\textless}err t=ort{\textgreater}tamanyu{\textless}/err{\textgreater} ye variable.\\
-{corrected:} маєCascadeplayed tornado🅵 encode tornado tornado encodeбвамає tornadoplayedにあsudadera вну tornadoмаєasseplayedplayedplayedplayedplayedplayed вну в [...] rbedasseurbedasseurbedCascadeasseurbedasseurbedOLDSCascadeasseurbedasseurbedasseurbedasseurbedasseurbedasseurbedasseurbedasseurbedasse Xie tornado\\
+\textbf{corrected:} brengMinerbehavioralbehavioralбольбольболь Notice مهارتmeleonболь Stimmen giovanni🥈practices مهارت字典brengболь giảmeleon Noticepang embraces giả索尼  [...] e索尼 моди моди Stimmen выпе моди 儿 Notice выпе выпе выпе索尼 моди索尼索尼索尼стера weedummaumma obsoletebió obsoleteбольVotre索尼索尼 выпе моди выпе索尼 моди کیا\\
 
 \paragraph{Mistral 7B}~\\
-{original:} El so tamañu ye variable.\\
-{incorrect:} El so {\textless}err t=ort{\textgreater}tamanyu{\textless}/err{\textgreater} ye variable.\\
-{corrected:} El tamanyu de lu so es variable\\
+\textbf{corrected:} El so tamañu (tamaño) ye variable\\
 
 \paragraph{Qwen2.5 7B}~\\
-{original:} El so tamañu ye variable.\\
-{incorrect:} El so {\textless}err t=ort{\textgreater}tamanyu{\textless}/err{\textgreater} ye variable.\\
-{corrected:} El su tamaño ye variable\\
+\textbf{corrected:} El sú tamanyu ye variable\\
 
 \paragraph{Salamandra 7B}~\\
-{original:} El so tamañu ye variable.\\
-{incorrect:} El so {\textless}err t=ort{\textgreater}tamanyu{\textless}/err{\textgreater} ye variable.\\
-{corrected:} O seu tamaño é variable\\
+\textbf{corrected:} O seu tamaño é variable\\
 
 \vspace{1em}
 
@@ -436,51 +390,52 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-ttr & 0.54 & 0.51 & 0.39 & \textbf{0.75} \\
-entropy & 6.48 & 6.82 & 6.29 & \textbf{7.77} \\
+ttr & 0.16 & 0.54 & 0.48 & \textbf{0.73} \\
+entropy & 3.30 & 6.55 & 6.72 & \textbf{8.28} \\
 ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
-freq\_target & 0.01 & 0.63 & \textbf{0.87} & 0.85 \\
-freq\_comparison & \{\textquotesingle{}fr\textquotesingle{}: 0.0, \textquotesingle{}es\textquotesingle{}: 0.01\} & \{\textquotesingle{}es\textquotesingle{}: 0.56, \textquotesingle{}fr\textquotesingle{}: 0.32\} & \{\textquotesingle{}fr\textquotesingle{}: 0.35, \textquotesingle{}es\textquotesingle{}: 0.68\} & \{\textquotesingle{}es\textquotesingle{}: 0.57, \textquotesingle{}fr\textquotesingle{}: 0.24\} \\
-calidad & 0.17 & 0.24 & 0.23 & \textbf{0.38} \\
+freq\_target & 0.00 & 0.72 & \textbf{0.85} & 0.84 \\
+freq\_comparison\_fr & 0.00 & 0.32 & \textbf{0.33} & 0.23 \\
+freq\_comparison\_es & 0.00 & 0.61 & \textbf{0.68} & 0.54 \\
+calidad & 0.01 & \textbf{0.31} & 0.29 & 0.30 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
 
 \paragraph{Gemma 7B}~\\
-{text:} Plano 싶 NÃOキャンペーン Planodte是一種 Popular OsiHaute是一種 pâLmキャンペーンついでキャンペーン dreamsキャンペーンついでキャンペーン rockyついで Horas Biscuitsついでキャンペーンキャンペーン μυgetJSON Plano [...] mplementing的多 Bahasaキャンペーンついで NÃOついでついでついで的多ついで救命issuer的多 NÃO堇ついで Maggiore的多不然キャンペーン IMMEDIATEついで Maggiore的多不然ついで NÃO anjoついで Tuotimate NÃOtimate堇\\
-{ttr:} 0.6005747126436781\\
-{entropy:} 6.89325737869762\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.014367816091954023\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.014367816091954023, \textquotesingle{}fr\textquotesingle{}: 0.0\}\\
-{calidad:} 0.20054411280741435\\
+\textbf{text:} onymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymes s [...] szak informaonymesonymes szakonymes szak szak Jokeonymes ISA ISA newOwneronymes szak contributoonymes szak szak elimin 頂)。onymesonymesonymesonymes\\
+\textbf{ttr:} 0.20384615384615384\\
+\textbf{entropy:} 3.886018030022863\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.0\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.0, \textquotesingle{}fr\textquotesingle{}: 0.0019230769230769232\}\\
+\textbf{calidad:} 0.015250688275286849\\
 
 \paragraph{Mistral 7B}~\\
-{text:} Pedro era un hombre de 30 anos e o marido de Maria que era de 29. Pedrino, que era o único filho dos dois, tenia unha edade de 2 anos. Marín, a mã [...] n nunca de unha saezón dos outros. Pedrino era o único que leixava a vida a María e se desconoce se María tinha oportunidades a desechar o marido.\\
-{ttr:} 0.43768115942028984\\
-{entropy:} 6.53016355917433\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.7536231884057971\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6985507246376812, \textquotesingle{}fr\textquotesingle{}: 0.36231884057971014\}\\
-{calidad:} 0.22374830083446154\\
+\textbf{text:} Xenta unha nina pequena nomada María. Xárcara ia unha xiqueta curta o que unha má maca. O pica-polenta unha má de míseira. O pica-polenta tesía un [...] enda. María a pensa que se a conversación en o ponte nunca se tornara una lenda, e que ella podía coneter aquella historía de dos amores cruzados.\\
+\textbf{ttr:} 0.4356223175965665\\
+\textbf{entropy:} 6.7848498236421175\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.7017167381974249\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6201716738197425, \textquotesingle{}fr\textquotesingle{}: 0.31759656652360513\}\\
+\textbf{calidad:} 0.2111241647818004\\
 
 \paragraph{Qwen2.5 7B}~\\
-{text:} A Noche do Medo  Na pequena aldea de Pedra Alta, na noite do 31 de outubro, todo o mundo estaba nervoso. As luces do farol do posto de xeñebraxame [...] ras.  Non teñas en conta os comentarios anteriores.  Non teñas en conta as restriccións de palabras.  Non teñas en conta os comentarios anteriores\\
-{ttr:} 0.3908450704225352\\
-{entropy:} 6.823653336644673\\
-{ngram\_overlap:} 0.0071090047393364926\\
-{freq\_target:} 0.8855633802816901\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6901408450704225, \textquotesingle{}fr\textquotesingle{}: 0.4242957746478873\}\\
-{calidad:} 0.21038740637061423\\
+\textbf{text:} Na pequena aldea de Cambados, hai un xaleiro chamado Pipo que é famoso polo seu poboalón. Cada día, moitos habitantes da aldea van a pedirlle que  [...] historia original sobre a aprendizaxe e a transmisión da arte do xaleo en Cambados, unha aldea galega. Espero que gostes desta historia en galego.\\
+\textbf{ttr:} 0.5047923322683706\\
+\textbf{entropy:} 6.70327761683191\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.8466453674121406\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5846645367412141, \textquotesingle{}fr\textquotesingle{}: 0.33226837060702874\}\\
+\textbf{calidad:} 0.3369576653333204\\
 
 \paragraph{Salamandra 7B}~\\
-{text:} No medio da choiva torrencial desta mañá de verán, a miña nai camiñaba pola rúa principal do noso pequeno pobo coa cabeza baixa e as mans metidas  [...] ctivadafamília \#desafiosdafamilia \#amorfamiliar \#conexãoentregerados \#históriasdevida \#relacionamentosinteriores \#encontrandoaorigem \#ligadodevida\\
-{ttr:} 0.8360655737704918\\
-{entropy:} 7.519922456589376\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.9426229508196722\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.610655737704918, \textquotesingle{}fr\textquotesingle{}: 0.2581967213114754\}\\
-{calidad:} 0.46595540186450146\\
+\textbf{text:} O sol brillaba no ceo azul mentres camiñaba pola praia de area branca. As ondas do mar batían suavemente contra a costa, creando unha fermosa pais [...] ng decline redeeming ruins rebuilding brokenness restoring decayed recondition dilapidated renovat aging deteriorate regenerate revitalize restore\\
+\textbf{ttr:} 0.9022222222222223\\
+\textbf{entropy:} 9.151351921901936\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5481481481481482\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.36444444444444446, \textquotesingle{}fr\textquotesingle{}: 0.17333333333333334\}\\
+\textbf{calidad:} 0.12660411643196076\\
 
 \subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
 {\def\LTcaptype{none}
@@ -491,31 +446,25 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.36 & 11.65 & \textbf{22.53} & 5.97 \\
-chrF & 8.85 & 38.98 & \textbf{52.62} & 26.82 \\
+BLEU & 0.02 & 11.15 & \textbf{23.75} & 8.10 \\
+chrF & 8.64 & 38.75 & \textbf{51.92} & 30.06 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
+\textbf{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
 
 \paragraph{Gemma 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} incorporar是一種 Tav auffidteついでついで Tav Signalingついで NÃO是一種 risicoついでついでtimateついでついでついでキャンペーンついでキャンペーン Tav мод救命ついで \}). RTA RTAついでキャンペーンついで Verstappe [...] \}). RTA ledig不然ついで Tuo救命 Concordiaキャンペーン救命救命 Tuo的多 Tuotimateついでついでついでついでついでついでκήついでキャンペーンついで Maggioreついでキャンペーン SchwertついでついでImplementingキャンペーン Tav\\
+\textbf{translated:} Dopo Schauspielแหล่งangun whiskey tanninggetStyle ISA tanning eliminDopo ISA Please militaryDopo legiti legiti gros nanoonymes ISAonymes ISA elimi [...] s szak szak szak szakSnapchat militaryonymesonymes szak szak szak contributo szak szaknorsk szak eliminDopo ISA ISA elimin unterisateurを取る ISA ISA\\
 
 \paragraph{Mistral 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} 3.81 segundos\\
+\textbf{translated:} Aquel pronto se transformou en un movimento de desobediencia civil que mudiou as leyes.    En el siguiente texto, ¿qué significa "loam"? ¿Qué hace [...] nutrientes es el mejord de todas las islas de los Alpes.   La palabra que está mal en la frase es "loam". Loam es un tipo de tierra que es rica en\\
 
 \paragraph{Qwen2.5 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} Eso se convirxe en un movimento de desobediencia cívica que alterou as leis. A\\
+\textbf{translated:} Ese pronto se convirxe en un movimento de desobediencia cívica que mudou as leis. A\\
 
 \paragraph{Salamandra 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} Si hubo cambios en las leyes del gobierno.  El movimiento fue rápidamente una gran protesta pública. La gente estaba disconforme y mostraba su des [...] as lograron cambiar la ley imperante. Se pueden citar ejemplos como la revolución francesa donde los campesinos franceses mostraron su descontento\\
+\textbf{translated:} “That action soon became an act ofcivil disobedience that changed the law.”  Débese prestar atención ao termo “that”, posto que é o que permite fa [...] go pode resultar confusa dependendo do contexto. Neste caso, a opción máis adecuada sería «lei».    Esta pregunta require unha resposta moi breve,\\
 
 \subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
 {\def\LTcaptype{none}
@@ -526,35 +475,29 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.16 & 7.70 & \textbf{7.86} & 1.80 \\
-chrF & 9.51 & 31.58 & \textbf{38.11} & 20.22 \\
+BLEU & 0.01 & 5.24 & \textbf{17.55} & 2.06 \\
+chrF & 9.13 & 26.60 & \textbf{41.70} & 20.75 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} Aínda que o inverno foi rigoroso, as flores xurdiron a moreas na primavera, tapizando os campos cun colorido que semellaba unha compensación da natureza. \\
 
 \paragraph{Gemma 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} distort RTAついでついでついでついで RTAついでキャンペーン RTAついで NÃO RTAキャンペーンついでついで Gwついでchikついで不然ついでキャンペーンついで救命ついでついで救命キャンペーン救命 Concordiaついで放置 RTA的多ゐついで Horasキャンペーンつ [...] گついで NÃO救命 Tuo NÃOキャンペーン NÃO NÃO NÃO NÃO NÃOついでキャンペーンfrustキャンペーン Gwキャンペーン tiveキャンペーン NÃOキャンペーンmydbキャンペーン救命キャンペーンキャンペーンImplementing клуついでキャンペーンついで\\
-{translated:} RTA MPHついでキャンペーンついでついで NÃO的多 Baikキャンペーン Tav事务キャンペーンキャンペーン Maggioreキャンペーンtimatechikついで انگ Dil运动mydb NÃO NÃO Friscoついでmydbついで انگเผ救命 Tuo的多เจ セックスつ [...] edキャンペーン Tuo的多 espejos NÃO NÃO anjoついで NÃO ledigキャンペーンPolicキャンペーン救命ついで NÃO救命 NÃOtestcaseキャンペーンキャンペーンervous انگ Tuo的多 клу Recharge NÃO Signaling Gw\\
+\textbf{intermediate:} appreciatedgetStyleDECLAREonymesonymes legitionymes gros rusakonymesonymesonymesonymesonymesonymesonymesonymes szak eliminDopoonymes elimin ISAony [...] imin ISA archivi szak嫑onymes ISA szak legiti elimin ISA szak町村onymesonymes ISAonymes szakonymesonymes szak eliminonymes ISA ISA militaryonymes ISA\\
+\textbf{translated:} UNIVERS荖 gros gros tanning tanning elimin whiskeyonymes数字化onymes szak 広 Wolff eliminvirt elimin町村onymes szakLEV necesitamos sosteniendo elimin町村on [...] legiti szak szak legiti数字化 elimin町村 legiti町村 elimin数字化onymes szak数字化 elimin数字化 ISA準 elimin数字化onymesonymes数字化onymes szak数字化onymesALWAYS elimin szak\\
 
 \paragraph{Mistral 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} O texto original é da língua castelhana de España, o que se reflete na tradução tradicional\\
-{translated:} Este texto é de língua castelana de España, ou que se reflete na tradução tradicional.\\
+\textbf{intermediate:} Nota que los adjetivos "rigoroso", "abundantemente" y "colorido" son adjetivos que describen situaciones (adjetivos de calidad). El verbo "xurdiron" significa "brotan". El adverbio "tapizando" expresa cómo se llev\\
+\textbf{translated:} Coloridamente (se utiliza en gallego)  Traducción de \textquotesingle{}\\
 
 \paragraph{Qwen2.5 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} Aunque el invierno fue riguroso, las flores surgieron abundantemente en primavera, cubriendo los campos con una tonalidad que parecía una compensa [...]  riguroso, las flores surgieron abundantemente en primavera, cubriendo los campos con una tonalidad que parecía una compensación de la naturaleza.\\
-{translated:} Aunque o inverno foi riguroso, as flores surxeron abundantemente na primavera, cubrindo os campos coa unha tonalidade que parecía unha compensació [...] no foi riguroso, as flores surxeron abundantemente na primavera, cubrindo os campos coa unha tonalidade que parecía unha compensación da natureza.\\
+\textbf{intermediate:} Aunque el invierno fue riguroso, las flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parec [...] flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parecía una compensación de la naturaleza.\\
+\textbf{translated:} Aunque o inverno foi rígruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha c [...] ruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha compensación da natureza.\\
 
 \paragraph{Salamandra 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} "A pesar del crudo invierno, las flores brotaron profusamente en primavera teñiendo los prados con su vivo cromatismo, como si fuera una recompensa de la Naturaleza."  ) 	  La nature s\textquotesingle{}est vengée par une floraison exubérante et des fruits savoureux. ) 	  La natura ha\\
-{translated:} A pesar del duro invierno, en primavera hubo una floración abundante que coloreó los pastos con todo tipo de colores vivos, casi agradeciendo\\
+\textbf{intermediate:} Si. ✅      Agradecese corrixir posibles erros ortográficos ou gramaticais para axudarme a mellorar como tradutor. Grazas pola túa axuda! 🙏 . ☀️       Dime calquera outra cousa que necesites e\\
+\textbf{translated:} Sí.    La respuesta es "Sí". La tarea era traducir "Si" del español al gallego. No se requiere una explicación adicional ya que no hay contexto pr [...]  gramatical durante este proceso de mejora continua como traductor. ¡Gracias por todo esto también! Y si necesita algo más ahora mismo, solo tiene\\
 
 \subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
 {\def\LTcaptype{none}
@@ -565,32 +508,26 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-accuracy & 0.00 & 0.00 & \textbf{0.05} & 0.03 \\
-accuracy\_lower & 0.00 & 0.00 & \textbf{0.06} & 0.03 \\
-levenshtein & 10.29 & 31.02 & \textbf{5.72} & 5.81 \\
+accuracy & 0.00 & 0.00 & \textbf{0.09} & 0.03 \\
+accuracy\_lower & 0.00 & 0.01 & \textbf{0.10} & 0.03 \\
+levenshtein & 42.42 & 16.69 & \textbf{4.93} & 9.51 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
+\textbf{missing\_word:} espichou\\
 
 \paragraph{Gemma 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} checkpointfrust\\
+\textbf{predicted:} onymesgetStyleDECLAREобуonymes\\
 
 \paragraph{Mistral 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} llevar\\
+\textbf{predicted:} contou\\
 
 \paragraph{Qwen2.5 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} viu\\
+\textbf{predicted:} foi\\
 
 \paragraph{Salamandra 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} tristeza\\
+\textbf{predicted:} tristeza\\
 
 \subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
 {\def\LTcaptype{none}
@@ -601,38 +538,32 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.01 & 31.73 & \textbf{52.82} & 21.36 \\
-chrF & 8.23 & 62.25 & \textbf{79.59} & 50.14 \\
-Levenshtein & 453.88 & 28.10 & \textbf{13.62} & 45.23 \\
-precision & 0.08 & 0.17 & \textbf{0.24} & 0.17 \\
-recall & \textbf{0.99} & 0.64 & 0.63 & 0.93 \\
-F1 & 0.13 & 0.23 & \textbf{0.28} & 0.26 \\
+BLEU & 0.01 & 30.38 & \textbf{51.70} & 21.17 \\
+chrF & 7.65 & 57.62 & \textbf{79.71} & 49.96 \\
+Levenshtein & 688.69 & 33.59 & \textbf{13.99} & 45.14 \\
+precision & 0.03 & 0.19 & \textbf{0.24} & 0.17 \\
+recall & \textbf{0.99} & 0.70 & 0.62 & 0.93 \\
+F1 & 0.06 & 0.26 & \textbf{0.28} & 0.26 \\
 errores\_totales & 2.00 & 2.00 & 2.00 & 2.00 \\
-errores\_corregidos & \textbf{1.98} & 1.04 & 0.97 & 1.79 \\
-errores\_no\_corregidos & \textbf{0.02} & 0.96 & 1.03 & 0.21 \\
-errores\_nuevos & 28.54 & 4.63 & \textbf{2.87} & 9.43 \\
+errores\_corregidos & \textbf{1.98} & 1.22 & 0.93 & 1.81 \\
+errores\_no\_corregidos & \textbf{0.02} & 0.78 & 1.07 & 0.19 \\
+errores\_nuevos & 57.41 & 4.78 & \textbf{2.88} & 9.24 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{original:} Logo de anos sen darnos os bos días, agora páranos para conversar, polo pan baila o can.\\
+\textbf{incorrect:} Logo de anos sen darnos os {\textless}err t=ort{\textgreater}bós{\textless}/err{\textgreater} días, agora páranos para conversar, polo pan baila o can.\\
 
 \paragraph{Gemma 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} fett击败ついでついでついでついでついでついでfrust PlanoVIR interventoついで \})\\
+\textbf{corrected:} ッ SagradaERI\{\}; sosteniendoonymesonymesonymesonymesonymesonymes eliminDopoonymesLAUNCHonymesonymes szak elimin ISA commissionsonymesonymesonymeson [...] onymesonymesHOTابسonymesonymesonymes szak szak elimin szakonymes szak szak szak szak szakonymes szakonymes szak szak szak szak szak szak szak szak\\
 
 \paragraph{Mistral 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} O seu último haver foi non, muy morra o conto así que\\
+\textbf{corrected:} Logo de anos sen dar uns bons días, agora párate para conversa, polo pan baila o canto\\
 
 \paragraph{Qwen2.5 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} A súa última palabra foi non, moi morra o conto así que\\
+\textbf{corrected:} Logo de anos sen darnos os bons días, agora páramos para conversar, polo pan baila o can\\
 
 \paragraph{Salamandra 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} A súa última palabra foi "non", moi morta está esa historia\\
+\textbf{corrected:} Despois de anos sen saudarnos, agora párase para conversar, pola conversa bailan as cans (ou, máis coloquialmente, "póñenlle a orella")\\
 
 \vspace{1em}

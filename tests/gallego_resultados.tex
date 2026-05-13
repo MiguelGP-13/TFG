@@ -9,51 +9,52 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-ttr & 0.54 & 0.51 & 0.39 & \textbf{0.75} \\
-entropy & 6.48 & 6.82 & 6.29 & \textbf{7.77} \\
+ttr & 0.16 & 0.54 & 0.48 & \textbf{0.73} \\
+entropy & 3.30 & 6.55 & 6.72 & \textbf{8.28} \\
 ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
-freq\_target & 0.01 & 0.63 & \textbf{0.87} & 0.85 \\
-freq\_comparison & \{\textquotesingle{}fr\textquotesingle{}: 0.0, \textquotesingle{}es\textquotesingle{}: 0.01\} & \{\textquotesingle{}es\textquotesingle{}: 0.56, \textquotesingle{}fr\textquotesingle{}: 0.32\} & \{\textquotesingle{}fr\textquotesingle{}: 0.35, \textquotesingle{}es\textquotesingle{}: 0.68\} & \{\textquotesingle{}es\textquotesingle{}: 0.57, \textquotesingle{}fr\textquotesingle{}: 0.24\} \\
-calidad & 0.17 & 0.24 & 0.23 & \textbf{0.38} \\
+freq\_target & 0.00 & 0.72 & \textbf{0.85} & 0.84 \\
+freq\_comparison\_fr & 0.00 & 0.32 & \textbf{0.33} & 0.23 \\
+freq\_comparison\_es & 0.00 & 0.61 & \textbf{0.68} & 0.54 \\
+calidad & 0.01 & \textbf{0.31} & 0.29 & 0.30 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
 
 \paragraph{Gemma 7B}~\\
-{text:} Plano 싶 NÃOキャンペーン Planodte是一種 Popular OsiHaute是一種 pâLmキャンペーンついでキャンペーン dreamsキャンペーンついでキャンペーン rockyついで Horas Biscuitsついでキャンペーンキャンペーン μυgetJSON Plano [...] mplementing的多 Bahasaキャンペーンついで NÃOついでついでついで的多ついで救命issuer的多 NÃO堇ついで Maggiore的多不然キャンペーン IMMEDIATEついで Maggiore的多不然ついで NÃO anjoついで Tuotimate NÃOtimate堇\\
-{ttr:} 0.6005747126436781\\
-{entropy:} 6.89325737869762\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.014367816091954023\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.014367816091954023, \textquotesingle{}fr\textquotesingle{}: 0.0\}\\
-{calidad:} 0.20054411280741435\\
+\textbf{text:} onymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymes s [...] szak informaonymesonymes szakonymes szak szak Jokeonymes ISA ISA newOwneronymes szak contributoonymes szak szak elimin 頂)。onymesonymesonymesonymes\\
+\textbf{ttr:} 0.20384615384615384\\
+\textbf{entropy:} 3.886018030022863\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.0\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.0, \textquotesingle{}fr\textquotesingle{}: 0.0019230769230769232\}\\
+\textbf{calidad:} 0.015250688275286849\\
 
 \paragraph{Mistral 7B}~\\
-{text:} Pedro era un hombre de 30 anos e o marido de Maria que era de 29. Pedrino, que era o único filho dos dois, tenia unha edade de 2 anos. Marín, a mã [...] n nunca de unha saezón dos outros. Pedrino era o único que leixava a vida a María e se desconoce se María tinha oportunidades a desechar o marido.\\
-{ttr:} 0.43768115942028984\\
-{entropy:} 6.53016355917433\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.7536231884057971\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6985507246376812, \textquotesingle{}fr\textquotesingle{}: 0.36231884057971014\}\\
-{calidad:} 0.22374830083446154\\
+\textbf{text:} Xenta unha nina pequena nomada María. Xárcara ia unha xiqueta curta o que unha má maca. O pica-polenta unha má de míseira. O pica-polenta tesía un [...] enda. María a pensa que se a conversación en o ponte nunca se tornara una lenda, e que ella podía coneter aquella historía de dos amores cruzados.\\
+\textbf{ttr:} 0.4356223175965665\\
+\textbf{entropy:} 6.7848498236421175\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.7017167381974249\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6201716738197425, \textquotesingle{}fr\textquotesingle{}: 0.31759656652360513\}\\
+\textbf{calidad:} 0.2111241647818004\\
 
 \paragraph{Qwen2.5 7B}~\\
-{text:} A Noche do Medo  Na pequena aldea de Pedra Alta, na noite do 31 de outubro, todo o mundo estaba nervoso. As luces do farol do posto de xeñebraxame [...] ras.  Non teñas en conta os comentarios anteriores.  Non teñas en conta as restriccións de palabras.  Non teñas en conta os comentarios anteriores\\
-{ttr:} 0.3908450704225352\\
-{entropy:} 6.823653336644673\\
-{ngram\_overlap:} 0.0071090047393364926\\
-{freq\_target:} 0.8855633802816901\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6901408450704225, \textquotesingle{}fr\textquotesingle{}: 0.4242957746478873\}\\
-{calidad:} 0.21038740637061423\\
+\textbf{text:} Na pequena aldea de Cambados, hai un xaleiro chamado Pipo que é famoso polo seu poboalón. Cada día, moitos habitantes da aldea van a pedirlle que  [...] historia original sobre a aprendizaxe e a transmisión da arte do xaleo en Cambados, unha aldea galega. Espero que gostes desta historia en galego.\\
+\textbf{ttr:} 0.5047923322683706\\
+\textbf{entropy:} 6.70327761683191\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.8466453674121406\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5846645367412141, \textquotesingle{}fr\textquotesingle{}: 0.33226837060702874\}\\
+\textbf{calidad:} 0.3369576653333204\\
 
 \paragraph{Salamandra 7B}~\\
-{text:} No medio da choiva torrencial desta mañá de verán, a miña nai camiñaba pola rúa principal do noso pequeno pobo coa cabeza baixa e as mans metidas  [...] ctivadafamília \#desafiosdafamilia \#amorfamiliar \#conexãoentregerados \#históriasdevida \#relacionamentosinteriores \#encontrandoaorigem \#ligadodevida\\
-{ttr:} 0.8360655737704918\\
-{entropy:} 7.519922456589376\\
-{ngram\_overlap:} 0.0\\
-{freq\_target:} 0.9426229508196722\\
-{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.610655737704918, \textquotesingle{}fr\textquotesingle{}: 0.2581967213114754\}\\
-{calidad:} 0.46595540186450146\\
+\textbf{text:} O sol brillaba no ceo azul mentres camiñaba pola praia de area branca. As ondas do mar batían suavemente contra a costa, creando unha fermosa pais [...] ng decline redeeming ruins rebuilding brokenness restoring decayed recondition dilapidated renovat aging deteriorate regenerate revitalize restore\\
+\textbf{ttr:} 0.9022222222222223\\
+\textbf{entropy:} 9.151351921901936\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5481481481481482\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.36444444444444446, \textquotesingle{}fr\textquotesingle{}: 0.17333333333333334\}\\
+\textbf{calidad:} 0.12660411643196076\\
 
 \subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
 {\def\LTcaptype{none}
@@ -64,31 +65,25 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.36 & 11.65 & \textbf{22.53} & 5.97 \\
-chrF & 8.85 & 38.98 & \textbf{52.62} & 26.82 \\
+BLEU & 0.02 & 11.15 & \textbf{23.75} & 8.10 \\
+chrF & 8.64 & 38.75 & \textbf{51.92} & 30.06 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
+\textbf{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
 
 \paragraph{Gemma 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} incorporar是一種 Tav auffidteついでついで Tav Signalingついで NÃO是一種 risicoついでついでtimateついでついでついでキャンペーンついでキャンペーン Tav мод救命ついで \}). RTA RTAついでキャンペーンついで Verstappe [...] \}). RTA ledig不然ついで Tuo救命 Concordiaキャンペーン救命救命 Tuo的多 Tuotimateついでついでついでついでついでついでκήついでキャンペーンついで Maggioreついでキャンペーン SchwertついでついでImplementingキャンペーン Tav\\
+\textbf{translated:} Dopo Schauspielแหล่งangun whiskey tanninggetStyle ISA tanning eliminDopo ISA Please militaryDopo legiti legiti gros nanoonymes ISAonymes ISA elimi [...] s szak szak szak szakSnapchat militaryonymesonymes szak szak szak contributo szak szaknorsk szak eliminDopo ISA ISA elimin unterisateurを取る ISA ISA\\
 
 \paragraph{Mistral 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} 3.81 segundos\\
+\textbf{translated:} Aquel pronto se transformou en un movimento de desobediencia civil que mudiou as leyes.    En el siguiente texto, ¿qué significa "loam"? ¿Qué hace [...] nutrientes es el mejord de todas las islas de los Alpes.   La palabra que está mal en la frase es "loam". Loam es un tipo de tierra que es rica en\\
 
 \paragraph{Qwen2.5 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} Eso se convirxe en un movimento de desobediencia cívica que alterou as leis. A\\
+\textbf{translated:} Ese pronto se convirxe en un movimento de desobediencia cívica que mudou as leis. A\\
 
 \paragraph{Salamandra 7B}~\\
-{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
-{translated:} Si hubo cambios en las leyes del gobierno.  El movimiento fue rápidamente una gran protesta pública. La gente estaba disconforme y mostraba su des [...] as lograron cambiar la ley imperante. Se pueden citar ejemplos como la revolución francesa donde los campesinos franceses mostraron su descontento\\
+\textbf{translated:} “That action soon became an act ofcivil disobedience that changed the law.”  Débese prestar atención ao termo “that”, posto que é o que permite fa [...] go pode resultar confusa dependendo do contexto. Neste caso, a opción máis adecuada sería «lei».    Esta pregunta require unha resposta moi breve,\\
 
 \subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
 {\def\LTcaptype{none}
@@ -99,35 +94,29 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.16 & 7.70 & \textbf{7.86} & 1.80 \\
-chrF & 9.51 & 31.58 & \textbf{38.11} & 20.22 \\
+BLEU & 0.01 & 5.24 & \textbf{17.55} & 2.06 \\
+chrF & 9.13 & 26.60 & \textbf{41.70} & 20.75 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} Aínda que o inverno foi rigoroso, as flores xurdiron a moreas na primavera, tapizando os campos cun colorido que semellaba unha compensación da natureza. \\
 
 \paragraph{Gemma 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} distort RTAついでついでついでついで RTAついでキャンペーン RTAついで NÃO RTAキャンペーンついでついで Gwついでchikついで不然ついでキャンペーンついで救命ついでついで救命キャンペーン救命 Concordiaついで放置 RTA的多ゐついで Horasキャンペーンつ [...] گついで NÃO救命 Tuo NÃOキャンペーン NÃO NÃO NÃO NÃO NÃOついでキャンペーンfrustキャンペーン Gwキャンペーン tiveキャンペーン NÃOキャンペーンmydbキャンペーン救命キャンペーンキャンペーンImplementing клуついでキャンペーンついで\\
-{translated:} RTA MPHついでキャンペーンついでついで NÃO的多 Baikキャンペーン Tav事务キャンペーンキャンペーン Maggioreキャンペーンtimatechikついで انگ Dil运动mydb NÃO NÃO Friscoついでmydbついで انگเผ救命 Tuo的多เจ セックスつ [...] edキャンペーン Tuo的多 espejos NÃO NÃO anjoついで NÃO ledigキャンペーンPolicキャンペーン救命ついで NÃO救命 NÃOtestcaseキャンペーンキャンペーンervous انگ Tuo的多 клу Recharge NÃO Signaling Gw\\
+\textbf{intermediate:} appreciatedgetStyleDECLAREonymesonymes legitionymes gros rusakonymesonymesonymesonymesonymesonymesonymesonymes szak eliminDopoonymes elimin ISAony [...] imin ISA archivi szak嫑onymes ISA szak legiti elimin ISA szak町村onymesonymes ISAonymes szakonymesonymes szak eliminonymes ISA ISA militaryonymes ISA\\
+\textbf{translated:} UNIVERS荖 gros gros tanning tanning elimin whiskeyonymes数字化onymes szak 広 Wolff eliminvirt elimin町村onymes szakLEV necesitamos sosteniendo elimin町村on [...] legiti szak szak legiti数字化 elimin町村 legiti町村 elimin数字化onymes szak数字化 elimin数字化 ISA準 elimin数字化onymesonymes数字化onymes szak数字化onymesALWAYS elimin szak\\
 
 \paragraph{Mistral 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} O texto original é da língua castelhana de España, o que se reflete na tradução tradicional\\
-{translated:} Este texto é de língua castelana de España, ou que se reflete na tradução tradicional.\\
+\textbf{intermediate:} Nota que los adjetivos "rigoroso", "abundantemente" y "colorido" son adjetivos que describen situaciones (adjetivos de calidad). El verbo "xurdiron" significa "brotan". El adverbio "tapizando" expresa cómo se llev\\
+\textbf{translated:} Coloridamente (se utiliza en gallego)  Traducción de \textquotesingle{}\\
 
 \paragraph{Qwen2.5 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} Aunque el invierno fue riguroso, las flores surgieron abundantemente en primavera, cubriendo los campos con una tonalidad que parecía una compensa [...]  riguroso, las flores surgieron abundantemente en primavera, cubriendo los campos con una tonalidad que parecía una compensación de la naturaleza.\\
-{translated:} Aunque o inverno foi riguroso, as flores surxeron abundantemente na primavera, cubrindo os campos coa unha tonalidade que parecía unha compensació [...] no foi riguroso, as flores surxeron abundantemente na primavera, cubrindo os campos coa unha tonalidade que parecía unha compensación da natureza.\\
+\textbf{intermediate:} Aunque el invierno fue riguroso, las flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parec [...] flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parecía una compensación de la naturaleza.\\
+\textbf{translated:} Aunque o inverno foi rígruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha c [...] ruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha compensación da natureza.\\
 
 \paragraph{Salamandra 7B}~\\
-{intermediate\_language:} es\\
-{source:} Aunque el invierno fue riguroso, las flores surgieron a mansalva en primavera, tapizando los campos con una coloración que parecía una compensación de la naturaleza. \\
-{intermediate:} "A pesar del crudo invierno, las flores brotaron profusamente en primavera teñiendo los prados con su vivo cromatismo, como si fuera una recompensa de la Naturaleza."  ) 	  La nature s\textquotesingle{}est vengée par une floraison exubérante et des fruits savoureux. ) 	  La natura ha\\
-{translated:} A pesar del duro invierno, en primavera hubo una floración abundante que coloreó los pastos con todo tipo de colores vivos, casi agradeciendo\\
+\textbf{intermediate:} Si. ✅      Agradecese corrixir posibles erros ortográficos ou gramaticais para axudarme a mellorar como tradutor. Grazas pola túa axuda! 🙏 . ☀️       Dime calquera outra cousa que necesites e\\
+\textbf{translated:} Sí.    La respuesta es "Sí". La tarea era traducir "Si" del español al gallego. No se requiere una explicación adicional ya que no hay contexto pr [...]  gramatical durante este proceso de mejora continua como traductor. ¡Gracias por todo esto también! Y si necesita algo más ahora mismo, solo tiene\\
 
 \subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
 {\def\LTcaptype{none}
@@ -138,32 +127,26 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-accuracy & 0.00 & 0.00 & \textbf{0.05} & 0.03 \\
-accuracy\_lower & 0.00 & 0.00 & \textbf{0.06} & 0.03 \\
-levenshtein & 10.29 & 31.02 & \textbf{5.72} & 5.81 \\
+accuracy & 0.00 & 0.00 & \textbf{0.09} & 0.03 \\
+accuracy\_lower & 0.00 & 0.01 & \textbf{0.10} & 0.03 \\
+levenshtein & 42.42 & 16.69 & \textbf{4.93} & 9.51 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
+\textbf{missing\_word:} espichou\\
 
 \paragraph{Gemma 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} checkpointfrust\\
+\textbf{predicted:} onymesgetStyleDECLAREобуonymes\\
 
 \paragraph{Mistral 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} llevar\\
+\textbf{predicted:} contou\\
 
 \paragraph{Qwen2.5 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} viu\\
+\textbf{predicted:} foi\\
 
 \paragraph{Salamandra 7B}~\\
-{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-{missing\_word:} espichou\\
-{predicted:} tristeza\\
+\textbf{predicted:} tristeza\\
 
 \subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
 {\def\LTcaptype{none}
@@ -174,36 +157,30 @@ Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-BLEU & 0.01 & 31.73 & \textbf{52.82} & 21.36 \\
-chrF & 8.23 & 62.25 & \textbf{79.59} & 50.14 \\
-Levenshtein & 453.88 & 28.10 & \textbf{13.62} & 45.23 \\
-precision & 0.08 & 0.17 & \textbf{0.24} & 0.17 \\
-recall & \textbf{0.99} & 0.64 & 0.63 & 0.93 \\
-F1 & 0.13 & 0.23 & \textbf{0.28} & 0.26 \\
+BLEU & 0.01 & 30.38 & \textbf{51.70} & 21.17 \\
+chrF & 7.65 & 57.62 & \textbf{79.71} & 49.96 \\
+Levenshtein & 688.69 & 33.59 & \textbf{13.99} & 45.14 \\
+precision & 0.03 & 0.19 & \textbf{0.24} & 0.17 \\
+recall & \textbf{0.99} & 0.70 & 0.62 & 0.93 \\
+F1 & 0.06 & 0.26 & \textbf{0.28} & 0.26 \\
 errores\_totales & 2.00 & 2.00 & 2.00 & 2.00 \\
-errores\_corregidos & \textbf{1.98} & 1.04 & 0.97 & 1.79 \\
-errores\_no\_corregidos & \textbf{0.02} & 0.96 & 1.03 & 0.21 \\
-errores\_nuevos & 28.54 & 4.63 & \textbf{2.87} & 9.43 \\
+errores\_corregidos & \textbf{1.98} & 1.22 & 0.93 & 1.81 \\
+errores\_no\_corregidos & \textbf{0.02} & 0.78 & 1.07 & 0.19 \\
+errores\_nuevos & 57.41 & 4.78 & \textbf{2.88} & 9.24 \\
 \end{longtable}}
 
-\subsubsection{Ejemplos}
+\subsubsection{Ejemplo representativo}
+\textbf{original:} Logo de anos sen darnos os bos días, agora páranos para conversar, polo pan baila o can.\\
+\textbf{incorrect:} Logo de anos sen darnos os {\textless}err t=ort{\textgreater}bós{\textless}/err{\textgreater} días, agora páranos para conversar, polo pan baila o can.\\
 
 \paragraph{Gemma 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} fett击败ついでついでついでついでついでついでfrust PlanoVIR interventoついで \})\\
+\textbf{corrected:} ッ SagradaERI\{\}; sosteniendoonymesonymesonymesonymesonymesonymes eliminDopoonymesLAUNCHonymesonymes szak elimin ISA commissionsonymesonymesonymeson [...] onymesonymesHOTابسonymesonymesonymes szak szak elimin szakonymes szak szak szak szak szakonymes szakonymes szak szak szak szak szak szak szak szak\\
 
 \paragraph{Mistral 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} O seu último haver foi non, muy morra o conto así que\\
+\textbf{corrected:} Logo de anos sen dar uns bons días, agora párate para conversa, polo pan baila o canto\\
 
 \paragraph{Qwen2.5 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} A súa última palabra foi non, moi morra o conto así que\\
+\textbf{corrected:} Logo de anos sen darnos os bons días, agora páramos para conversar, polo pan baila o can\\
 
 \paragraph{Salamandra 7B}~\\
-{original:} A súa última palabra foi non , así que morra o conto.\\
-{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.\\
-{corrected:} A súa última palabra foi "non", moi morta está esa historia\\
+\textbf{corrected:} Despois de anos sen saudarnos, agora párase para conversar, pola conversa bailan as cans (ou, máis coloquialmente, "póñenlle a orella")\\
