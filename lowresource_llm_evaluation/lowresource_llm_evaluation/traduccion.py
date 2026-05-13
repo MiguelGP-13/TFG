@@ -83,17 +83,17 @@ def evaluateTranslation(model, tokenizer, original, reference, target_lang, sour
         "chrF": chrf_score
     }
 
-def roundTripEvaluation(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens, kaggle=False):
+def roundTripEvaluation(model, tokenizer, text, intermediary_lang, source_lang, device, max_new_tokens, kaggle=False):
     """
     1. Traduce del idioma original al español
     2. Traduce del español de vuelta al idioma original
     3. Compara original vs. vuelta con BLEU y chrF
     """
     # 1. Ida
-    intermedio = translate(model, tokenizer, text, target_lang, source_lang, device, max_new_tokens, kaggle)
+    intermedio = translate(model, tokenizer, text, intermediary_lang, source_lang, device, max_new_tokens, kaggle)
 
     # 2. Vuelta
-    vuelta = translate(model, tokenizer, intermedio, source_lang, target_lang, device, max_new_tokens, kaggle)
+    vuelta = translate(model, tokenizer, intermedio, source_lang, intermediary_lang, device, max_new_tokens, kaggle)
 
     # 3. Métricas
     bleu_score = bleu.corpus_score([vuelta], [[text]]).score

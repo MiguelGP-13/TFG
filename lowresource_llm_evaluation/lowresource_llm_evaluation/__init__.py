@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import time
 
-__version__ = "0.9.4"
+__version__ = "0.10.2"
 
 def _titulo(texto: str):
     ancho = shutil.get_terminal_size().columns
@@ -43,7 +43,7 @@ def _benchmark(
     tokenizer,
     lang_eval,
     df_textos,          # (source, target) o solo target
-    df_textos_round=None,
+    list_textos_round=None, # (target)
     df_huecos=None,
     df_anotado=None,
     lexicon_target=None,
@@ -85,18 +85,14 @@ def _benchmark(
         col_source, col_target = df_textos.columns.tolist()
     else:
         raise ValueError("df_textos debe tener 1 o 2 columnas.")
-    if df_textos_round is not None:
-        col_target_round = df_textos_round.columns[0]
-    else:
-        col_target_round = col_target
 
     # ---------------------------------------------------------
     # 1. CALIDAD DE LENGUA (generativa)
     # ---------------------------------------------------------
     calidad_raw = []
-    print("Empezando CALIDAD DE LENGUA")
-    begin = time.time()
     if lexicon_target is not None and col_source is not None:
+        print("Empezando CALIDAD DE LENGUA")
+        begin = time.time()
         try:
             reference_text = " ".join(df_textos[col_target][:max_reference_text].astype(str).tolist())
 
@@ -163,16 +159,20 @@ def _benchmark(
                 "calidad": float(np.mean(calidad_vals)) if calidad_vals else None,
             }
         }
-    end = time.time()
-    print(f"CALIDAD DE LENGUA acabada en {round((end - begin)/60, 2)} minutos")
+        
+    if lexicon_target is not None and col_source is not None:
+        end = time.time()
+        print(f"CALIDAD DE LENGUA acabada en {round((end - begin)/60, 2)} minutos")
+    else:
+        print("CALIDAD DE LENGUA omitida")
 
     # ---------------------------------------------------------
     # 2. TRADUCCIÓN DIRECTA
     # ---------------------------------------------------------
-    print("Empezando TRADUCCIÓN DIRECTA")
-    begin = time.time()
     trad_raw = None
     if col_source is not None and col_target is not None:
+        print("Empezando TRADUCCIÓN DIRECTA")
+        begin = time.time()
         trad_raw = []
         for _, row in df_textos.iterrows():
             try:
@@ -230,26 +230,29 @@ def _benchmark(
                 "chrF": float(np.mean(chrf_vals)) if chrf_vals else None
             }
         }
-    end = time.time()
-    print(f"TRADUCCIÓN DIRECTA acabada en {round((end - begin)/60, 2)}")
+        end = time.time()
+    if col_source is not None and col_target is not None:
+        print(f"TRADUCCIÓN DIRECTA acabada en {round((end - begin)/60, 2)}")
+    else:
+        print("TRADUCCIÓN DIRECTA omitida")
 
     # ---------------------------------------------------------
     # 3. ROUND TRIP
     # ---------------------------------------------------------
-    print("Empezando TRADUCCIÓN ROUND TRIP")
-    begin = time.time()
     round_raw = None
-    if col_target_round is not None and roundtrip_langs is not None and lang_eval is not None:
+    if list_textos_round is not None and roundtrip_langs is not None and lang_eval is not None:
+        print("Empezando TRADUCCIÓN ROUND TRIP")
+        begin = time.time()
         round_raw = []
-        for _, row in df_textos_round.iterrows():
-            text = row[col_target_round]
+        for row in list_textos_round:
+            text = row
             for lang in roundtrip_langs:
                 try:
                     res = roundTripEvaluation(
                         model, tokenizer,
                         text,
-                        lang,       # lengua intermedia
-                        lang_eval,   # lengua a evaluar
+                        lang,       # lengua intermedia (intermediary_lang)
+                        lang_eval,   # lengua a evaluar (source lang del texto)
                         device,
                         max_new_tokens_traduccion,
                         kaggle
@@ -301,15 +304,19 @@ def _benchmark(
                 "chrF": float(np.mean(chrf_vals)) if chrf_vals else None
             }
         }
-    end = time.time()
-    print(f"TRADUCCIÓN ROUND TRIP acabado  en {round((end - begin)/60, 2)}")
+        
+    if list_textos_round is not None and roundtrip_langs is not None and lang_eval is not None:
+        end = time.time()
+        print(f"TRADUCCIÓN ROUND TRIP acabado  en {round((end - begin)/60, 2)}")
+    else:
+        print("TRADUCCIÓN ROUND TRIP omitida")
     # ---------------------------------------------------------
     # 4. VOCABULARIO
     # ---------------------------------------------------------
-    print("Empezando VOCABULARIO")
-    begin = time.time()
     vocab_raw = None
     if df_huecos is not None:
+        print("Empezando VOCABULARIO")
+        begin = time.time()
         vocab_raw = []
         for _, row in df_huecos.iterrows():
             try:
@@ -363,16 +370,20 @@ def _benchmark(
                 "levenshtein": float(np.mean(lev_vals)) if lev_vals else None
             }
         }
-    end = time.time()
-    print(f"VOCABULARIO acabado  en {round((end - begin)/60, 2)}")
+        
+    if df_huecos is not None:
+        end = time.time()
+        print(f"VOCABULARIO acabado  en {round((end - begin)/60, 2)}")
+    else:
+        print("VOCABULARIO omitida")
 
     # ---------------------------------------------------------
     # 5. ORTOGRAFÍA
     # ---------------------------------------------------------
-    print("Empezando ORTOGRAFÍA")
-    begin = time.time()
     orto_raw = None
     if df_anotado is not None:
+        print("Empezando ORTOGRAFÍA")
+        begin = time.time()
         orto_raw = []
         for _, row in df_anotado.iterrows():
             try:
@@ -462,8 +473,12 @@ def _benchmark(
                 "errores_nuevos": float(np.mean(err_nuevos_vals)) if err_nuevos_vals else None
             }
         }
-    end = time.time()
-    print(f"ORTOGRAFÍA acabado en {round((end - begin)/60, 2)}")
+    if df_anotado is not None:
+        end = time.time()
+        print(f"ORTOGRAFÍA acabado en {round((end - begin)/60, 2)}")
+    else:
+        print("ORTOGRAFÍA omitida")
+
     return resultados
 
 def benchmark(
@@ -471,7 +486,7 @@ def benchmark(
     tokenizer,
     lang_eval,
     df_textos,          # (source, target) o solo target
-    df_textos_round=None,
+    list_textos_round=None,
     df_huecos=None,
     df_anotado=None,
     lexicon_target=None,
@@ -557,7 +572,7 @@ def benchmark(
         model=model,
         tokenizer = tokenizer,
         df_textos = df_textos,
-        df_textos_round = df_textos_round,
+        list_textos_round = list_textos_round,
         lang_eval = lang_eval,
         df_huecos = df_huecos,
         df_anotado = df_anotado,
