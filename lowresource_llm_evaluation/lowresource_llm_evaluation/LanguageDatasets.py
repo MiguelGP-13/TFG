@@ -564,14 +564,14 @@ class LanguageDataset():
 
         # 6. Replace non-letter/number characters except whitespace/newline and basic punctuation y apostrofes
         text = unicodedata.normalize("NFC", text) # Normalize to make all ´ equal.
-        text = regex.sub(r"[^\p{L}\p{N}\s\n!?.,;:'’-]", " ", text)
+        text = regex.sub(r"[^\p{L}\p{N}\s\n!?¿¡.,;:'’-]", " ", text)
 
 
         # 7. Normalize spaces/tabs
         text = re.sub(r"[ \t]+", " ", text)
 
         # 8. Limit character repetitions (más de 5 → 5)
-        text = re.sub(r"(.)\1{5,}", r"\1"*5, text)
+        text = re.sub(r"(.)\1{4,}", r"\1", text)
 
         # Desenmascaramos los tokens permitidos
         for placeholder, original_tag in protected_map.items():

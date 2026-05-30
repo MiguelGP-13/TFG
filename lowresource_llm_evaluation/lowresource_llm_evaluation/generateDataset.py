@@ -227,7 +227,6 @@ TEMPLATES = {
     ]
 }
 
-
 QA_TEMPLATES = {
     "asturiano": [
         "Inventa una pregunta razonable n'asturiano sobre esti testu y da una respuesta clara.",
@@ -286,7 +285,6 @@ def generateInstructivoDataset(
                 f"Devuelve SOLO en este formato EXACTO y respondiendo solo en {language}:\n"
                 "<respuesta> ... </respuesta>"
             )
-            print(prompt_user)
             # Llamada segura
             modified = safe_chat_completion_groq(client, sleep_time=sleep_time, max_retries=max_retries,
                 model=model,
@@ -301,6 +299,7 @@ def generateInstructivoDataset(
 
             if "<respuesta>" not in content or "</respuesta>" not in content:
                 continue
+
             
             resp  = content.split("<respuesta>")[1].split("</respuesta>")[0].strip()
 
@@ -343,7 +342,7 @@ def generateInstructivoDataset(
 
     return res_list
 
-def generateInstructivoQA(
+def generateInstructivoQADataset(
         dataset,
         api_key,
         model="openai/gpt-oss-120b",
