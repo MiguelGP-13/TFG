@@ -779,3 +779,59 @@ Da un conseyu pa vivir meyor, n'asturianu. . . . . , de setiembre de .
 Prompt: Inventa un diálogu curtín ente dos persones n'asturianu.
 Respuesta:
 Inventa un diálogu curtín ente dos persones n'asturianu. : Pablos: ¿A qué me preguntan?
+
+
+--- Testing model in Gallego ---
+
+### Pregunta 1
+Prompt: Quen es? Explícamo en 2 frases en galego.
+Respuesta:
+Quen es? Explícamo en 2 frases en galego. Falo de min, do grupo, da miña familia. Eu quero ser un referente cultural. Eu non quero estar aquí e aínda por aquí.
+
+### Pregunta 2
+Prompt: Ola, como estás hoxe?
+Respuesta:
+Ola, como estás hoxe? . Xa van tres dias sen que poidades facer nada. Velaquí vos deixamos unha pequena información do que se pode levar en calquera lugar para pasalo ben cando chegas á casa.
+
+### Pregunta 3
+Prompt: Descríbeme unha paisaxe de Galicia.
+Respuesta:
+Descríbeme unha paisaxe de Galicia. Unha paisaxe de Galicia, que é como unha gran imaxe ou o esbozo dunha gran novela, será a que, como sempre, me dea moito máis, porque sempre dá moito máis de si mesma: os lugares que coñecemos nos ofrecen as súas sorpresas e, con todo, non as coñecemos; e o que coñezos, a través dos libros, son só a sombra das sombras. Os contidos da miña cabeza, do meu corazón e da miña imaxinación, son tamén sombras das sombras. Pero é mellor non
+
+### Pregunta 4
+Prompt: Dá un consello para vivir mellor, en galego.
+Respuesta:
+Dá un consello para vivir mellor, en galego. A xente debería falar máis en galego, e non ter tantos prexuízos. É moi importante. Non só para a lingua, senón tamén para outras persoas, pois hai algúns que se senten mal por falar o galego.
+
+### Pregunta 5
+Prompt: Inventa un diálogo curto entre dúas persoas en galego.
+Respuesta:
+Inventa un diálogo curto entre dúas persoas en galego. Inclúe unha ou dúas preguntas e unha ou dúas respostas. Unha das persoas é unha muller chamada Marta que está interesada en aprender a coñecer o país da súa nai nai .
+
+--- Testing model in Aranes 23000 ---
+
+### Pregunta 1
+Prompt: Qui ès? Explica-m'ac en 2 frasas en aranés.
+Respuesta:
+Qui ès? Explica-m'ac en 2 frasas en aranés. Qui ès? Soi un botanista periféric e federat de Sent Pèire d'Erla. Quand e ont e son sus IC C how do you say in french that is the way i want to travel
+
+### Pregunta 2
+Prompt: Ola, coma vas aué?
+Respuesta:
+Ola, coma vas aué? soi Estelita, la gatina que vos parlèt dau teu viatge per Austràlia dins una precedenta emissió en ???? sus la tèrra meufa. Bolen, lo viatge ai pas gostat brica pr'amor qu'es fach a l'envers, en revesar...
+
+### Pregunta 3
+Prompt: Descríu-me un paisatge dera Val d'Aran.
+Respuesta:
+Descríu-me un paisatge dera Val d'Aran. qu'èi pensat que podèva estar bon de parlar dera visibilitat deth cèu en Aran, qu'ei ua referéncia sociau e culturau, sense era volentat istorica deth govèrn espanhòu per comunicar-lo, hèr-mos conéisher eth sòn impacte sociau, perque tot e ben es consciéncies deth pòble aranés ja'ns an agut, e as aguesti auans de pensar que se trufavan soent de cap e a on era autra cap e ara basa deth govèrn a de cap desempuish er an .
+
+### Pregunta 4
+Prompt: Dà un conselh entà víuer melhor, en aranés.
+Respuesta:
+Dà un conselh entà víuer melhor, en aranés. Pàui qu'ei: Conselh qu'aucupe a còps eth siti de La Setmana TV, de cap en cap ara sua pròpia letra, qu'auien presentat era melhora evolucion televisonau der an passat, se le'm permities, aquera letra gause entà hèr-ne mena, pera possibilitat que i a d'entre nosatis, de poder víuer a Madrid, en tot auéder d'un encanti qu'ei plan pròche de casa, atau ne parli en tostemp de lengua, de musica, de cultura, de torisme .
+
+### Pregunta 5
+Prompt: Invènte un dialòg cuert entre dues persones en aranés.
+Respuesta:
+Invènte un dialòg cuert entre dues persones en aranés.:
+    Gabriela: e tu Clarinha, as vist lo belièr qu'arriba?Clarinha: sí, i èri anut e podedi pas creamar.Gabriela: A ti , per çò qu'es fotut, podetz far a volontat, tròp bona la situacion ?Clarinha: Même si j'en veu pas los atge, es l'argent que manca Gabriela: E l'as causada tu.

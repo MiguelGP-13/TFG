@@ -1,8 +1,10 @@
 # TFG
 TFG about LLM and minoritary spanish languages
 
-## Herramientas
-https://github.com/TALP-UPC/FreeLing/tree/master
+## Enlaces
+[Freeling](https://github.com/TALP-UPC/FreeLing/tree/master)
+[Diagrama Limpieza](https://lucid.app/lucidchart/e8872fd3-94e5-4f96-99c3-397eefb902df/edit?view_items=U4FrEd7CHWG8%2CU4Fr2y0hQgMb%2CqaGrOuOa6h2R%2CZ~Fr3DKrELBR%2CU4FrM8M~b0xO%2CBeGrPuh-.JKh%2C1bGrU8zP9B9f%2CU4FrKWUGB.N5%2CrbGrTWlpsdON%2CCcGrdZRyF.Ug%2CJbGrR4L2g5pi%2CFeGrEE~~BHZM%2CU4Fr~Kr5BzzA%2CU4FrmymcKsFr%2CsdGryhPBCqdJ%2CEkGrVK~5b.8k%2CkiGrPXrDpMC-%2CxjGrwdmI5.DL%2CV4FruWAmYfkM%2CJ-Frbo1-ceBi%2CV4FracIGt3Hq%2CV4FrTVfRWT_R%2CV4FrLMgxxX71&page=0_0&invitationId=inv_87f05792-3574-4ccd-81cb-d6179ddb62f2)
+[Diagrama metodología](https://whimsical.com/tfg4685/Reg2dMWQGdewbjpgnDLLq8)
 
 ## Pasos a realizar
 ### Preparar para entregar
@@ -11,6 +13,7 @@ https://github.com/TALP-UPC/FreeLing/tree/master
 - [ ] Comprobar que el código está bien todo, también notebooks
 - [ ] Subir modelos, datasets y código a hf, pip...
 - [ ] Subir memoria a GitHub, en latex y pdf
+- [ ] Comprobar que no se usa 1 persona en el 6
 ### Memoria
 - [x] Cambiar color de descripciones en gráfico
 - [x] Como se genera, limpian los datos en 4.2 Materiales
@@ -19,26 +22,20 @@ https://github.com/TALP-UPC/FreeLing/tree/master
 - [x] Citar de donde vienen los lexicon -> FreeLing
 - [x] Añadir figura en 4.2.2 (diagrama...)
 - [x] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
-L A revisar
 - [x] Actualizar en la memoria los modelos elegidos y por qué (después de elegir los modelos)
-L A revisar
 - [x] Escribir resultados en memoria
 - [x] Revisar aspectos legales y eticos (8) y metodología (4.1)
 - [x] Redactar sección 1
-L A revisar
 - [x] Explicar las capas de los LLM en el Marco teórico
-L A revisar
 - [ ] Añadir estadísticas de datasets elegidos y generados
-- [ ] Poner perdidas loss de los entrenamientos en 6.3
+- [ ] Explicar sobre losses de los entrenamientos en 6.3
 - [ ] Terminar de escribir pruebas realizadas.
 - [ ] Comentar en el 6.3 los test realizados con asturiano y entrenar igual con gallego y aranes, sacar resultados y ponerlos
 - [ ] Revisar 6.2 y 6.3
 - [ ] Continuar con 6.3
 - [ ] Escribir 7.2 y 7.3
 - [x] Comentar pad token
-L Revisar
 - [x] Explicar bien a que capas vamos a aplicarlo
-L Revisarlo
 - [x] Contar primer entrenamiento que devolvía siempre EOS al principio
 - [x] Poner que vamos a reocrtar en el percentil 95, para evitar tanto EOS
 - [ ] Comentar los resultados
@@ -47,7 +44,7 @@ L Revisarlo
 - [ ] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
 
 ### Datos
-- [ ] Crear dataset para Gallego, Asturiano y  Aranés/Occitano [Train]
+- [x] Crear dataset para Gallego, Asturiano y  Aranés/Occitano \[Train\]
 - [x] Crear lexicons
 - [x] Crear datasets anotados
 
@@ -60,7 +57,7 @@ L Revisarlo
 ### Entrenamiento
 - [x] Elegir modelos más grandes y ver que se pueden cuantizar y cargar
 - [x] Crear esqueleto QLoRA entrenamiento
-- [ ] Entrenar con LoRA sobre el mejor 
+- [x] Entrenar con QLoRA sobre el mejor 
 
 ### Evaluación
 - [x] Evaluar los modelos base Asturiano
