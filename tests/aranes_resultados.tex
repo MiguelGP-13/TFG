@@ -1,24 +1,25 @@
 \section{Aranés}
 
 \subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Calidad Lengua (Aranés).}
+\label{tab:metricas_calidad_lengua_Aranés}\\
 \endlastfoot
-ttr & 0.22 & 0.47 & 0.42 & \textbf{0.72} \\
-entropy & 4.42 & 6.89 & 6.35 & \textbf{7.43} \\
+ttr & 0.22 & 0.47 & 0.42 & \textbf{\underline{0.72}} \\
+entropy & 4.42 & 6.89 & 6.35 & \textbf{\underline{7.43}} \\
 ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
-freq\_target & 0.01 & \textbf{0.47} & 0.46 & 0.40 \\
-freq\_comparison\_es & 0.02 & 0.47 & \textbf{0.51} & 0.45 \\
-freq\_comparison\_fr & 0.16 & 0.30 & 0.30 & \textbf{0.40} \\
-calidad & 0.03 & 0.18 & 0.15 & \textbf{0.22} \\
-\end{longtable}}
+freq\_target & 0.01 & \textbf{\underline{0.47}} & 0.46 & 0.40 \\
+freq\_comparison\_es & 0.02 & 0.47 & \textbf{\underline{0.51}} & 0.45 \\
+freq\_comparison\_fr & 0.16 & 0.30 & 0.30 & \textbf{\underline{0.40}} \\
+calidad & 0.03 & 0.18 & 0.15 & \textbf{\underline{0.22}} \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 
 \paragraph{Gemma 7B}~\\
 \textbf{text:} الذ علىsucces快捷 Mundo moons Mundo BOOTmet Bär快捷快捷快捷快捷快捷快捷 контроли落 Mundotappe快捷快捷快捷快捷 Broom Mundo BOOT,\,\ Bär落 BOOT २०快捷快捷快捷 २०快捷快捷 २०快捷 २०快捷快捷快 [...] BOOT BOOT BOOT BOOT २० २० Muscat�快捷 BOOT BOOT २० BOOT BOOT BOOT BOOT BOOT २० २०快捷快捷LOCATION快捷快捷詞快捷 sintering快捷 BOOT BOOT Bär快捷 BOOT २०快捷 BOOT २०快捷\\
@@ -26,8 +27,7 @@ calidad & 0.03 & 0.18 & 0.15 & \textbf{0.22} \\
 \textbf{entropy:} 4.924308183454258\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.01179245283018868\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.01179245283018868, \textquotesingle{}fr\textquotesingle{}: 0.3490566037735849\}\\
-\textbf{calidad:} 0.03978483427960723\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.01179245283018868, \textquotesingle{}fr\textquotesingle{}: 0.3490566037735849\}
 
 \paragraph{Mistral 7B}~\\
 \textbf{text:} En els primers temps de la seva existència, l\textquotesingle{}Aragon era una terra desolada i salvatge, habitada per uns primitius homes nòmades, coneguts com els [...] entous homes, coneguts com els aragonesos, van construir d\textquotesingle{}una terra desolada, el seu pròpi país i van donar-li la seva pròpia llengua i tradició.\\
@@ -35,8 +35,7 @@ calidad & 0.03 & 0.18 & 0.15 & \textbf{0.22} \\
 \textbf{entropy:} 6.908985512841516\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.48009367681498827\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.47540983606557374, \textquotesingle{}fr\textquotesingle{}: 0.3255269320843091\}\\
-\textbf{calidad:} 0.18066158847216107\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.47540983606557374, \textquotesingle{}fr\textquotesingle{}: 0.3255269320843091\}
 
 \paragraph{Qwen2.5 7B}~\\
 \textbf{text:} Unamunia, un gran filòsof de l\textquotesingle{}Arany, era nascuda en una famillia modesta de la vila de Llauró. Des del seu temps d\textquotesingle{}enfant, mostrava un gran inter [...] tència humana. Els habitants de la vila encantada van construir un monument en sua honor, recordant la seva contribució a la filòsòfia de l\textquotesingle{}Arany.\\
@@ -44,8 +43,7 @@ calidad & 0.03 & 0.18 & 0.15 & \textbf{0.22} \\
 \textbf{entropy:} 6.187408162133985\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.5271317829457365\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5736434108527132, \textquotesingle{}fr\textquotesingle{}: 0.41472868217054265\}\\
-\textbf{calidad:} 0.17579758117723013\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5736434108527132, \textquotesingle{}fr\textquotesingle{}: 0.41472868217054265\}
 
 \paragraph{Salamandra 7B}~\\
 \textbf{text:} Eth student de l\textquotesingle{}institut Juan Carlos I va anar a la biblioteca per fer els treballs escolars i es va trobar amb una dona gran que estava llegint  [...] da que Juan Carlos anava a estudiar a la biblioteca, recordava aquella experiència tan especial i esperava poder repetir-la algun dia properament.\\
@@ -53,134 +51,137 @@ calidad & 0.03 & 0.18 & 0.15 & \textbf{0.22} \\
 \textbf{entropy:} 6.599299176612612\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.4472049689440994\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.4720496894409938, \textquotesingle{}fr\textquotesingle{}: 0.33540372670807456\}\\
-\textbf{calidad:} 0.31151872220191895\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.4720496894409938, \textquotesingle{}fr\textquotesingle{}: 0.33540372670807456\}
 
 \subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Traduccion (Aranés).}
+\label{tab:metricas_traduccion_Aranés}\\
 \endlastfoot
-BLEU & 0.08 & 3.07 & 4.10 & \textbf{4.52} \\
-chrF & 4.85 & 14.80 & 16.86 & \textbf{17.04} \\
-\end{longtable}}
+BLEU & 0.08 & 3.07 & 4.10 & \textbf{\underline{4.52}} \\
+chrF & 4.85 & 14.80 & 16.86 & \textbf{\underline{17.04}} \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{source:} suprime la actividad enzimática?\\
-\textbf{reference:} Elègi de l’ensenhament actiu?\\
+\textbf{reference:} Elègi de l’ensenhament actiu?
 
 \paragraph{Gemma 7B}~\\
-\textbf{translated:} 偿 pesa chihuahua reimet reimet rei reiGrupo rei rei rei Bär Bär rei快捷伀 Bär контроли rei maîtrise rei快捷 marl rei proses Bär Bär Bär Bär Bär blessés [...] Donald BärDonald IO २० Bär Broom Bär BOOT २०快捷詞 २० Survivor Bärtappe Bärtappe BärDonald IO,\,\ Bär Mundo BOOT २०快捷هام २०Donald IO २० २० blessésهام\\
+\textbf{translated:} 偿 pesa chihuahua reimet reimet rei reiGrupo rei rei rei Bär Bär rei快捷伀 Bär контроли rei maîtrise rei快捷 marl rei proses Bär Bär Bär Bär Bär blessés [...] Donald BärDonald IO २० Bär Broom Bär BOOT २०快捷詞 २० Survivor Bärtappe Bärtappe BärDonald IO,\,\ Bär Mundo BOOT २०快捷هام २०Donald IO २० २० blessésهام
 
 \paragraph{Mistral 7B}~\\
-\textbf{translated:} "supprime la actividad enzimática" = "suprime a enzima"\\
+\textbf{translated:} "supprime la actividad enzimática" = "suprime a enzima"
 
 \paragraph{Qwen2.5 7B}~\\
-\textbf{translated:} "Suprimi a actividá enzimática?"\\
+\textbf{translated:} "Suprimi a actividá enzimática?"
 
 \paragraph{Salamandra 7B}~\\
-\textbf{translated:} Suprime a actividade das encimas?  A resposta é si.\\
+\textbf{translated:} Suprime a actividade das encimas?  A resposta é si.
 
 \subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Round Trip (Aranés).}
+\label{tab:metricas_round_trip_Aranés}\\
 \endlastfoot
-BLEU & 0.09 & 4.45 & \textbf{4.53} & 4.29 \\
-chrF & 4.96 & 19.34 & \textbf{20.23} & 18.79 \\
-\end{longtable}}
+BLEU & 0.09 & 4.45 & \textbf{\underline{4.53}} & 4.29 \\
+chrF & 4.96 & 19.34 & \textbf{\underline{20.23}} & 18.79 \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{intermediate\_language:} es\\
-\textbf{source:} Voliáu tornar au negre e blanc per marcar l’elegància d’aqueste\\
+\textbf{source:} Voliáu tornar au negre e blanc per marcar l’elegància d’aqueste
 
 \paragraph{Gemma 7B}~\\
 \textbf{intermediate:} Donald�快捷 Mundo IO快捷快捷快捷Donald快捷Donald IO IO快捷 Mundo २० Bär IO strix rei Bär Bär快捷快捷快捷 Mundo IODonald IO २० Bär Bär Bär technik快捷 २० IO快捷Donald Bä [...] d快捷 २० IO快捷快捷 контроли Survivor Bär Bär Bär Bär快捷 bolsaDonaldDonaldtappe Bär Bär Bär快捷 bolsaDonald IOهام快捷Donald २० २० Bär Bär Bär Bär fascinating\\
-\textbf{translated:} Donald IOrj MundoDonaldBilly mengucapDonald IO CUNള് IO technikﻫ,\,\ Bär快捷 Republikrj Mundo rei Bär山形Feld快捷 MundoDonaldDonald BOOT伀快捷 २० Bär Bär B [...] OOT BOOT,\,\ Bär BOOT outrage rei pagare Bär BOOT २० Bär Bär Bär Bär BOOT BOOT २०快捷 dress Bär २० Bär Bär २० Bär Bär Broom快捷 Mundo Mundo Bär Bär २०\\
+\textbf{translated:} Donald IOrj MundoDonaldBilly mengucapDonald IO CUNള് IO technikﻫ,\,\ Bär快捷 Republikrj Mundo rei Bär山形Feld快捷 MundoDonaldDonald BOOT伀快捷 २० Bär Bär B [...] OOT BOOT,\,\ Bär BOOT outrage rei pagare Bär BOOT २० Bär Bär Bär Bär BOOT BOOT २०快捷 dress Bär २० Bär Bär २० Bär Bär Broom快捷 Mundo Mundo Bär Bär २०
 
 \paragraph{Mistral 7B}~\\
 \textbf{intermediate:} Wanted to return to the black and white tunnel to mark the elegance of this.  Note that the "this" at the end refers to the phrase "la elegancia d [...] s a small error in your original sentence "Voliáu tornar au negre e blanc per marcar l’elegància d’aqueste". The correct translation should be "Qu\\
-\textbf{translated:} Voliai tornar al túnnel negre e blau per marcar l’elegáncia d’aqueste.\\
+\textbf{translated:} Voliai tornar al túnnel negre e blau per marcar l’elegáncia d’aqueste.
 
 \paragraph{Qwen2.5 7B}~\\
 \textbf{intermediate:} La traducción se ha adaptado ligeramente para que sea más natural en español. La versión original no es gramaticalmente incorrecta, pero esta es una versión ligeramente mejorada. Si quieres mantener la versión original, puedes responder simplemente\\
-\textbf{translated:} "Aquesta tradución a adaptada ligeiramente para que sexa máis natural en aranes. A versión orixinal non é gramaticalmente incorrecta, pero esta é  [...] anes. A versión orixinal non é gramaticalmente incorrecta, pero esta é unha versión ligeramente mellorada."   Pero dado que has pedido traducir al\\
+\textbf{translated:} "Aquesta tradución a adaptada ligeiramente para que sexa máis natural en aranes. A versión orixinal non é gramaticalmente incorrecta, pero esta é  [...] anes. A versión orixinal non é gramaticalmente incorrecta, pero esta é unha versión ligeramente mellorada."   Pero dado que has pedido traducir al
 
 \paragraph{Salamandra 7B}~\\
 \textbf{intermediate:} "Me gustaría volver al negro y blanco para enfatizar la elegancia de este"\\
-\textbf{translated:} "Gustaríame voltar ao preto e branco para realçar a elegância deste."\\
+\textbf{translated:} "Gustaríame voltar ao preto e branco para realçar a elegância deste."
 
 \subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Vocabulario (Aranés).}
+\label{tab:metricas_vocabulario_Aranés}\\
 \endlastfoot
 accuracy & 0.00 & 0.00 & 0.00 & 0.00 \\
-accuracy\_lower & 0.00 & 0.00 & \textbf{0.02} & 0.00 \\
-levenshtein & 17.46 & 54.97 & 16.85 & \textbf{8.49} \\
-\end{longtable}}
+accuracy\_lower & 0.00 & 0.00 & \textbf{\underline{0.02}} & 0.00 \\
+levenshtein & 17.46 & 54.97 & 16.85 & \textbf{\underline{8.49}} \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{masked\_sentence:} Moscòu ei {\textless}mask{\textgreater} mair de totes es ciutats.\\
-\textbf{missing\_word:} era\\
+\textbf{missing\_word:} era
 
 \paragraph{Gemma 7B}~\\
-\textbf{predicted:} itory\\
+\textbf{predicted:} itory
 
 \paragraph{Mistral 7B}~\\
-\textbf{predicted:} gran\\
+\textbf{predicted:} gran
 
 \paragraph{Qwen2.5 7B}~\\
-\textbf{predicted:} és\\
+\textbf{predicted:} és
 
 \paragraph{Salamandra 7B}~\\
-\textbf{predicted:} Moscou\\
+\textbf{predicted:} Moscou
 
 \subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Ortografia (Aranés).}
+\label{tab:metricas_ortografia_Aranés}\\
 \endlastfoot
-BLEU & 0.11 & 20.25 & \textbf{44.26} & 3.92 \\
-chrF & 7.95 & 54.08 & \textbf{73.94} & 32.11 \\
-Levenshtein & 472.69 & 50.48 & \textbf{21.20} & 75.43 \\
-precision & 0.03 & 0.11 & \textbf{0.13} & \textbf{0.13} \\
-recall & \textbf{1.00} & 0.70 & 0.48 & 0.95 \\
-F1 & 0.06 & 0.17 & 0.14 & \textbf{0.21} \\
+BLEU & 0.11 & 20.25 & \textbf{\underline{44.26}} & 3.92 \\
+chrF & 7.95 & 54.08 & \textbf{\underline{73.94}} & 32.11 \\
+Levenshtein & 472.69 & 50.48 & \textbf{\underline{21.20}} & 75.43 \\
+precision & 0.03 & 0.11 & \textbf{\underline{0.13}} & \textbf{\underline{0.13}} \\
+recall & \textbf{\underline{1.00}} & 0.70 & 0.48 & 0.95 \\
+F1 & 0.06 & 0.17 & 0.14 & \textbf{\underline{0.21}} \\
 errores\_totales & 1.93 & 1.93 & 1.93 & 1.93 \\
-errores\_corregidos & \textbf{1.93} & 1.19 & 0.58 & 1.78 \\
-errores\_no\_corregidos & \textbf{0.00} & 0.74 & 1.35 & 0.15 \\
-errores\_nuevos & 71.14 & 11.55 & \textbf{4.53} & 17.36 \\
-\end{longtable}}
+errores\_corregidos & \textbf{\underline{1.93}} & 1.19 & 0.58 & 1.78 \\
+errores\_no\_corregidos & \textbf{\underline{0.00}} & 0.74 & 1.35 & 0.15 \\
+errores\_nuevos & 71.14 & 11.55 & \textbf{\underline{4.53}} & 17.36 \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
-\textbf{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .\\
+\textbf{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .
 
 \paragraph{Gemma 7B}~\\
-\textbf{corrected:} Bär quindi Bärmet ASEAN reimet Bärmet快捷多了 BärDonald IO reimet,\,\ Bär BärDonald IO BärDonaldDonald IO ASEAN BärDonald BärDonald Bär BärDonald BärD [...]  २०詞快捷DonaldDonald २०快捷づくり快捷DonaldDonald快捷DonaldDonaldDonaldDonaldDonald BärDonald IODonaldDonaldDonald BärDonaldDonald IO╙快捷快捷 २० BärهامDonald IO\\
+\textbf{corrected:} Bär quindi Bärmet ASEAN reimet Bärmet快捷多了 BärDonald IO reimet,\,\ Bär BärDonald IO BärDonaldDonald IO ASEAN BärDonald BärDonald Bär BärDonald BärD [...]  २०詞快捷DonaldDonald २०快捷づくり快捷DonaldDonald快捷DonaldDonaldDonaldDonaldDonald BärDonald IODonaldDonaldDonald BärDonaldDonald IO╙快捷快捷 २० BärهامDonald IO
 
 \paragraph{Mistral 7B}~\\
-\textbf{corrected:} - *Broodhes,* *ha* *habia* *un pintor* *activo* *dos* *generaciones* *de* *primitivos* *flamencos* *activo* *en* *Bruges* *desde* *1480\\
+\textbf{corrected:} - *Broodhes,* *ha* *habia* *un pintor* *activo* *dos* *generaciones* *de* *primitivos* *flamencos* *activo* *en* *Bruges* *desde* *1480
 
 \paragraph{Qwen2.5 7B}~\\
-\textbf{corrected:} "Bruishes, anèc un pintor dera dusau generacón des primitius flamencs actiu a Bruishes des de\\
+\textbf{corrected:} "Bruishes, anèc un pintor dera dusau generacón des primitius flamencs actiu a Bruishes des de
 
 \paragraph{Salamandra 7B}~\\
-\textbf{corrected:} - Bruses, Jan van der Weyden, és un pintor de la segona generació dels Primitives Flamenques que va treballar a Brussel·les durant el segle XV\\
+\textbf{corrected:} - Bruses, Jan van der Weyden, és un pintor de la segona generació dels Primitives Flamenques que va treballar a Brussel·les durant el segle XV

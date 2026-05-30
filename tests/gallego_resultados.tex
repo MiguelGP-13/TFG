@@ -1,24 +1,25 @@
 \section{Gallego}
 
 \subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Calidad Lengua (Gallego).}
+\label{tab:metricas_calidad_lengua_Gallego}\\
 \endlastfoot
-ttr & 0.16 & 0.54 & 0.48 & \textbf{0.73} \\
-entropy & 3.30 & 6.55 & 6.72 & \textbf{8.28} \\
+ttr & 0.16 & 0.54 & 0.48 & \textbf{\underline{0.73}} \\
+entropy & 3.30 & 6.55 & 6.72 & \textbf{\underline{8.28}} \\
 ngram\_overlap & 0.00 & 0.00 & 0.00 & 0.00 \\
-freq\_target & 0.00 & 0.72 & \textbf{0.85} & 0.84 \\
-freq\_comparison\_fr & 0.00 & 0.32 & \textbf{0.33} & 0.23 \\
-freq\_comparison\_es & 0.00 & 0.61 & \textbf{0.68} & 0.54 \\
-calidad & 0.01 & \textbf{0.31} & 0.29 & 0.30 \\
-\end{longtable}}
+freq\_target & 0.00 & 0.72 & \textbf{\underline{0.85}} & 0.84 \\
+freq\_comparison\_fr & 0.00 & 0.32 & \textbf{\underline{0.33}} & 0.23 \\
+freq\_comparison\_es & 0.00 & 0.61 & \textbf{\underline{0.68}} & 0.54 \\
+calidad & 0.01 & \textbf{\underline{0.31}} & 0.29 & 0.30 \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 
 \paragraph{Gemma 7B}~\\
 \textbf{text:} onymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymesonymes s [...] szak informaonymesonymes szakonymes szak szak Jokeonymes ISA ISA newOwneronymes szak contributoonymes szak szak elimin 頂)。onymesonymesonymesonymes\\
@@ -26,8 +27,7 @@ calidad & 0.01 & \textbf{0.31} & 0.29 & 0.30 \\
 \textbf{entropy:} 3.886018030022863\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.0\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.0, \textquotesingle{}fr\textquotesingle{}: 0.0019230769230769232\}\\
-\textbf{calidad:} 0.015250688275286849\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.0, \textquotesingle{}fr\textquotesingle{}: 0.0019230769230769232\}
 
 \paragraph{Mistral 7B}~\\
 \textbf{text:} Xenta unha nina pequena nomada María. Xárcara ia unha xiqueta curta o que unha má maca. O pica-polenta unha má de míseira. O pica-polenta tesía un [...] enda. María a pensa que se a conversación en o ponte nunca se tornara una lenda, e que ella podía coneter aquella historía de dos amores cruzados.\\
@@ -35,8 +35,7 @@ calidad & 0.01 & \textbf{0.31} & 0.29 & 0.30 \\
 \textbf{entropy:} 6.7848498236421175\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.7017167381974249\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6201716738197425, \textquotesingle{}fr\textquotesingle{}: 0.31759656652360513\}\\
-\textbf{calidad:} 0.2111241647818004\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.6201716738197425, \textquotesingle{}fr\textquotesingle{}: 0.31759656652360513\}
 
 \paragraph{Qwen2.5 7B}~\\
 \textbf{text:} Na pequena aldea de Cambados, hai un xaleiro chamado Pipo que é famoso polo seu poboalón. Cada día, moitos habitantes da aldea van a pedirlle que  [...] historia original sobre a aprendizaxe e a transmisión da arte do xaleo en Cambados, unha aldea galega. Espero que gostes desta historia en galego.\\
@@ -44,8 +43,7 @@ calidad & 0.01 & \textbf{0.31} & 0.29 & 0.30 \\
 \textbf{entropy:} 6.70327761683191\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.8466453674121406\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5846645367412141, \textquotesingle{}fr\textquotesingle{}: 0.33226837060702874\}\\
-\textbf{calidad:} 0.3369576653333204\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5846645367412141, \textquotesingle{}fr\textquotesingle{}: 0.33226837060702874\}
 
 \paragraph{Salamandra 7B}~\\
 \textbf{text:} O sol brillaba no ceo azul mentres camiñaba pola praia de area branca. As ondas do mar batían suavemente contra a costa, creando unha fermosa pais [...] ng decline redeeming ruins rebuilding brokenness restoring decayed recondition dilapidated renovat aging deteriorate regenerate revitalize restore\\
@@ -53,134 +51,137 @@ calidad & 0.01 & \textbf{0.31} & 0.29 & 0.30 \\
 \textbf{entropy:} 9.151351921901936\\
 \textbf{ngram\_overlap:} 0.0\\
 \textbf{freq\_target:} 0.5481481481481482\\
-\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.36444444444444446, \textquotesingle{}fr\textquotesingle{}: 0.17333333333333334\}\\
-\textbf{calidad:} 0.12660411643196076\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.36444444444444446, \textquotesingle{}fr\textquotesingle{}: 0.17333333333333334\}
 
 \subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Traduccion (Gallego).}
+\label{tab:metricas_traduccion_Gallego}\\
 \endlastfoot
-BLEU & 0.02 & 11.15 & \textbf{23.75} & 8.10 \\
-chrF & 8.64 & 38.75 & \textbf{51.92} & 30.06 \\
-\end{longtable}}
+BLEU & 0.02 & 11.15 & \textbf{\underline{23.75}} & 8.10 \\
+chrF & 8.64 & 38.75 & \textbf{\underline{51.92}} & 30.06 \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
-\textbf{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. \\
+\textbf{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. 
 
 \paragraph{Gemma 7B}~\\
-\textbf{translated:} Dopo Schauspielแหล่งangun whiskey tanninggetStyle ISA tanning eliminDopo ISA Please militaryDopo legiti legiti gros nanoonymes ISAonymes ISA elimi [...] s szak szak szak szakSnapchat militaryonymesonymes szak szak szak contributo szak szaknorsk szak eliminDopo ISA ISA elimin unterisateurを取る ISA ISA\\
+\textbf{translated:} Dopo Schauspielแหล่งangun whiskey tanninggetStyle ISA tanning eliminDopo ISA Please militaryDopo legiti legiti gros nanoonymes ISAonymes ISA elimi [...] s szak szak szak szakSnapchat militaryonymesonymes szak szak szak contributo szak szaknorsk szak eliminDopo ISA ISA elimin unterisateurを取る ISA ISA
 
 \paragraph{Mistral 7B}~\\
-\textbf{translated:} Aquel pronto se transformou en un movimento de desobediencia civil que mudiou as leyes.    En el siguiente texto, ¿qué significa "loam"? ¿Qué hace [...] nutrientes es el mejord de todas las islas de los Alpes.   La palabra que está mal en la frase es "loam". Loam es un tipo de tierra que es rica en\\
+\textbf{translated:} Aquel pronto se transformou en un movimento de desobediencia civil que mudiou as leyes.    En el siguiente texto, ¿qué significa "loam"? ¿Qué hace [...] nutrientes es el mejord de todas las islas de los Alpes.   La palabra que está mal en la frase es "loam". Loam es un tipo de tierra que es rica en
 
 \paragraph{Qwen2.5 7B}~\\
-\textbf{translated:} Ese pronto se convirxe en un movimento de desobediencia cívica que mudou as leis. A\\
+\textbf{translated:} Ese pronto se convirxe en un movimento de desobediencia cívica que mudou as leis. A
 
 \paragraph{Salamandra 7B}~\\
-\textbf{translated:} “That action soon became an act ofcivil disobedience that changed the law.”  Débese prestar atención ao termo “that”, posto que é o que permite fa [...] go pode resultar confusa dependendo do contexto. Neste caso, a opción máis adecuada sería «lei».    Esta pregunta require unha resposta moi breve,\\
+\textbf{translated:} “That action soon became an act ofcivil disobedience that changed the law.”  Débese prestar atención ao termo “that”, posto que é o que permite fa [...] go pode resultar confusa dependendo do contexto. Neste caso, a opción máis adecuada sería «lei».    Esta pregunta require unha resposta moi breve,
 
 \subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Round Trip (Gallego).}
+\label{tab:metricas_round_trip_Gallego}\\
 \endlastfoot
-BLEU & 0.01 & 5.24 & \textbf{17.55} & 2.06 \\
-chrF & 9.13 & 26.60 & \textbf{41.70} & 20.75 \\
-\end{longtable}}
+BLEU & 0.01 & 5.24 & \textbf{\underline{17.55}} & 2.06 \\
+chrF & 9.13 & 26.60 & \textbf{\underline{41.70}} & 20.75 \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{intermediate\_language:} es\\
-\textbf{source:} Aínda que o inverno foi rigoroso, as flores xurdiron a moreas na primavera, tapizando os campos cun colorido que semellaba unha compensación da natureza. \\
+\textbf{source:} Aínda que o inverno foi rigoroso, as flores xurdiron a moreas na primavera, tapizando os campos cun colorido que semellaba unha compensación da natureza. 
 
 \paragraph{Gemma 7B}~\\
 \textbf{intermediate:} appreciatedgetStyleDECLAREonymesonymes legitionymes gros rusakonymesonymesonymesonymesonymesonymesonymesonymes szak eliminDopoonymes elimin ISAony [...] imin ISA archivi szak嫑onymes ISA szak legiti elimin ISA szak町村onymesonymes ISAonymes szakonymesonymes szak eliminonymes ISA ISA militaryonymes ISA\\
-\textbf{translated:} UNIVERS荖 gros gros tanning tanning elimin whiskeyonymes数字化onymes szak 広 Wolff eliminvirt elimin町村onymes szakLEV necesitamos sosteniendo elimin町村on [...] legiti szak szak legiti数字化 elimin町村 legiti町村 elimin数字化onymes szak数字化 elimin数字化 ISA準 elimin数字化onymesonymes数字化onymes szak数字化onymesALWAYS elimin szak\\
+\textbf{translated:} UNIVERS荖 gros gros tanning tanning elimin whiskeyonymes数字化onymes szak 広 Wolff eliminvirt elimin町村onymes szakLEV necesitamos sosteniendo elimin町村on [...] legiti szak szak legiti数字化 elimin町村 legiti町村 elimin数字化onymes szak数字化 elimin数字化 ISA準 elimin数字化onymesonymes数字化onymes szak数字化onymesALWAYS elimin szak
 
 \paragraph{Mistral 7B}~\\
 \textbf{intermediate:} Nota que los adjetivos "rigoroso", "abundantemente" y "colorido" son adjetivos que describen situaciones (adjetivos de calidad). El verbo "xurdiron" significa "brotan". El adverbio "tapizando" expresa cómo se llev\\
-\textbf{translated:} Coloridamente (se utiliza en gallego)  Traducción de \textquotesingle{}\\
+\textbf{translated:} Coloridamente (se utiliza en gallego)  Traducción de \textquotesingle{}
 
 \paragraph{Qwen2.5 7B}~\\
 \textbf{intermediate:} Aunque el invierno fue riguroso, las flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parec [...] flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parecía una compensación de la naturaleza.\\
-\textbf{translated:} Aunque o inverno foi rígruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha c [...] ruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha compensación da natureza.\\
+\textbf{translated:} Aunque o inverno foi rígruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha c [...] ruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha compensación da natureza.
 
 \paragraph{Salamandra 7B}~\\
 \textbf{intermediate:} Si. ✅      Agradecese corrixir posibles erros ortográficos ou gramaticais para axudarme a mellorar como tradutor. Grazas pola túa axuda! 🙏 . ☀️       Dime calquera outra cousa que necesites e\\
-\textbf{translated:} Sí.    La respuesta es "Sí". La tarea era traducir "Si" del español al gallego. No se requiere una explicación adicional ya que no hay contexto pr [...]  gramatical durante este proceso de mejora continua como traductor. ¡Gracias por todo esto también! Y si necesita algo más ahora mismo, solo tiene\\
+\textbf{translated:} Sí.    La respuesta es "Sí". La tarea era traducir "Si" del español al gallego. No se requiere una explicación adicional ya que no hay contexto pr [...]  gramatical durante este proceso de mejora continua como traductor. ¡Gracias por todo esto también! Y si necesita algo más ahora mismo, solo tiene
 
 \subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Vocabulario (Gallego).}
+\label{tab:metricas_vocabulario_Gallego}\\
 \endlastfoot
-accuracy & 0.00 & 0.00 & \textbf{0.09} & 0.03 \\
-accuracy\_lower & 0.00 & 0.01 & \textbf{0.10} & 0.03 \\
-levenshtein & 42.42 & 16.69 & \textbf{4.93} & 9.51 \\
-\end{longtable}}
+accuracy & 0.00 & 0.00 & \textbf{\underline{0.09}} & 0.03 \\
+accuracy\_lower & 0.00 & 0.01 & \textbf{\underline{0.10}} & 0.03 \\
+levenshtein & 42.42 & 16.69 & \textbf{\underline{4.93}} & 9.51 \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
-\textbf{missing\_word:} espichou\\
+\textbf{missing\_word:} espichou
 
 \paragraph{Gemma 7B}~\\
-\textbf{predicted:} onymesgetStyleDECLAREобуonymes\\
+\textbf{predicted:} onymesgetStyleDECLAREобуonymes
 
 \paragraph{Mistral 7B}~\\
-\textbf{predicted:} contou\\
+\textbf{predicted:} contou
 
 \paragraph{Qwen2.5 7B}~\\
-\textbf{predicted:} foi\\
+\textbf{predicted:} foi
 
 \paragraph{Salamandra 7B}~\\
-\textbf{predicted:} tristeza\\
+\textbf{predicted:} tristeza
 
 \subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
-{\def\LTcaptype{none}
 \begin{longtable}[]{@{}lllll@{}}
 \toprule\noalign{}
 Métrica & Gemma 7B & Mistral 7B & Qwen2.5 7B & Salamandra 7B \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Ortografia (Gallego).}
+\label{tab:metricas_ortografia_Gallego}\\
 \endlastfoot
-BLEU & 0.01 & 30.38 & \textbf{51.70} & 21.17 \\
-chrF & 7.65 & 57.62 & \textbf{79.71} & 49.96 \\
-Levenshtein & 688.69 & 33.59 & \textbf{13.99} & 45.14 \\
-precision & 0.03 & 0.19 & \textbf{0.24} & 0.17 \\
-recall & \textbf{0.99} & 0.70 & 0.62 & 0.93 \\
-F1 & 0.06 & 0.26 & \textbf{0.28} & 0.26 \\
+BLEU & 0.01 & 30.38 & \textbf{\underline{51.70}} & 21.17 \\
+chrF & 7.65 & 57.62 & \textbf{\underline{79.71}} & 49.96 \\
+Levenshtein & 688.69 & 33.59 & \textbf{\underline{13.99}} & 45.14 \\
+precision & 0.03 & 0.19 & \textbf{\underline{0.24}} & 0.17 \\
+recall & \textbf{\underline{0.99}} & 0.70 & 0.62 & 0.93 \\
+F1 & 0.06 & 0.26 & \textbf{\underline{0.28}} & 0.26 \\
 errores\_totales & 2.00 & 2.00 & 2.00 & 2.00 \\
-errores\_corregidos & \textbf{1.98} & 1.22 & 0.93 & 1.81 \\
-errores\_no\_corregidos & \textbf{0.02} & 0.78 & 1.07 & 0.19 \\
-errores\_nuevos & 57.41 & 4.78 & \textbf{2.88} & 9.24 \\
-\end{longtable}}
+errores\_corregidos & \textbf{\underline{1.98}} & 1.22 & 0.93 & 1.81 \\
+errores\_no\_corregidos & \textbf{\underline{0.02}} & 0.78 & 1.07 & 0.19 \\
+errores\_nuevos & 57.41 & 4.78 & \textbf{\underline{2.88}} & 9.24 \\
+\end{longtable}
 
-\subsubsection{Ejemplo representativo}
+\subsubsection{Ejemplo:}
 \textbf{original:} Logo de anos sen darnos os bos días, agora páranos para conversar, polo pan baila o can.\\
-\textbf{incorrect:} Logo de anos sen darnos os {\textless}err t=ort{\textgreater}bós{\textless}/err{\textgreater} días, agora páranos para conversar, polo pan baila o can.\\
+\textbf{incorrect:} Logo de anos sen darnos os {\textless}err t=ort{\textgreater}bós{\textless}/err{\textgreater} días, agora páranos para conversar, polo pan baila o can.
 
 \paragraph{Gemma 7B}~\\
-\textbf{corrected:} ッ SagradaERI\{\}; sosteniendoonymesonymesonymesonymesonymesonymes eliminDopoonymesLAUNCHonymesonymes szak elimin ISA commissionsonymesonymesonymeson [...] onymesonymesHOTابسonymesonymesonymes szak szak elimin szakonymes szak szak szak szak szakonymes szakonymes szak szak szak szak szak szak szak szak\\
+\textbf{corrected:} ッ SagradaERI\{\}; sosteniendoonymesonymesonymesonymesonymesonymes eliminDopoonymesLAUNCHonymesonymes szak elimin ISA commissionsonymesonymesonymeson [...] onymesonymesHOTابسonymesonymesonymes szak szak elimin szakonymes szak szak szak szak szakonymes szakonymes szak szak szak szak szak szak szak szak
 
 \paragraph{Mistral 7B}~\\
-\textbf{corrected:} Logo de anos sen dar uns bons días, agora párate para conversa, polo pan baila o canto\\
+\textbf{corrected:} Logo de anos sen dar uns bons días, agora párate para conversa, polo pan baila o canto
 
 \paragraph{Qwen2.5 7B}~\\
-\textbf{corrected:} Logo de anos sen darnos os bons días, agora páramos para conversar, polo pan baila o can\\
+\textbf{corrected:} Logo de anos sen darnos os bons días, agora páramos para conversar, polo pan baila o can
 
 \paragraph{Salamandra 7B}~\\
-\textbf{corrected:} Despois de anos sen saudarnos, agora párase para conversar, pola conversa bailan as cans (ou, máis coloquialmente, "póñenlle a orella")\\
+\textbf{corrected:} Despois de anos sen saudarnos, agora párase para conversar, pola conversa bailan as cans (ou, máis coloquialmente, "póñenlle a orella")
