@@ -2,41 +2,10 @@ import re
 from sacrebleu.metrics import BLEU, CHRF
 import Levenshtein
 from .utils import generar_texto
+from .constants.prompts import buildFillMaskPrompt
 
 bleu = BLEU()
 chrf = CHRF()
-
-def buildFillMaskPrompt(masked_sentence, lang):
-    prompts = {
-        "es": (
-            f"En la siguiente frase falta una palabra, reemplazada por <mask>. "
-            f"Devuelve solo y únicamente la palabra faltante.\n"
-            f"{masked_sentence}\nPalabra:"
-        ),
-        "ast": (
-            f"Na siguiente frase falta una pallabra, reemplazada por <mask>. "
-            f"Devuelve namás la pallabra que falta.\n"
-            f"{masked_sentence}\nPallabra:"
-        ),
-        "gl": (
-            f"Na seguinte frase falta unha palabra, substituída por <mask>. "
-            f"Devolve só a palabra que falta.\n"
-            f"{masked_sentence}\nPalabra:"
-        ),
-        "aran": (
-            f"En aguesta frasa manque ua paraula, remplaçada per <mask>. "
-            f"Da sonque era paraula que manque.\n"
-            f"{masked_sentence}\nParaula:"
-        ),
-        "fr": (
-            f"Dans la phrase suivante il manque un mot, remplacé par <mask>. "
-            f"Donne seulement le mot manquant.\n"
-            f"{masked_sentence}\nMot:"
-        ),
-    }
-    return prompts[lang]
-
-
 
 def extraer_palabra(decoded, prompt, cortar=False):
     # Parte del prompt donde empieza la respuesta

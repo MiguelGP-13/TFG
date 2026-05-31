@@ -2,40 +2,10 @@ import re
 from sacrebleu.metrics import BLEU, CHRF
 import Levenshtein
 from .utils import generar_texto
+from .constants.prompts import buildCorrectionPrompt
 
 bleu = BLEU()
 chrf = CHRF()
-
-def buildCorrectionPrompt(text, lang):
-    prompts = {
-        "es": (
-            f"Corrige esta frase en español. "
-            f"No añadas contenido nuevo. "
-            f"Devuelve solo la frase corregida:\n{text}\nCorrección:"
-        ),
-        "ast": (
-            f"Corrige esta frase n'asturianu. "
-            f"Nun añadas conteníu nuevu. "
-            f"Devuelve namás la frase correxida:\n{text}\nCorreición:"
-        ),
-        "gl": (
-            f"Corrige esta frase en galego. "
-            f"Non engadas contido novo. "
-            f"Devolve só a frase corrixida:\n{text}\nCorrección:"
-        ),
-        "aran": (
-            f"Corrigís aguesta frasa en aranés. "
-            f"Non híges contengut nau. "
-            f"Da sonque era frasa corregida:\n{text}\nCorreccion:"
-        ),
-        "fr": (
-            f"Corrige cette phrase en français. "
-            f"N’ajoute aucun contenu. "
-            f"Donne seulement la phrase corrigée:\n{text}\nCorrection:"
-        ),
-    }
-
-    return prompts[lang]
 
 
 def evaluacionOrtograficaAnotado(model, tokenizer, annotated, original, lang="es", device="cuda", max_new_tokens=128, kaggle= False, cortar=False):

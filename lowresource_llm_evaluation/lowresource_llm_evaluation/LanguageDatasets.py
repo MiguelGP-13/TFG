@@ -9,29 +9,7 @@ except:
     print("FastText no encontrado")
 import requests
 
-lang_code = {
-    "asturiano": {
-        "tatoeba": "ast",
-        "opus": "ast",
-        "fasttext": "__label__ast"
-    },
-    "aranes": {
-        "tatoeba": "oci",   # Tatoeba usa 'oci' (Occitan)
-        "opus": "oc",       # OPUS usa 'oc'
-        "fasttext": "__label__oc"
-    },
-    "aragones": {
-        "tatoeba": "arg",
-        "opus": "an",
-        "fasttext": None    # FastText NO soporta aragonés
-    },
-    "gallego": {
-        "tatoeba": "glg",
-        "opus": "gl",
-        "fasttext": "__label__gl"
-    }
-}
-
+from .constants.languageCodesAndNames import LANG_CODES
 
 class LanguageDataset():
     def __init__(self, language=None,
@@ -42,16 +20,16 @@ class LanguageDataset():
         if language is None:
             raise ValueError("Debe pasar 'language' o 'path' obligatoriamente.")
 
-        if language not in lang_code.keys():
+        if language not in LANG_CODES.keys():
             raise KeyError(
-                f'Lenguaje no contemplado ({list(lang_code.keys())})\n'
+                f'Lenguaje no contemplado ({list(LANG_CODES.keys())})\n'
                 'Si quiere crear el dataset desde un checkpoint previo, necesita poner path="path_to_your_dataset"'
             )
 
         # --- Atributos base ---
         self.raw_datasets = {}
         self.language = language
-        self.language_codes = lang_code[language]
+        self.language_codes = LANG_CODES[language]
         self.json = []
         self.MIN_WORDS = min_words
         self.MAX_WORDS = max_words
@@ -303,57 +281,6 @@ class LanguageDataset():
         self.summary() # Para ver cómo han quedado los nuevos tamaños
         return self
     
-    def to_pseudo_instruct(self, ratio_or_n=1.0, template_type="random"):
-        """
-        Convierte el dataset a formato instructivo optimizado.
-        
-        ratio_or_n: proporción (0-1) o número entero de ejemplos a convertir.
-        template_type: 'random' para variar el prompt, o 'fixed' para usar siempre el mismo.
-        """
-        total = len(self.json)
-        if total == 0:
-            return self
-
-        # 1. Cálculo rápido de cantidad
-        n = int(total * ratio_or_n) if ratio_or_n <= 1 else int(min(ratio_or_n, total))
-        
-        print(f"[Pseudo-Instruct] Transformando {n} ejemplos para {self.language}...")
-
-        # 2. Definición de plantillas (Variabilidad para mejor generalización)
-        templates = [
-            "Continúa esti testu n'{lang}, respetando'l tonu:",
-            "Sigue escribiendo en {lang} dende equí:",
-            "Completa la siguiente secuencia en llingua {lang}:",
-            "Escribe la continuación d'esti fragmentu ({lang}):"
-        ] if template_type == "random" else ["Continúa esti testu n'{lang}:"]
-
-        lang_name = self.language # Usa el nombre de la lengua de la instancia
-
-        # 3. Transformación in-place parcial
-        # Solo iteramos y modificamos los primeros 'n' elementos
-        
-        for i in range(n):
-            text = self.json[i]["text"].strip()
-            
-            # Elegimos una plantilla al azar y reemplazamos el placeholder del idioma
-            prompt_base = random.choice(templates).format(lang=lang_name)
-            
-            # Formato de chat optimizado (ChatML o similar)
-            full_text = (
-                f"<|user|>\n{prompt_base}\n\n{text}\n\n"
-                f"<|assistant|>\n{text}"
-            )
-            
-            self.json[i]["text"] = full_text
-
-        print(f"Transformación completada. Ejemplo:\n{self.json[0]['text'][:200]}...")
-        # 4. Mezclar (Opcional pero recomendado)
-        # Para que los ejemplos instructivos no queden todos al principio del entrenamiento
-        random.shuffle(self.json)
-
-        return self
-
-
     def startTatoeba(self):
         print(f"Descargando tatoeba para {self.language}:")
         try:

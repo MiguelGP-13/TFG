@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "lowresource-llm-evaluation"
-version = "0.10.2"
+version = "0.11.0.2"
 description = "Métricas para evaluar LLMs en su capacidad de hablar una lengua sin datasets de Q&A"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = "MIT"
@@ -14,7 +14,7 @@ authors = [
     {name = "Miguel Gómez Prieto", email = "miguel.gprieto@alumnos.upm.es"}
 ]
 
-keywords = ["evaluation", "machine learning", "utils", "LLM", "minority language"]
+keywords = ["evaluation", "machine learning", "utils", "LLM", "minority language", "benchmark", "analyze"]
 
 dependencies = [
     "numpy",
@@ -26,7 +26,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/MiguelGP-13/TFG/tree/main/metricas"
+Homepage = "https://github.com/MiguelGP-13/TFG/tree/main/lowresource_llm_evaluation"
 
 [tool.setuptools.packages.find]
 where = ["."]

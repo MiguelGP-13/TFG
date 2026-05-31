@@ -1,57 +1,9 @@
 from sacrebleu.metrics import BLEU, CHRF
 from .utils import generar_texto
+from .constants.prompts import buildTranslationPrompt
 
 bleu = BLEU()
 chrf = CHRF()
-
-def buildTranslationPrompt(text, target_lang, source_lang):
-    """
-    Devuelve un prompt en el idioma adecuado según source_lang,
-    usando nombres de idiomas adaptados a cada lengua.
-    """
-
-    # Diccionario de nombres de idiomas por idioma origen
-    LANG_NAMES = {
-        "es": {"es": "español", "fr": "francés", "en": "inglés", "gl": "gallego", "ast": "asturiano", "aran": "aranés", "pt": "portugués", "it": "italiano", "de": "alemán"},
-        "fr": {"es": "espagnol", "fr": "français", "en": "anglais", "gl": "galicien", "ast": "asturien", "aran": "aranés", "pt": "portugais", "it": "italien", "de": "allemand"},
-        "en": {"es": "spanish", "fr": "french", "en": "english", "gl": "galician", "ast": "asturian", "aran": "aranese", "pt": "portuguese", "it": "italian", "de": "german"},
-        "gl": {"es": "español", "fr": "francés", "en": "inglés", "gl": "galego", "ast": "asturiano", "aran": "aranés", "pt": "portugués", "it": "italiano", "de": "alemán"},
-        "ast": {"es": "español", "fr": "francés", "en": "inglés", "gl": "gallego", "ast": "asturiano", "aran": "aranés", "pt": "portugués", "it": "italiano", "de": "alemán"},
-        "aran": {"es": "espanhòu", "fr": "francés", "en": "anglés", "gl": "galèc", "ast": "asturianu", "aran": "aranés", "pt": "portugués", "it": "italian", "de": "alemand"}
-    }
-
-    if source_lang not in LANG_NAMES:
-        raise ValueError(f"Idioma no soportado: {source_lang}. Elija uno de [{LANG_NAMES.keys()}]")
-
-    if target_lang not in LANG_NAMES[source_lang]:
-        raise ValueError(f"Idioma destino non reconocido: {target_lang}. Elija uno de [{LANG_NAMES.keys()}]")
-
-    # Nombre del idioma destino adaptado al idioma origen
-    target_name = LANG_NAMES[source_lang][target_lang]
-
-    prompts = {
-        "es": (
-            f"Traduce al {target_name} el siguiente texto y responde únicamente con la frase traducida, sin añadir nada más:\n\n{text}\n\nTraducción:"
-        ),
-
-        "fr": (
-            f"Traduisez en {target_name} le texte suivant et répondez uniquement avec la phrase traduite, sans rien ajouter:\n\n{text}\n\nTraduction:"
-        ),
-
-        "ast": (
-            f"Traduce al {target_name} esti testu y respuende namás cola frase traducida, ensin amestar nada más:\n\n{text}\n\nTraducción:"
-        ),
-
-        "aran": (
-            f"Tradusís eth tèxte seguent ara lengua {target_name} e respòn sonque damb era frasa tradusida, sense híger cap aute tèxte:\n\n{text}\n\nTraduccion:"
-        ),
-
-        "gl": (
-            f"Traduce ao {target_name} o seguinte texto e responde unicamente coa frase traducida, sen engadir nada máis:\n\n{text}\n\nTradución:"
-        )
-    }
-
-    return prompts[source_lang]
 
 
 def translate(model, tokenizer, text, target_lang, source_lang, device="cuda", max_new_tokens=128, kaggle=False):

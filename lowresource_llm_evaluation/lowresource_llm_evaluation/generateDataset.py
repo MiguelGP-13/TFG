@@ -4,6 +4,7 @@ import time
 import pandas as pd
 from groq import Groq
 from .LanguageDatasets import LanguageDataset
+from .constants.prompts import GenerateInstructivePrompts
 
 def quitarYaAnotadas(dataset: LanguageDataset, anotadas: pd.DataFrame):
     ya = set(anotadas["original"].astype(str))
@@ -164,93 +165,6 @@ def generateDatasetHuecos(
 
     return df
 
-
-TEMPLATES = {
-    "asturiano": [
-        # ——— ALARGAR / AMPLIAR ———
-        "Amplía esti testu añadiendo detalles, exemplos y esplicaciones:",
-        "Desarrolla esti conteníu con una versión más llarga y completa:",
-        "Esplica esti testu con más fondura y razonamientu:",
-        "Amplía esti fragmentu como si fuera pa un adultu interesáu nel tema:",
-        "Da una interpretación detallada y razonada d'esti conteníu:",
-        "Crea una versión más estensa d'esti testu, añadiendo matices:",
-        "Inventa un cuentu más llargu inspiráu nesti fragmentu:",
-        "Crea un diálogu más desarrolláu basáu nesti conteníu:",
-        "Da exemplos prácticos y amplía la información d'esti testu:",
-        "Elabora una esplicación más completa d'esti conteníu:",
-
-        # ——— VARIEDAD / REFORMULAR ———
-        "Reformula esti testu con otres pallabres:",
-        "Resume esti testu n'asturiano:",
-        "Cambia esti testu a un tonu más formal:",
-        "Cambia esti testu a un tonu más informal:"
-    ],
-
-    "gallego": [
-        # ——— ALARGAR / AMPLIAR ———
-        "Amplía este texto engadindo detalles, exemplos e explicacións:",
-        "Desenvolve este contido cunha versión máis longa e completa:",
-        "Explica este texto con máis profundidade e razoamento:",
-        "Amplía este fragmento como se fose para un adulto interesado no tema:",
-        "Dá unha interpretación detallada e razoada deste contido:",
-        "Crea unha versión máis extensa deste texto, engadindo matices:",
-        "Inventa un conto máis longo inspirado neste fragmento:",
-        "Crea un diálogo máis desenvolvido baseado neste contido:",
-        "Dá exemplos prácticos e amplía a información deste texto:",
-        "Elabora unha explicación máis completa deste contido:",
-
-        # ——— VARIEDAD / REFORMULAR ———
-        "Reformula este texto con outras palabras:",
-        "Resume este texto en galego:",
-        "Cambia este texto a un ton máis formal:",
-        "Cambia este texto a un ton máis informal:"
-    ],
-
-    "aranes": [
-        # ——— ALARGAR / AMPLIAR ———
-        "Amplie aguest tèxte en tot includir detalhs, exemples e explicacions:",
-        "Desvolòpe aguest contengut damb ua version mès longa e completa:",
-        "Explique aguest tèxte damb mès prigondor e rasonament:",
-        "Amplie aguest fragment coma entà un adult interessat en eth tèma:",
-        "Done ua interpretacion detalhada e rasonada d'aguest contengut:",
-        "Cree ua version mès estensa d'aguest tèxte, includint matices:",
-        "Invente un raconte mès long inspirat en aguest fragment:",
-        "Cree un dialòg mès desvolopat basat en aguest contengut:",
-        "Done exemples practics e amplie era informacion d'aguest tèxte:",
-        "Elabòre ua explicacion mès completa d'aguest contengut:",
-
-        # ——— VARIEDAD / REFORMULAR ———
-        "Reformule aguest tèxte damb d'autes paraules:",
-        "Resumís aguest tèxte en aranés:",
-        "Càmbia aguest tèxte a un ton mès formau:",
-        "Càmbia aguest tèxte a un ton mès informau:"
-    ]
-}
-
-QA_TEMPLATES = {
-    "asturiano": [
-        "Inventa una pregunta razonable n'asturiano sobre esti testu y da una respuesta clara.",
-        "Crea una pregunta útil basada nesti conteníu y da una respuesta completa.",
-        "Xenera una pregunta de comprensión lectora y respóndela con detalle.",
-        "Inventa una pregunta sencilla sobre esti fragmentu y da una respuesta curtia pero natural.",
-        "Crea una pregunta abierta inspirada nesti testu y da una respuesta razonada."
-    ],
-    "gallego": [
-        "Inventa unha pregunta razoable en galego sobre este texto e dá unha resposta clara.",
-        "Crea unha pregunta útil baseada neste contido e ofrece unha resposta completa.",
-        "Xera unha pregunta de comprensión lectora e respóndea con detalle.",
-        "Inventa unha pregunta sinxela sobre este fragmento e dá unha resposta curta pero natural.",
-        "Crea unha pregunta aberta inspirada neste texto e dá unha resposta razoada."
-    ],
-    "aranes": [
-        "Invente ua question rasonabla en aranés sus aqueste tèxte e done ua responsa clara.",
-        "Cree ua question util basada en aguest contengut e done ua responsa completa.",
-        "Gènere ua question de compreneson deth tèxte e respòn en detalh.",
-        "Invente ua question simpla sus aguest fragment e done ua responsa braca mès naturau.",
-        "Cree ua question dubèrta inspirada en aguest tèxte e done ua responsa rasonada."
-    ]
-}
-
 def generateInstructivoDataset(
         dataset,
         api_key,
@@ -264,10 +178,10 @@ def generateInstructivoDataset(
     client = Groq(api_key=api_key)
     i= 0
     language = dataset.language
-    if language not in TEMPLATES:
+    if language not in GenerateInstructivePrompts.TEMPLATES:
         raise ValueError(f"Idioma '{language}' non soportado.")
 
-    templates = TEMPLATES[language]
+    templates = GenerateInstructivePrompts.TEMPLATES[language]
     res_list = []
 
     base_texts = random.sample(dataset.json, N) if len(dataset.json) > N else dataset.json
@@ -355,10 +269,10 @@ def generateInstructivoQADataset(
     client = Groq(api_key=api_key)
     i= 0
     language = dataset.language
-    if language not in QA_TEMPLATES:
+    if language not in GenerateInstructivePrompts.QA_TEMPLATES:
         raise ValueError(f"Idioma '{language}' non soportado.")
 
-    templates = QA_TEMPLATES[language]
+    templates = GenerateInstructivePrompts.QA_TEMPLATES[language]
     res_list = []
 
     base_texts = random.sample(dataset.json, N) if len(dataset.json) > N else dataset.json

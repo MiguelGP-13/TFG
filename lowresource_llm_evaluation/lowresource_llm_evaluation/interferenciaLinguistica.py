@@ -2,6 +2,7 @@ import re
 from collections import Counter
 import math
 from .utils import generar_texto
+from .constants.prompts import buildStoryPrompt
 
 def loadLexicon(file_path):
     with open(file_path, "r", encoding="utf8") as f:
@@ -65,37 +66,6 @@ def normalize(x, min_val, max_val):
     if max_val == min_val:
         return 0.0
     return (x - min_val) / (max_val - min_val)
-
-
-def buildStoryPrompt(lang):
-    prompts = {
-        "es": (
-            "Eres un modelo que solo puede hablar en español. "
-            "Genera una historia original, coherente, completa y corta en español. "
-            "No utilices ningún otro idioma.\nHistoria:"
-        ),
-        "ast": (
-            "Tu yes un modelu que namás pue falar n'asturianu. "
-            "Xenera una hestoria orixinal, coherente, completa y curtia n'asturianu. "
-            "Nun uses nengún otru idioma.\nHestoria:"
-        ),
-        "gl": (
-            "Es un modelo que só pode falar en galego. "
-            "Xera unha historia orixinal, coherente, completa e curta en galego. "
-            "Non empregues ningún outro idioma.\nHistoria:"
-        ),
-        "aran": (
-            "Es un modèl que pòt parlar sonque en aranés. "
-            "Genèra ua istòria originau, coerenta, completa e braca en aranés. "
-            "Non emplegues cap d’auti idiòmas.\nIstòria:"
-        ),
-        "fr": (
-            "Tu es un modèle qui ne peut parler qu’en français. "
-            "Génère une histoire originale, cohérente, complète et courte en français. "
-            "N’utilise aucune autre langue.\nHistoire:"
-        ),
-    }
-    return prompts[lang]
 
 
 def calidadLengua(
