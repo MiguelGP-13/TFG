@@ -1,0 +1,145 @@
+\section{Gallego QLoRA}
+
+\subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Calidad Lengua (Gallego QLoRA).}
+\label{tab:metricas_calidad_lengua_Gallego QLoRA}
+\endlastfoot
+ttr & 0.48 & \textbf{\underline{0.80}} \\
+entropy & \textbf{\underline{6.72}} & 4.53 \\
+ngram\_overlap & 0.00 & 0.00 \\
+freq\_target & 0.85 & \textbf{\underline{0.99}} \\
+freq\_comparison\_es & 0.68 & 0.68 \\
+freq\_comparison\_fr & 0.33 & \textbf{\underline{0.35}} \\
+calidad & 0.29 & \textbf{\underline{0.45}} \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+
+\paragraph{Base}~\\
+\textbf{text:} Na pequena aldea de Cambados, hai un xaleiro chamado Pipo que é famoso polo seu poboalón. Cada día, moitos habitantes da aldea van a pedirlle que  [...] historia original sobre a aprendizaxe e a transmisión da arte do xaleo en Cambados, unha aldea galega. Espero que gostes desta historia en galego.\\
+\textbf{ttr:} 0.5047923322683706\\
+\textbf{entropy:} 6.70327761683191\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.8466453674121406\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5846645367412141, \textquotesingle{}fr\textquotesingle{}: 0.33226837060702874\}
+
+\paragraph{Entrenado}~\\
+\textbf{text:} A historia debe ser orixinal e coherente, con personaxes, situacións e acontecementos reais, e con elementos de humor.\\
+\textbf{ttr:} 0.8333333333333334\\
+\textbf{entropy:} 3.794653473544342\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 1.0\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.7222222222222222, \textquotesingle{}fr\textquotesingle{}: 0.2777777777777778\}
+
+\subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Traduccion (Gallego QLoRA).}
+\label{tab:metricas_traduccion_Gallego QLoRA}
+\endlastfoot
+BLEU & 23.75 & \textbf{\underline{32.75}} \\
+chrF & \textbf{\underline{51.92}} & 51.50 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{source:} Aquel pronto se convirtió en un movimiento de desobediencia civil que cambió las leyes. \\
+\textbf{reference:} Aquela arroutada converteuse nun movemento de disobediencia civil que cambiou as leis. 
+
+\paragraph{Base}~\\
+\textbf{translated:} Ese pronto se convirxe en un movimento de desobediencia cívica que mudou as leis. A
+
+\paragraph{Entrenado}~\\
+\textbf{translated:} 
+
+\subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Round Trip (Gallego QLoRA).}
+\label{tab:metricas_round_trip_Gallego QLoRA}
+\endlastfoot
+BLEU & 17.55 & \textbf{\underline{48.94}} \\
+chrF & 41.70 & \textbf{\underline{50.43}} \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} Aínda que o inverno foi rigoroso, as flores xurdiron a moreas na primavera, tapizando os campos cun colorido que semellaba unha compensación da natureza. 
+
+\paragraph{Base}~\\
+\textbf{intermediate:} Aunque el invierno fue riguroso, las flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parec [...] flores comenzaron a brotar en multitudes durante la primavera, cubriendo los campos con un colorido que parecía una compensación de la naturaleza.\\
+\textbf{translated:} Aunque o inverno foi rígruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha c [...] ruoso, as flores comezaron a brotar en multitudes durante a primaver, cubrindo os campos co un colorido que parecía unha compensación da natureza.
+
+\paragraph{Entrenado}~\\
+\textbf{intermediate:} \\
+\textbf{translated:} 
+
+\subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Vocabulario (Gallego QLoRA).}
+\label{tab:metricas_vocabulario_Gallego QLoRA}
+\endlastfoot
+accuracy & \textbf{\underline{0.09}} & 0.03 \\
+accuracy\_lower & \textbf{\underline{0.10}} & 0.03 \\
+levenshtein & \textbf{\underline{4.93}} & 5.50 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{masked\_sentence:} A miña avoa {\textless}mask{\textgreater} onte, mais deixounos cheos de lembranzas fermosas.\\
+\textbf{missing\_word:} espichou
+
+\paragraph{Base}~\\
+\textbf{predicted:} foi
+
+\paragraph{Entrenado}~\\
+\textbf{predicted:} 
+
+\subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
+\begin{longtable}[]{@{}lll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Ortografia (Gallego QLoRA).}
+\label{tab:metricas_ortografia_Gallego QLoRA}
+\endlastfoot
+BLEU & 51.70 & \textbf{\underline{61.28}} \\
+chrF & 79.71 & \textbf{\underline{80.51}} \\
+Levenshtein & \textbf{\underline{13.99}} & 16.99 \\
+precision & 0.24 & \textbf{\underline{0.34}} \\
+recall & 0.62 & \textbf{\underline{0.64}} \\
+F1 & 0.28 & \textbf{\underline{0.35}} \\
+errores\_totales & 2.00 & 2.00 \\
+errores\_corregidos & 0.93 & \textbf{\underline{1.02}} \\
+errores\_no\_corregidos & 1.07 & \textbf{\underline{0.98}} \\
+errores\_nuevos & 2.88 & \textbf{\underline{1.88}} \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{original:} A súa última palabra foi non , así que morra o conto.\\
+\textbf{incorrect:} A {\textless}err t=ort{\textgreater}sua{\textless}/err{\textgreater} última palabra foi non , {\textless}err t=add{\textgreater}muy {\textless}/err{\textgreater}{\textless}err t=reord{\textgreater}morra o conto así que{\textless}/err{\textgreater}.
+
+\paragraph{Base}~\\
+\textbf{corrected:} A su última palabra foi non, moi morra o conto así que
+
+\paragraph{Entrenado}~\\
+\textbf{corrected:} A súa última palabra foi non, moito morra o conto así que

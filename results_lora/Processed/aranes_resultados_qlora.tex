@@ -1,0 +1,166 @@
+\section{Aranés QLoRA}
+
+\subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Entrenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Calidad Lengua (Aranés QLoRA).}
+\label{tab:metricas_calidad_lengua_Aranés QLoRA}
+\endlastfoot
+ttr & 0.42 & \textbf{\underline{0.82}} & 0.67 \\
+entropy & \textbf{\underline{6.35}} & 5.08 & 5.12 \\
+ngram\_overlap & \textbf{\underline{0.00}} & \textbf{\underline{0.00}} & 0.01 \\
+freq\_target & 0.46 & 0.68 & \textbf{\underline{0.72}} \\
+freq\_comparison\_es & 0.51 & 0.49 & \textbf{\underline{0.58}} \\
+freq\_comparison\_fr & 0.30 & 0.30 & \textbf{\underline{0.37}} \\
+calidad & 0.15 & \textbf{\underline{0.40}} & 0.35 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+
+\paragraph{Base}~\\
+\textbf{text:} Unamunia, un gran filòsof de l\textquotesingle{}Arany, era nascuda en una famillia modesta de la vila de Llauró. Des del seu temps d\textquotesingle{}enfant, mostrava un gran inter [...] tència humana. Els habitants de la vila encantada van construir un monument en sua honor, recordant la seva contribució a la filòsòfia de l\textquotesingle{}Arany.\\
+\textbf{ttr:} 0.4496124031007752\\
+\textbf{entropy:} 6.187408162133985\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5271317829457365\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5736434108527132, \textquotesingle{}fr\textquotesingle{}: 0.41472868217054265\}
+
+\paragraph{Entrenado}~\\
+\textbf{text:} Dona es una istòria - un contat originau en aranés. Deu estar creat per tu. Non copiaja cap\textquotesingle{} d’auti contats. Dona exemples de viatges, de mondes, de causas imaginàrias... Aquò qu\textquotesingle{}arribes en un endret n’ei important. Non cau escotar los parents!\\
+\textbf{ttr:} 0.8604651162790697\\
+\textbf{entropy:} 5.12963946395411\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5348837209302325\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5581395348837209, \textquotesingle{}fr\textquotesingle{}: 0.3953488372093023\}
+
+\paragraph{Entrenado + Inst}~\\
+\textbf{text:} En un moment o l’aute de la tèrra, deu temps deu rèi Jaume I, lo gran, rei de França, venguí a Pirenèus e percaçaré a totos los rebèls e saunaires.\\
+\textbf{ttr:} 0.8709677419354839\\
+\textbf{entropy:} 4.696131794257844\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.6129032258064516\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.4838709677419355, \textquotesingle{}fr\textquotesingle{}: 0.3225806451612903\}
+
+\subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Entrenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Traduccion (Aranés QLoRA).}
+\label{tab:metricas_traduccion_Aranés QLoRA}
+\endlastfoot
+BLEU & 4.10 & 6.66 & \textbf{\underline{7.25}} \\
+chrF & 16.86 & 20.33 & \textbf{\underline{21.23}} \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{source:} suprime la actividad enzimática?\\
+\textbf{reference:} Elègi de l’ensenhament actiu?
+
+\paragraph{Base}~\\
+\textbf{translated:} "Suprimi a actividá enzimática?"
+
+\paragraph{Entrenado}~\\
+\textbf{translated:} "Assegure l\textquotesingle{}activitat enzimatica pas
+
+\paragraph{Entrenado + Inst}~\\
+\textbf{translated:} "ask if the enzymatic activity is suppressed?"
+
+\subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Entrenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Round Trip (Aranés QLoRA).}
+\label{tab:metricas_round_trip_Aranés QLoRA}
+\endlastfoot
+BLEU & 4.53 & 8.63 & \textbf{\underline{10.05}} \\
+chrF & 20.23 & \textbf{\underline{28.39}} & 27.66 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} Voliáu tornar au negre e blanc per marcar l’elegància d’aqueste
+
+\paragraph{Base}~\\
+\textbf{intermediate:} La traducción se ha adaptado ligeramente para que sea más natural en español. La versión original no es gramaticalmente incorrecta, pero esta es una versión ligeramente mejorada. Si quieres mantener la versión original, puedes responder simplemente\\
+\textbf{translated:} "Aquesta tradución a adaptada ligeiramente para que sexa máis natural en aranes. A versión orixinal non é gramaticalmente incorrecta, pero esta é  [...] anes. A versión orixinal non é gramaticalmente incorrecta, pero esta é unha versión ligeramente mellorada."   Pero dado que has pedido traducir al
+
+\paragraph{Entrenado}~\\
+\textbf{intermediate:} "I voldriái retourner au noir e au blanc per marcar l\textquotesingle{}elegància d\textquotesingle{}aqueste\\
+\textbf{translated:} "Voldriái qu\textquotesingle{}il retornet a l\textquotesingle{}obscuritat e al blancoquèr per marcar l\textquotesingle{}elegància èste
+
+\paragraph{Entrenado + Inst}~\\
+\textbf{intermediate:} "I voldriái tornar a noirce e blanc per marquer l\textquotesingle{}elegància d\textquotesingle{}aqueste\\
+\textbf{translated:} "Parierais a nèu e blanc per marcar l\textquotesingle{}elegància d\textquotesingle{}aqueste
+
+\subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Entrenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Vocabulario (Aranés QLoRA).}
+\label{tab:metricas_vocabulario_Aranés QLoRA}
+\endlastfoot
+accuracy & 0.00 & 0.00 & 0.00 \\
+accuracy\_lower & \textbf{\underline{0.02}} & 0.00 & 0.00 \\
+levenshtein & 16.85 & 9.38 & \textbf{\underline{6.18}} \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{masked\_sentence:} Que {\textless}mask{\textgreater} me mingi ara gent.\\
+\textbf{missing\_word:} non
+
+\paragraph{Base}~\\
+\textbf{predicted:} montanha
+
+\paragraph{Entrenado}~\\
+\textbf{predicted:} amassa
+
+\paragraph{Entrenado + Inst}~\\
+\textbf{predicted:} quela
+
+\subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
+\begin{longtable}[]{@{}llll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Entrenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Ortografia (Aranés QLoRA).}
+\label{tab:metricas_ortografia_Aranés QLoRA}
+\endlastfoot
+BLEU & \textbf{\underline{44.26}} & 18.90 & 22.36 \\
+chrF & \textbf{\underline{73.94}} & 50.54 & 57.84 \\
+Levenshtein & \textbf{\underline{21.20}} & 66.95 & 44.35 \\
+precision & 0.13 & 0.15 & \textbf{\underline{0.16}} \\
+recall & 0.48 & \textbf{\underline{0.87}} & 0.83 \\
+F1 & 0.14 & 0.23 & \textbf{\underline{0.24}} \\
+errores\_totales & 1.93 & 1.93 & 1.93 \\
+errores\_corregidos & 0.58 & \textbf{\underline{1.61}} & 1.51 \\
+errores\_no\_corregidos & 1.35 & \textbf{\underline{0.32}} & 0.42 \\
+errores\_nuevos & \textbf{\underline{4.53}} & 10.38 & 9.11 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{original:} - Bruishes, , anèc un pintor dera dusau generacion des primitius flamencs actiu a Bruishes des de .\\
+\textbf{incorrect:} - Bruishes, , anèc un pintor dera dusau {\textless}err t=ort{\textgreater}generacón{\textless}/err{\textgreater} des primitius flamencs actiu a Bruishes des de .
+
+\paragraph{Base}~\\
+\textbf{corrected:} "Bruishes, anèc un pintor dera dusau generacón des primitius flamencs actiu a Bruishes des de
+
+\paragraph{Entrenado}~\\
+\textbf{corrected:} Bruishes, qu\textquotesingle{}èra un dels prumèrs endrets de marmòr d\textquotesingle{}Aran a on s\textquotesingle{}apericia estil florit , se trobèc ath fin de
+
+\paragraph{Entrenado + Inst}~\\
+\textbf{corrected:} Bruishes, que disposava d\textquotesingle{}un important creament artesan en sòn pòble, anèc un pintor dera dusau generacion de los primitivos flamenques actuaus a Bruishes en

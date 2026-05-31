@@ -1,0 +1,187 @@
+\section{Asturiano QLoRA}
+
+\subsection{Tarea: CALIDAD\_LENGUA}\label{tarea-calidad_lengua}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Concatenado & Concatenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Calidad Lengua (Asturiano QLoRA).}
+\label{tab:metricas_calidad_lengua_Asturiano QLoRA}
+\endlastfoot
+ttr & 0.43 & 0.53 & 0.56 & \textbf{\underline{0.58}} \\
+entropy & \textbf{\underline{5.90}} & 2.47 & 3.79 & 4.40 \\
+ngram\_overlap & \textbf{\underline{0.00}} & 0.01 & 0.03 & 0.01 \\
+freq\_target & 0.60 & 0.54 & 0.74 & \textbf{\underline{0.77}} \\
+freq\_comparison\_fr & \textbf{\underline{0.43}} & 0.16 & 0.31 & 0.34 \\
+freq\_comparison\_es & \textbf{\underline{0.92}} & 0.39 & 0.52 & 0.60 \\
+calidad & 0.14 & 0.23 & 0.20 & \textbf{\underline{0.26}} \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+
+\paragraph{Base}~\\
+\textbf{text:} En un villu del Asturies, hai un muchacho chamado Eneko. Eneko ama la montaña y pasa tolos veranos subiendu a la cumbre a veure los paisajes e res [...] tor de la naturaleza y una guía famosa entre los amantes de la montaña, todo gracias a la ayuda de María e a la Flor de la Montaña que tanto aman.\\
+\textbf{ttr:} 0.5125448028673835\\
+\textbf{entropy:} 6.462956732217847\\
+\textbf{ngram\_overlap:} 0.0\\
+\textbf{freq\_target:} 0.5698924731182796\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.910394265232975, \textquotesingle{}fr\textquotesingle{}: 0.3942652329749104\}
+
+\paragraph{Entrenado}~\\
+\textbf{text:} Un día, nel campu, un caballu llamáu Lirón yera lliberáu de les sos cadenes por un valiente caballeru.\\
+\textbf{ttr:} 0.8888888888888888\\
+\textbf{entropy:} 3.9057645846554525\\
+\textbf{ngram\_overlap:} 0.0625\\
+\textbf{freq\_target:} 0.9444444444444444\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5, \textquotesingle{}fr\textquotesingle{}: 0.2777777777777778\}
+
+\paragraph{Concatenado}~\\
+\textbf{text:} El xuegu foi llanzáu en xunu de pa PlayStation, PlayStation , Xbox y PC. Hestoria: El xuegu foi llanzáu en xunu de pa PlayStation, PlayStation , Xbox y PC.\\
+\textbf{ttr:} 0.48148148148148145\\
+\textbf{entropy:} 3.6437763910523575\\
+\textbf{ngram\_overlap:} 0.07142857142857142\\
+\textbf{freq\_target:} 0.7037037037037037\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.2962962962962963, \textquotesingle{}fr\textquotesingle{}: 0.2962962962962963\}
+
+\paragraph{Concatenado + Inst}~\\
+\textbf{text:} El conceyu de Villaviciosa de la Serena, na provincia d\textquotesingle{}Ávila, foi fundáu nel añu pol rei Alfonsu X el Sabiu, siendo la so capital\textquotesingle{}l conceyu de Vi [...]  Villaviciosa de la Serena, na provincia de Ávila, foi fundáu nel añu pol rei Alfonsu X el Sabiu, siendo la so capital el conceyu de Villaviciosa.\\
+\textbf{ttr:} 0.4067796610169492\\
+\textbf{entropy:} 4.403640931923872\\
+\textbf{ngram\_overlap:} 0.029411764705882353\\
+\textbf{freq\_target:} 0.7457627118644068\\
+\textbf{freq\_comparison:} \{\textquotesingle{}es\textquotesingle{}: 0.5254237288135594, \textquotesingle{}fr\textquotesingle{}: 0.3050847457627119\}
+
+\subsection{Tarea: TRADUCCION}\label{tarea-traduccion}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Concatenado & Concatenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Traduccion (Asturiano QLoRA).}
+\label{tab:metricas_traduccion_Asturiano QLoRA}
+\endlastfoot
+BLEU & 4.89 & 6.63 & 1.92 & \textbf{\underline{10.94}} \\
+chrF & \textbf{\underline{25.35}} & 17.68 & 11.65 & 25.29 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{source:} Faltan pocos días para el comienzo de las clases en los colegios de Primaria.\\
+\textbf{reference:} Falten pocos díes pal empiezu de les clases nes escueles de Primaria.
+
+\paragraph{Base}~\\
+\textbf{translated:} Falta poucas dazas pa l\textquotesingle{}incipiu das clases nos coellos de Primaria.
+
+\paragraph{Entrenado}~\\
+\textbf{translated:} Faltaben pocos díes pa l\textquotesingle{}arrancu de les clases nel Colexos de Primaria.
+
+\paragraph{Concatenado}~\\
+\textbf{translated:} El rei ye\textquotesingle{}l más fuerte y llibre de tolos dioses, porque ye unu solu, y tamién el más sabiu y poderosu.
+
+\paragraph{Concatenado + Inst}~\\
+\textbf{translated:} Faltan pocos díes pa que se comiencen les clases nes escueles de Primaria.
+
+\subsection{Tarea: ROUND\_TRIP}\label{tarea-round_trip}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Concatenado & Concatenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Round Trip (Asturiano QLoRA).}
+\label{tab:metricas_round_trip_Asturiano QLoRA}
+\endlastfoot
+BLEU & 13.65 & \textbf{\underline{26.17}} & 1.58 & 16.57 \\
+chrF & \textbf{\underline{44.16}} & 37.73 & 10.07 & 27.66 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{intermediate\_language:} es\\
+\textbf{source:} El xuegu Nanobreaker de Konami tien una secuencia d\textquotesingle{}apertura na que les nanomáquinas amenorguen tolos organismos vivientes nuna islla a plaga gris.
+
+\paragraph{Base}~\\
+\textbf{intermediate:} El juego Nanobreaker de Konami tiene una secuencia de apertura en la que las nanomáquinas reduzcan a todos los organismos vivientes en una isla a una plaga gris.\\
+\textbf{translated:} Nanobreaker d Konami tien unha secuencia de abertura na que as nanomáquinas reducían a todos os organismos viventes nunha ilha a unha plaga grise.
+
+\paragraph{Entrenado}~\\
+\textbf{intermediate:} El xuegu Nanobreaker de Konami tiene una secuencia d\textquotesingle{}apertura na que les nanomáquines amenorguen a plaga gris tolos organismos vivientes nuna islla.\\
+\textbf{translated:} 
+
+\paragraph{Concatenado}~\\
+\textbf{intermediate:} El so vientu ye\textquotesingle{}l vientu del Norte.\\
+\textbf{translated:} El so vientu ye\textquotesingle{}l vientu del Norte.
+
+\paragraph{Concatenado + Inst}~\\
+\textbf{intermediate:} La llei del xuegu ye que si nun tienes un llugar nel que poder caltenese, te vayáu.\\
+\textbf{translated:} La llei del xuegu ye que si nun tienes un llugar nel que poder caltenese, te vayáu.
+
+\subsection{Tarea: VOCABULARIO}\label{tarea-vocabulario}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Concatenado & Concatenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Vocabulario (Asturiano QLoRA).}
+\label{tab:metricas_vocabulario_Asturiano QLoRA}
+\endlastfoot
+accuracy & \textbf{\underline{0.02}} & 0.00 & 0.00 & 0.00 \\
+accuracy\_lower & \textbf{\underline{0.02}} & 0.00 & 0.00 & 0.00 \\
+levenshtein & 7.98 & 5.10 & \textbf{\underline{5.03}} & 11.72 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{masked\_sentence:} È d\textquotesingle{}èster aquiu entà {\textless}mask{\textgreater} es tonos de gris.\\
+\textbf{missing\_word:} ensenhar-te
+
+\paragraph{Base}~\\
+\textbf{predicted:} a
+
+\paragraph{Entrenado}~\\
+\textbf{predicted:} 
+
+\paragraph{Concatenado}~\\
+\textbf{predicted:} El
+
+\paragraph{Concatenado + Inst}~\\
+\textbf{predicted:} La
+
+\subsection{Tarea: ORTOGRAFIA}\label{tarea-ortografia}
+\begin{longtable}[]{@{}lllll@{}}
+\toprule\noalign{}
+Métrica & Base & Entrenado & Concatenado & Concatenado + Inst \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\caption{Métricas de rendimiento para la tarea Ortografia (Asturiano QLoRA).}
+\label{tab:metricas_ortografia_Asturiano QLoRA}
+\endlastfoot
+BLEU & 54.78 & \textbf{\underline{65.76}} & 1.91 & 1.94 \\
+chrF & 81.51 & \textbf{\underline{86.29}} & 13.09 & 12.67 \\
+Levenshtein & 19.92 & \textbf{\underline{16.87}} & 147.93 & 140.09 \\
+precision & 0.13 & \textbf{\underline{0.25}} & 0.13 & 0.14 \\
+recall & 0.44 & 0.58 & 0.97 & \textbf{\underline{0.98}} \\
+F1 & 0.15 & \textbf{\underline{0.27}} & 0.22 & 0.23 \\
+errores\_totales & 2.03 & 2.03 & 2.03 & 2.03 \\
+errores\_corregidos & 0.60 & 0.95 & 1.96 & \textbf{\underline{2.00}} \\
+errores\_no\_corregidos & 1.43 & 1.08 & 0.07 & \textbf{\underline{0.03}} \\
+errores\_nuevos & 4.81 & \textbf{\underline{3.13}} & 14.66 & 13.44 \\
+\end{longtable}
+
+\subsubsection{Ejemplo:}
+\textbf{original:} El so tamañu ye variable.\\
+\textbf{incorrect:} El so {\textless}err t=ort{\textgreater}tamanyu{\textless}/err{\textgreater} ye variable.
+
+\paragraph{Base}~\\
+\textbf{corrected:} El sú tamanyu ye variable
+
+\paragraph{Entrenado}~\\
+\textbf{corrected:} El so tamañu ye variable
+
+\paragraph{Concatenado}~\\
+\textbf{corrected:} El so nome ye\textquotesingle{}l de la ciudá onde s\textquotesingle{}atopa, y non del país nel que ta asitiáu
+
+\paragraph{Concatenado + Inst}~\\
+\textbf{corrected:} Corriu, correión
