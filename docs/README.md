@@ -8,12 +8,12 @@ TFG about LLM and minoritary spanish languages
 
 ## Pasos a realizar
 ### Preparar para entregar
+- [ ] Comprobar que no se usa 1 persona en el 6
 - [ ] Leerse la memoria completa para buscar errores y comprobar que está todo bien
-- [ ] Limpiar el código (debug en init, read_local_file en LanguageDataset, las funciones de generardatasets)
+- [ ] Limpiar el código (debug en init, read_local_file en LanguageDataset, las funciones de generardatasets, funciones de exploreResults)
 - [ ] Comprobar que el código está bien todo, también notebooks
 - [ ] Subir modelos, datasets y código a hf, pip...
 - [ ] Subir memoria a GitHub, en latex y pdf
-- [ ] Comprobar que no se usa 1 persona en el 6
 ### Memoria
 - [x] Cambiar color de descripciones en gráfico
 - [x] Como se genera, limpian los datos en 4.2 Materiales
@@ -30,18 +30,19 @@ TFG about LLM and minoritary spanish languages
 - [ ] Añadir estadísticas de datasets elegidos y generados
 - [ ] Explicar sobre losses de los entrenamientos en 6.3
 - [ ] Terminar de escribir pruebas realizadas.
-- [ ] Comentar en el 6.3 los test realizados con asturiano y entrenar igual con gallego y aranes, sacar resultados y ponerlos
+- [x] Comentar en el 6.3 los test realizados con asturiano y entrenar igual con gallego y aranes, sacar resultados y ponerlos
 - [ ] Revisar 6.2 y 6.3
 - [ ] Continuar con 6.3
-- [ ] Escribir 7.2 y 7.3
+- [ ] Eliminar 7.2 y 7.3
 - [x] Comentar pad token
 - [x] Explicar bien a que capas vamos a aplicarlo
 - [x] Contar primer entrenamiento que devolvía siempre EOS al principio
 - [x] Poner que vamos a reocrtar en el percentil 95, para evitar tanto EOS
-- [ ] Comentar los resultados
-- [ ] Reducir entonces resultados no interesantes
-- [ ] Conclusiones y Future Work
-- [ ] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
+- [x] Comentar los resultados base
+- [x] Reducir entonces resultados no interesantes
+- [x] Conclusiones y Future Work
+L Revisar Conclusiones
+- [x] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
 
 ### Datos
 - [x] Crear dataset para Gallego, Asturiano y  Aranés/Occitano \[Train\]
@@ -63,6 +64,6 @@ TFG about LLM and minoritary spanish languages
 - [x] Evaluar los modelos base Asturiano
 - [x] Evaluar los modelos base Gallego
 - [x] Evaluar los modelos base Aranés
-- [ ] Evaluar resultados QLoRA Asturiano
-- [ ] Evaluar resultados QLoRA Gallego
-- [ ] Evaluar resultados QLoRA Aranés
+- [x] Evaluar resultados QLoRA Asturiano
+- [x] Evaluar resultados QLoRA Gallego
+- [x] Evaluar resultados QLoRA Aranés
