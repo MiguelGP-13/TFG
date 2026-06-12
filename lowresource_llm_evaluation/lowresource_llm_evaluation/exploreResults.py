@@ -3,7 +3,8 @@ import html
 import re
 from pathlib import Path
 import pandas as pd
-from .constants import colours as c
+from .constants.aesthetics import colores as c
+from .constants.aesthetics import SEABORN, PLOTLY
 
 # --- HELPERS DE TEXTO Y COLORES (TERMINAL) ---
 
@@ -440,7 +441,7 @@ def merge_latex_files(input_paths, output_path, chapter_title="Resumen General")
 # --- MÓDULO DE GRAFICACIÓN (DATA VISUALIZATION) ---
 
 def generar_grafico_barras(datos_globales, extractor, titulo="Comparativa", ylabel="Valor", 
-                           ylim=None, idiomas_orden=None, output_path=None, motor="sns"):
+                           ylim=None, idiomas_orden=None, output_path=None, motor=SEABORN):
     """
     Genera un gráfico de barras comparativo agrupado por modelos, procesando los datos 
     de manera uniforme y permitiendo salidas estáticas (Seaborn) o dinámicas (Plotly).
@@ -491,7 +492,7 @@ def generar_grafico_barras(datos_globales, extractor, titulo="Comparativa", ylab
     colores_sns_muted = ["#4878d0", "#ee854a", "#6acc64", "#d55e00", "#82169b", "#ccb974"]
     color_map = {modelo: colores_sns_muted[i % len(colores_sns_muted)] for i, modelo in enumerate(modelos)}
 
-    if motor.lower() == "sns":
+    if motor.lower() == SEABORN:
         import matplotlib.pyplot as plt
         import seaborn as sns
         sns.set_theme(style="whitegrid")
@@ -507,7 +508,7 @@ def generar_grafico_barras(datos_globales, extractor, titulo="Comparativa", ylab
         plt.show()
         plt.close()
 
-    elif motor.lower() == "plotly":
+    elif motor.lower() == PLOTLY:
         import plotly.graph_objects as go
         fig = go.Figure()
         for modelo in modelos:

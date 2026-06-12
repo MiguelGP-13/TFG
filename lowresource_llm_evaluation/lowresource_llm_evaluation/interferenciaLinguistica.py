@@ -130,7 +130,6 @@ def calidadLengua(
         "entropy": entropy_score,
         "ngram_overlap": ngram_score,
         "freq_target": freq_target,
-        "freq_comparison": freq_comparison,
-        "calidad": prob
+        "freq_comparison": freq_comparison
     }
 

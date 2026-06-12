@@ -8,7 +8,7 @@ import numpy as np
 import pandas as pd
 import time
 
-__version__ = "0.11.0.2"
+__version__ = "0.11.1"
 
 def _titulo(texto: str):
     ancho = shutil.get_terminal_size().columns
@@ -115,8 +115,7 @@ def _benchmark(
                 #     "entropy": entropy_score,
                 #     "ngram_overlap": ngram_score,
                 #     "freq_target": freq_target,
-                #     "freq_comparison": freq_comparison,
-                #     "calidad": prob
+                #     "freq_comparison": freq_comparison
                 #       }
                 calidad_raw.append(res)
         except Exception as e:
@@ -131,7 +130,6 @@ def _benchmark(
         ent_vals = [r["entropy"] for r in calidad_raw]
         ngram_vals = [r["ngram_overlap"] for r in calidad_raw]
         freq_target_vals = [r["freq_target"] for r in calidad_raw]
-        calidad_vals = [r["calidad"] for r in calidad_raw]
 
         # freq_comparison es dict por idioma
         all_langs = set()
@@ -155,8 +153,7 @@ def _benchmark(
                 "entropy": float(np.mean(ent_vals)) if ent_vals else None,
                 "ngram_overlap": float(np.mean(ngram_vals)) if ngram_vals else None,
                 "freq_target": float(np.mean(freq_target_vals)) if freq_target_vals else None,
-                "freq_comparison": freq_comp_media,
-                "calidad": float(np.mean(calidad_vals)) if calidad_vals else None,
+                "freq_comparison": freq_comp_media
             }
         }
         
