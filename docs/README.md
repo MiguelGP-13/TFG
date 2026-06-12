@@ -1,69 +1,232 @@
-# TFG
-TFG about LLM and minoritary spanish languages
+# TFG — Evaluación y Mejora de Modelos de Lenguaje en Lenguas Minoritarias
 
-## Enlaces
-[Freeling](https://github.com/TALP-UPC/FreeLing/tree/master)
-[Diagrama Limpieza](https://lucid.app/lucidchart/e8872fd3-94e5-4f96-99c3-397eefb902df/edit?view_items=U4FrEd7CHWG8%2CU4Fr2y0hQgMb%2CqaGrOuOa6h2R%2CZ~Fr3DKrELBR%2CU4FrM8M~b0xO%2CBeGrPuh-.JKh%2C1bGrU8zP9B9f%2CU4FrKWUGB.N5%2CrbGrTWlpsdON%2CCcGrdZRyF.Ug%2CJbGrR4L2g5pi%2CFeGrEE~~BHZM%2CU4Fr~Kr5BzzA%2CU4FrmymcKsFr%2CsdGryhPBCqdJ%2CEkGrVK~5b.8k%2CkiGrPXrDpMC-%2CxjGrwdmI5.DL%2CV4FruWAmYfkM%2CJ-Frbo1-ceBi%2CV4FracIGt3Hq%2CV4FrTVfRWT_R%2CV4FrLMgxxX71&page=0_0&invitationId=inv_87f05792-3574-4ccd-81cb-d6179ddb62f2)
-[Diagrama metodología](https://whimsical.com/tfg4685/Reg2dMWQGdewbjpgnDLLq8)
+Este repositorio contiene el código, experimentos, datasets y resultados del Trabajo de Fin de Grado dedicado a **evaluar y mejorar modelos de lenguaje (LLMs) en lenguas minoritarias**, con un enfoque aplicado y reproducible.  
+El proyecto combina:
 
-## Pasos a realizar
-### Preparar para entregar
-- [ ] Comprobar que no se usa 1 persona en el 6
-- [ ] Leerse la memoria completa para buscar errores y comprobar que está todo bien
-- [ ] Limpiar el código (debug en init, read_local_file en LanguageDataset, las funciones de generardatasets, funciones de exploreResults)
-- [ ] Comprobar que el código está bien todo, también notebooks
-- [ ] Subir modelos, datasets y código a hf, pip...
-- [ ] Subir memoria a GitHub, en latex y pdf
-### Memoria
-- [x] Cambiar color de descripciones en gráfico
-- [x] Como se genera, limpian los datos en 4.2 Materiales
-- [x] De donde vienen los datos en 4.2 Materiales
-- [x] Añadir pequeña explicacion de Bleue y chrF
-- [x] Citar de donde vienen los lexicon -> FreeLing
-- [x] Añadir figura en 4.2.2 (diagrama...)
-- [x] Identificar posibles soluciones (PEFT, Full fine tuning, algo más?) => explicar olvido catastrófico
-- [x] Actualizar en la memoria los modelos elegidos y por qué (después de elegir los modelos)
-- [x] Escribir resultados en memoria
-- [x] Revisar aspectos legales y eticos (8) y metodología (4.1)
-- [x] Redactar sección 1
-- [x] Explicar las capas de los LLM en el Marco teórico
-- [x] Añadir estadísticas de datasets elegidos y generados
-- [ ] Explicar sobre losses de los entrenamientos en 6.3
-- [ ] Terminar de escribir pruebas realizadas.
-- [x] Comentar en el 6.3 los test realizados con asturiano y entrenar igual con gallego y aranes, sacar resultados y ponerlos
-- [x] Revisar 6.2 y 6.3
-- [ ] Continuar con 6.3
-- [x] Eliminar 7.2 y 7.3
-- [x] Comentar pad token
-- [x] Explicar bien a que capas vamos a aplicarlo
-- [x] Contar primer entrenamiento que devolvía siempre EOS al principio
-- [x] Poner que vamos a reocrtar en el percentil 95, para evitar tanto EOS
-- [x] Comentar los resultados base
-- [x] Reducir entonces resultados no interesantes
-- [x] Conclusiones y Future Work
-L Revisar Conclusiones
-- [x] En future work, añadir que para cortar bien igual sería mejor cortar con un llm (no me da el cómputo)
+- preparación y limpieza de corpus reales  
+- generación de datasets sintéticos  
+- evaluación multicomponente de modelos  
+- análisis cuantitativo y cualitativo  
+- visualización avanzada de resultados  
+- experimentos reproducibles en notebooks  
 
-### Datos
-- [x] Crear dataset para Gallego, Asturiano y  Aranés/Occitano \[Train\]
-- [x] Crear lexicons
-- [x] Crear datasets anotados
+El objetivo es estudiar el comportamiento de modelos modernos en lenguas con pocos recursos y proponer herramientas prácticas para su mejora.
 
-### Benchmark
-- [x] Elegir métricas (Benchmark debajo) => No he encontrado papers sobre esto
-- [x] Implementar Benchmark
-- [x] Probar Benchmark con Dataset Anotado
+---
 
+## 1. Estructura del repositorio
 
-### Entrenamiento
-- [x] Elegir modelos más grandes y ver que se pueden cuantizar y cargar
-- [x] Crear esqueleto QLoRA entrenamiento
-- [x] Entrenar con QLoRA sobre el mejor 
+```
+TFG/
+│
+├── notebooks/                         # Notebooks principales del TFG
+├── 1-datasetGeneration.ipynb      # Generación de datasets (ortografía, huecos, instructivo…)
+├── 2-LLM_Evaluation.ipynb         # Evaluación de modelos base
+├── 3-Train.ipynb                  # Entrenamiento QLoRA
+├── 3.1-GenerateTrainDatasets.ipynb# Generación de datos para entrenamiento
+├── 3.2-Trained_LLM_Evaluation.ipynb
+├── 4-exploreResults.ipynb         # Análisis de resultados
+├── 5-UploadModels.ipynb           # Subida de modelos a HF
+├── Utilidades.ipynb                 # Descarga de corpus
+│
+├── lowresource_llm_evaluation/        # Paquete Python desarrollado en el TFG
+│   ├── lowresource_llm_evaluation/
+│   │   ├── LanguageDatasets.py        # Módulo central de limpieza y gestión de corpus
+│   │   ├── generateDataset.py         # Generación de datasets sintéticos
+│   │   ├── traduccion.py              # Evaluación de traducción
+│   │   ├── vocabulario.py             # Evaluación de huecos
+│   │   ├── ortografica.py             # Evaluación ortográfica
+│   │   ├── interferenciaLinguistica.py# Métricas de interferencia
+│   │   ├── exploreResults.py          # Exploración de resultados
+│   │   ├── utils.py                   # Utilidades
+│   │   └── constants/                 # Códigos de idioma, prompts, estética
+│   ├── README.md
+│   └── pyproject.toml
+│
+│
+├── results/                           # Resultados de modelos base
+│   ├── Raw/                           # JSON originales
+│   ├── Processed/                     # HTML/LaTeX procesados
+│   └── Figures/                       # Figuras del TFG
+│
+├── results_lora/                      # Resultados de modelos QLoRA
+│   ├── Raw/
+│   ├── Processed/
+│   └── Figures/
+│
+├── Memoria/                           # Figuras utilizadas en el documento del TFG
+│
+├── docs/                              # Documentación auxiliar
+│   ├── README.md
+│   ├── RESULTS.md
+│   └── requirements.txt
+│
+└── lexicons/                          # Lexicones por lengua para métricas
+```
 
-### Evaluación
-- [x] Evaluar los modelos base Asturiano
-- [x] Evaluar los modelos base Gallego
-- [x] Evaluar los modelos base Aranés
-- [x] Evaluar resultados QLoRA Asturiano
-- [x] Evaluar resultados QLoRA Gallego
-- [x] Evaluar resultados QLoRA Aranés
+## 2. Objetivo del proyecto
+
+El TFG aborda un problema central en PLN:  
+**la falta de herramientas, corpus y benchmarks para lenguas minoritarias**.
+
+El trabajo propone:
+
+1. Un pipeline reproducible para preparar corpus reales.  
+2. Un conjunto de tareas de evaluación adaptadas a lenguas low‑resource.  
+3. Métodos para generar datos sintéticos útiles para entrenamiento.  
+4. Un análisis comparativo del rendimiento de varios LLMs.  
+
+El proyecto se centra en lenguas como asturiano, aragonés o gallego, pero es extensible a cualquier lengua con escasez de recursos.
+
+---
+
+## 3. Preparación de corpus: `LanguageDataset`
+
+El módulo `LanguageDataset` implementa un sistema completo para:
+
+- cargar datos desde Tatoeba, OPUS, carpetas locales, listas o dataframes  
+- limpiar texto con reglas avanzadas  
+- anonimizar datos sensibles  
+- filtrar por idioma usando FastText LID‑176  
+- concatenar líneas para evitar fragmentación  
+- tokenizar y dividir en train/test  
+- obtener estadísticas de tokens para elegir `max_length`  
+
+Este módulo es la base del pipeline de datos del TFG y se usa en todas las fases posteriores.
+
+---
+
+## 4. Generación de datasets sintéticos
+
+El proyecto incluye herramientas para generar datasets útiles para entrenar o evaluar modelos:
+
+### 4.1. Dataset ortográfico  
+Frases con errores sintéticos (ortográficos, léxicos, reordenación, etc.).
+
+### 4.2. Dataset ortográfico anotado  
+Errores marcados con etiquetas XML `<err t=...>...</err>`.
+
+### 4.3. Dataset de huecos  
+Frases con `<mask>` y palabra objetivo.
+
+### 4.4. Dataset instructivo  
+Pares `<|user|> ... <|assistant|>` generados a partir de plantillas por idioma.
+
+### 4.5. Dataset QA instructivo  
+Generación automática de preguntas y respuestas.
+
+Todos los generadores incluyen reintentos automáticos y control de errores.
+
+---
+
+## 5. Benchmark de evaluación
+
+El benchmark evalúa modelos en **cinco tareas lingüísticas**, diseñadas para capturar distintos aspectos del rendimiento en lenguas minoritarias:
+
+### 5.1. Calidad de lengua  
+Generación libre evaluada con:
+- TTR  
+- entropía  
+- solapamiento de n‑gramas  
+- frecuencia de vocabulario objetivo  
+- comparación con otras lenguas  
+
+### 5.2. Traducción directa  
+Métricas:
+- BLEU  
+- chrF  
+
+### 5.3. Round‑trip translation  
+Traducción ida‑y‑vuelta pasando por lenguas intermedias.
+
+### 5.4. Vocabulario (huecos)  
+Predicción de palabras faltantes:
+- accuracy  
+- accuracy_lower  
+- Levenshtein  
+
+### 5.5. Ortografía  
+Corrección de errores anotados:
+- BLEU  
+- chrF  
+- Levenshtein  
+- precisión, recall, F1  
+- errores corregidos / no corregidos / nuevos  
+
+El benchmark devuelve un JSON estructurado con métricas globales y ejemplos por tarea.
+
+---
+
+## 6. Visualización y análisis de resultados
+
+El repositorio incluye herramientas para generar informes en varios formatos:
+
+### Consola  
+`pretty_print_results`  
+Informe formateado con colores ANSI y tablas.
+
+### HTML  
+`generate_html_report`  
+Informe interactivo con tablas comparativas y ejemplos paralelos.
+
+### LaTeX  
+`generate_latex_snippet_completo`  
+`generate_latex_snippet_compacto`  
+Fragmentos para papers y memoria del TFG.
+
+### Gráficas  
+`generar_grafico_barras`  
+Comparación de modelos por lengua y métrica usando Seaborn o Plotly.
+
+---
+
+## 7. Reproducibilidad
+
+El repositorio incluye:
+
+- notebooks con todos los experimentos  
+- scripts de evaluación  
+- datasets generados  
+- resultados guardados  
+- figuras y comparativas  
+- memoria del TFG  
+
+Todo el pipeline puede ejecutarse de forma reproducible siguiendo los notebooks.
+
+---
+
+## 8. Instalación
+
+```
+git clone https://github.com/MiguelGP-13/TFG
+cd TFG
+pip install -r requirements.txt
+```
+
+---
+
+## 9. Documento del TFG
+
+La memoria completa del proyecto está disponible en:
+
+```
+[docs/Memoria.pdf](docs/Memoria.pdf)
+```
+
+Incluye:
+- motivación  
+- objetivos  
+- metodología  
+- experimentos  
+- resultados  
+- conclusiones  
+- trabajo futuro  
+
+---
+
+## 10. Autor
+
+Miguel Gómez Prieto  
+Grado en Ciencia de Datos e Inteligencia Artificial
+Universidad Politécnica de Madrid
+
