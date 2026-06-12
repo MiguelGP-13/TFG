@@ -27,13 +27,13 @@ TFG about LLM and minoritary spanish languages
 - [x] Revisar aspectos legales y eticos (8) y metodología (4.1)
 - [x] Redactar sección 1
 - [x] Explicar las capas de los LLM en el Marco teórico
-- [ ] Añadir estadísticas de datasets elegidos y generados
+- [x] Añadir estadísticas de datasets elegidos y generados
 - [ ] Explicar sobre losses de los entrenamientos en 6.3
 - [ ] Terminar de escribir pruebas realizadas.
 - [x] Comentar en el 6.3 los test realizados con asturiano y entrenar igual con gallego y aranes, sacar resultados y ponerlos
-- [ ] Revisar 6.2 y 6.3
+- [x] Revisar 6.2 y 6.3
 - [ ] Continuar con 6.3
-- [ ] Eliminar 7.2 y 7.3
+- [x] Eliminar 7.2 y 7.3
 - [x] Comentar pad token
 - [x] Explicar bien a que capas vamos a aplicarlo
 - [x] Contar primer entrenamiento que devolvía siempre EOS al principio
