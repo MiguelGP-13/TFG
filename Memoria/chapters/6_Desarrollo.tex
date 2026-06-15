@@ -174,7 +174,7 @@ lluz azul se disperse y solo quede la lluz roja visible.
     \end{quotation}
 \end{itemize}
 
-Los conjuntos de datos que se han generado y utilizado para el entrenamiento se encuentran disponibles en HuggingFace con el resto de materiales del TFG \url{https://hf.co/collections/MiguelGP-13/tfg}.
+Los conjuntos de datos que se han generado y utilizado para el entrenamiento se encuentran disponibles en HuggingFace con el resto de materiales del TFG \url{https://hf.co/collections/MiguelGP-13/tfg} \cite{lexicons_2025, galician_instructive_2025, asturian_instructive_2025, aranes_instructive_2025, asturian_annotated_2025, galician_annotated_2025, aranes_annotated_2025, asturian_cloze_2025, galician_cloze_2025, aranes_cloze_2025}.
 
 \subsubsection{Robustez del flujo y control de calidad}
 Debido a que las respuestas de los modelos de lenguaje pueden sufrir alucinaciones de formato o errores de truncado en la API, el script implementado en Python incorporó filtros heurísticos automatizados de validación. Tras cada llamada al modelo, el sistema verifica la presencia íntegra de las etiquetas delimitadoras requeridas y comprueba que la longitud de los textos generados cumpliera con unos umbrales mínimos de calidad. 
@@ -256,7 +256,7 @@ Este optimizador está diseñado específicamente para QLoRA, gestionando eficie
 
 Para definir la mejor manera de entrenar, se han realizado pruebas iniciales con el asturiano, y luego se han probado la mejor metodología encontrada en el aranés y el gallego, adaptándose a los corpus de cada lengua y analizando los resultados.
 
-Los modelos entrenados en todas las lenguas y con todas las configuraciones se encuentran disponibles en HuggingFace con el resto de materiales del TFG \url{https://hf.co/collections/MiguelGP-13/tfg}.
+Los modelos entrenados en todas las lenguas y con todas las configuraciones se encuentran disponibles en HuggingFace con el resto de materiales del TFG \url{https://hf.co/collections/MiguelGP-13/tfg} \cite{asturian_lora_2025, asturian_concat_2025, asturian_concat_instructive_2025, galician_lora_2025, aranes_lora_2025, aranes_lora_instructive_2025}.
 
 \subsection{Optimización de la longitud de las muestras}
 \label{problemas-longitud-muestra}

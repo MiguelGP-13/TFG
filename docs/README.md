@@ -119,6 +119,30 @@ Generación automática de preguntas y respuestas.
 
 Todos los generadores incluyen reintentos automáticos y control de errores.
 
+### Disponibilidad de datos:
+Lexicons: https://doi.org/10.57967/hf/9171
+##### Instructivos
+Gallego: https://doi.org/10.57967/hf/9172
+Asturiano: https://doi.org/10.57967/hf/9173
+Aranes: https://doi.org/10.57967/hf/9174
+##### Anotados
+Gallego: https://doi.org/10.57967/hf/9176
+Asturiano: https://doi.org/10.57967/hf/9175
+Aranes: https://doi.org/10.57967/hf/9177
+##### Huecos
+Gallego: https://doi.org/10.57967/hf/9179
+Asturiano: https://doi.org/10.57967/hf/9178
+Aranes: https://doi.org/10.57967/hf/9180
+
+### Modelos
+Asturiano: https://doi.org/10.57967/hf/9185
+Asturiano concatenado: https://doi.org/10.57967/hf/9183
+Asturiano concatenado instructivo: https://doi.org/10.57967/hf/9186
+
+Gallego: https://doi.org/10.57967/hf/9181
+
+Aranés: https://doi.org/10.57967/hf/9182
+Aranés instructivo: https://doi.org/10.57967/hf/9184
 ---
 
 ## 5. Benchmark de evaluación
@@ -211,9 +235,7 @@ pip install -r requirements.txt
 
 La memoria completa del proyecto está disponible en:
 
-```
-[docs/Memoria.pdf](docs/Memoria.pdf)
-```
+[Memoria en pdf](<Memoria\Tecnología para la preservación lingüística en España. Adaptación y evaluación generalizable de modelos de lenguaje en lenguas minoritarias españolas mediante QLoRA.pdf>)
 
 Incluye:
 - motivación  
