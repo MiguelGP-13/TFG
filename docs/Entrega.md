@@ -5,6 +5,9 @@ Fueron puestos a nuestra disposición exclusivamente para el desarrollo de esta 
 
 A continuación se listan los conjuntos de datos generados y publicados en HuggingFace, junto con sus DOI.
 
+Los modelos entrenados y los datos en todas las lenguas y con todas las configuraciones se encuentran disponibles en HuggingFace agrupados en una colección:  
+https://hf.co/collections/MiguelGP-13/tfg
+
 ## Disponibilidad de datos
 
 ### Lexicons
@@ -24,13 +27,6 @@ A continuación se listan los conjuntos de datos generados y publicados en Huggi
 - Gallego: https://doi.org/10.57967/hf/9179  
 - Asturiano: https://doi.org/10.57967/hf/9178  
 - Aranés: https://doi.org/10.57967/hf/9180  
-
-Todos los datos recopilados se procesan y limpian como se describe en la sección 6.1, \textit{Limpieza}.  
-Después de limpiarlos se han publicado en HuggingFace junto con todo el material del TFG:  
-https://hf.co/collections/MiguelGP-13/tfg
-
-Los conjuntos de datos que se han generado y utilizado para el entrenamiento se encuentran disponibles en HuggingFace con el resto de materiales del TFG:  
-https://hf.co/collections/MiguelGP-13/tfg
 
 ---
 
@@ -101,7 +97,5 @@ Los modelos entrenados en todas las lenguas y configuraciones se encuentran disp
 - Aranés: https://doi.org/10.57967/hf/9182  
 - Aranés instructivo: https://doi.org/10.57967/hf/9184  
 
-Los modelos entrenados en todas las lenguas y con todas las configuraciones se encuentran disponibles en HuggingFace con el resto de materiales del TFG:  
-https://hf.co/collections/MiguelGP-13/tfg
 
 ---
