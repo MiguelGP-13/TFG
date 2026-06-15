@@ -1,0 +1,214 @@
+\chapter{Fase 3: Evaluación del modelo y comparativa}
+\label{ch:benchmark}
+
+Los métodos habituales para evaluar modelos de lenguaje se basan en conjuntos de datos creados manualmente, que incluyen tareas de preguntas y respuestas, razonamiento o comprensión lectora \cite{perez-ortiz-etal-2024-expanding, gonzalez2026iberbench, srivastava2022bigbench}. Sin embargo, en el ámbito de las lenguas minoritarias estos recursos no existen o son extremadamente limitados, y su creación requiere un esfuerzo de anotación que no siempre es viable. Esta falta de datos dificulta la evaluación sistemática de modelos adaptados a lenguas de bajo recurso y limita la comparación entre enfoques.
+
+Ante esta situación, se propone un benchmark diseñado para depender del mínimo número posible de datos en la lengua objetivo. El enfoque se basa en tareas lingüísticas fundamentales: generación de texto libre, traducción, inferencia de palabras enmascaradas y corrección de errores gramaticales, que pueden evaluarse a partir de texto monolingüe y, cuando está disponible, de un pequeño conjunto de datos paralelos. De este modo, es posible estimar la capacidad del modelo para generar texto correcto y coherente en la lengua objetivo sin necesidad de construir manualmente conjuntos de evaluación complejos.
+
+El benchmark está concebido para ser reutilizable en otras lenguas minoritarias, siempre que exista un corpus básico en la lengua objetivo y, opcionalmente, un conjunto reducido de pares de traducción. Aunque este enfoque no evalúa conocimiento cultural o razonamiento profundo, sí permite medir de forma fiable la competencia lingüística del modelo, proporcionando una herramienta práctica y reproducible para el estudio de lenguas con recursos limitados.
+
+\section{Métricas para la evaluación del modelo propuesto}
+
+Como se ha introducido, ante la ausencia de datasets supervisados de evaluación para el asturiano o el aranés, se propone un conjunto de métricas cuantitativas centradas en la comprensión, generación y adecuación del modelo en la nueva lengua. Al adaptar un modelo que ya ha adquirido conocimiento general previo en su etapa de preentrenamiento, se asume que su rendimiento en tareas lógicas o de razonamiento se mantendrá estable, por lo que el foco de este benchmark se desplaza hacia la evaluación de su competencia y madurez puramente lingüística.
+
+\subsection{Estudio de calidad de lengua}
+\label{calidad-lengua}
+
+El benchmark está diseñado para medir la competencia lingüística del modelo en la lengua objetivo, evaluando en primer lugar su capacidad para generar texto fluido, morfológicamente correcto y estructuralmente natural. Esta primera sección aborda de manera directa dos de las principales dimensiones de la calidad de generación. Las métricas aportan información sobre si las palabras utilizadas existen en el diccionario o no, la salud del texto, es decir, que no tenga patrones de degradación o repetición y por último, la detección de la interferencia lingüística de lenguas mayoritarias (como el castellano), cuya presencia en los corpus de entrenamiento del modelo base supone una de las mayores amenazas para la pureza y corrección del lenguaje minoritario generado.
+
+\subsubsection{Diversidad Léxica y Salud de la Generación: TTR y Entropía}
+
+Para comprobar que el modelo genera texto normativo y no cae en bucles de repetición que falseen los resultados de calidad, se emplean de forma complementaria el Índice Tipo-Token (TTR) y la Entropía Léxica. Ambas métricas actúan juntas para identificar fallos en la generación y asegurar la riqueza del vocabulario.
+
+El índice TTR mide la riqueza léxica superficial del texto:
+
+\[
+\text{TTR}(x) = \frac{\lvert V(x) \rvert}{N},
+\]
+
+donde $V(x)$ es el conjunto de palabras únicas y $N$ es el número total de tokens. Un TTR bajo es un indicador directo de degeneración por repetición, señalando que el modelo recurre a un subconjunto mínimo de vocabulario. Por lo tanto, en un modelo con buena capacidad de generación, el TTR tenderá a ser más \textbf{alto}.
+
+Sin embargo, el TTR de forma aislada presenta limitaciones analíticas. Un modelo dañado podría generar una secuencia de palabras aleatorias sin cohesión gramatical y registrar un TTR engañosamente elevado. Para solucionar este solapamiento, se introduce la \textbf{Entropía léxica} ($H(x)$), que mide la dispersión y el equilibrio de la distribución léxica:
+
+\[
+H(x) = -\sum_{w \in V(x)} p(w)\log_2 p(w),
+\]
+
+donde $p(w)$ representa la proporción de veces que aparece cada token en relación con el total del texto. Mientras que el TTR evalúa la presencia de palabras únicas, la entropía analiza si su distribución probabilística es natural (donde los artículos y preposiciones se repiten de forma lógica y el léxico varía de manera fluida). Una entropía anormalmente baja destapa modelos encallados en bucles alternantes complejos que el TTR no siempre penaliza con la misma dureza. De este modo, a \textbf{mayor} valor de entropía, mejor es la salud de la generación del modelo.
+
+\subsubsection{Frecuencia relativa de palabras (Lexicones)}
+
+Esta dimensión es la métrica principal para determinar si el modelo está hablando verdaderamente la lengua objetivo, permitiendo cuantificar tanto el nivel de acierto en la generación como el grado de interferencia o castellanización.
+
+Sea $L_{\text{target}}$ el lexicón (diccionario) de la lengua objetivo (asturiano, gallego o aranés), $L_{\text{es}}$ el lexicón del castellano y $L_{\text{fr}}$ un lexicón de francés utilizado como grupo de control. Se define la frecuencia relativa para cada uno de ellos como:
+\begin{gather*}
+f_{\text{target}}(x) = \frac{1}{N}\sum_{i=1}^N \mathbf{1}\{w_i \in L_{\text{target}}\}, \\
+f_{\text{es}}(x) = \frac{1}{N}\sum_{i=1}^N \mathbf{1}\{w_i \in L_{\text{es}}\}, \qquad
+f_{\text{fr}}(x) = \frac{1}{N}\sum_{i=1}^N \mathbf{1}\{w_i \in L_{\text{fr}}\}.
+\end{gather*}
+
+Esta métrica normaliza el recuento de las apariciones de las palabras $w_i$ en los lexicones definidos $L$, dividiéndolo por el número total de palabras $N$.
+
+La interpretación de estas frecuencias permite un análisis preciso: una proporción \textbf{alta} en $f_{\text{target}}$ indica que el modelo genera de forma efectiva léxico correcto y propio de la lengua analizada. Paralelamente, se monitoriza $f_{\text{es}}$ para medir la interferencia real del castellano, buscando que esta frecuencia disminuya a medida que el modelo se especializa. Finalmente, se incluye $f_{\text{fr}}$ como control para asegurar que los aciertos en los otros lexicones se deben a una competencia real y no a la generación aleatoria de palabras comunes en lenguas romances occidentales.
+
+Los diccionarios de referencia para el castellano, francés, gallego y asturiano se han obtenido a partir de los datos de FreeLing \cite{padro12}, un repositorio de código abierto desarrollado por el Centro de Tecnologías Lingüísticas y de la Lengua (TALP) de la Universitat Politècnica de Catalunya. 
+
+En el caso del aranés, ante la ausencia de un diccionario disponible en FreeLing, el lexicón se generó de forma propia a partir del diccionario normativo proporcionado por el Institut d'Estudis Aranesi \cite{InstitutEstudisAranesi2014}.
+
+\subsection{Traducción como tarea de evaluación}
+\label{traduccion-evaluacion}
+
+La traducción bidireccional entre gallego, asturiano, aranés y español constituye una forma indirecta pero eficaz de medir la capacidad del modelo para comprender y generar en lenguas de bajos recursos. Dado que el español dispone de abundantes recursos y modelos robustos, se utiliza como lengua de apoyo.
+
+Para abarcar diferentes escenarios de disponibilidad de datos en el ámbito de las lenguas minoritarias, el benchmark implementa dos enfoques metodológicos diferenciados:
+
+\begin{enumerate}
+    \item \textbf{Evaluación con datos paralelos (Traducción Directa):} Se aplica cuando se dispone de un corpus alineado de referencia. Permite medir directamente la fidelidad y precisión del modelo al contrastar su salida con una traducción humana.
+    \item \textbf{Evaluación sin datos paralelos (Traducción de Ida y Vuelta o \emph{Round-trip}):} Diseñada específicamente para entornos con escasez crítica de recursos donde solo se cuenta con texto monolingüe en la lengua objetivo. El proceso consiste en traducir un texto original de la lengua minoritaria al castellano y, acto seguido, pedirle al modelo que vuelva a traducir ese resultado intermedio a la lengua de origen. Al comparar el texto final con el original, se evalúa la consistencia semántica y sintáctica del modelo de forma autosuficiente.
+\end{enumerate}
+
+Para cuantificar la calidad del texto generado en ambos escenarios frente a sus respectivas secuencias de referencia, se emplean de manera combinada dos de las métricas automáticas más consolidadas en el estado del arte: \text{BLEU} y \text{chrF}.
+
+\paragraph{BLEU (Bilingual Evaluation Understudy).} Esta métrica evalúa la calidad de la generación basándose en la precisión de $n$-gramas de palabras compartidos entre la hipótesis del modelo y la referencia \cite{papineni-etal-2002-bleu}:
+
+\[
+\text{BLEU} = \text{BP} \cdot \exp\left( \sum_{n=1}^N w_n \log p_n \right),
+\]
+
+donde $p_n$ representa la precisión geométrica de los $n$-gramas de orden $n$, $w_n$ denota los pesos uniformes asignados a cada nivel de n-grama, y $\text{BP}$ es el factor de penalización por brevedad (\emph{brevity penalty}). Este último componente es crucial, ya que evita que el modelo infle artificialmente su precisión generando respuestas truncadas o excesivamente cortas, calculándose mediante:
+
+\[
+\text{BP} = \begin{cases} 
+1 & \text{si } c > r, \\ 
+e^{\left(1 - \frac{r}{c}\right)} & \text{si } c \le r,
+\end{cases}
+\]
+
+donde $c$ corresponde a la longitud en tokens del texto generado por el modelo y $r$ a la longitud del texto de referencia. El índice resultante oscila en un rango de 0 a 100, donde una puntuación más alta equivale a una mayor proximidad con la estructura del texto de referencia.
+
+\paragraph{chrF (Character n-gram F-score).} A diferencia de BLEU, chrF opera a nivel de subpalabras calculando la media armónica ponderada entre la precisión y la cobertura (\emph{recall}) de los $n$-gramas de caracteres \cite{popovic-2015-chrf}. Su formulación matemática se define como:
+
+\[
+\text{chrF}_\beta = (1+\beta^2)\frac{\text{Prec}\cdot\text{Rec}}{\beta^2\text{Prec}+\text{Rec}},
+\]
+
+donde $\text{Prec}$ es la proporción de $n$-gramas de caracteres correctos en la hipótesis, $\text{Rec}$ mide cuántos de los $n$-gramas de la referencia han sido recuperados por el modelo, y $\beta$ es un hiperparámetro regulador (frecuentemente fijado en $\beta=2$ para priorizar el impacto del \emph{recall} sobre la precisión). 
+
+Esta métrica resulta idónea para la evaluación de lenguas minoritarias debido a su alta correlación con el juicio humano en idiomas con una rica variación morfológica o flexiva, siendo capaz de valorar positivamente palabras correctamente derivadas o con pequeñas variaciones ortográficas que BLEU penalizaría de forma absoluta. Al igual que la anterior, sus valores se normalizan entre 0 y 100, indicando un mejor rendimiento del modelo a mayor valor obtenido.
+
+\subsection{Evaluación de vocabulario mediante tareas de enmascaramiento}
+\label{evaluacion-vocabulario}
+
+Para evaluar de forma específica el dominio del vocabulario, la morfología y la selección léxica del modelo en la lengua objetivo, se diseña una prueba basada en tareas de enmascaramiento (\emph{cloze task}). Este método permite forzar al modelo a predecir términos específicos dentro de un contexto sintáctico dado, acotando el espacio de generación para realizar una evaluación exacta.
+
+\subsubsection{Diseño de la tarea}
+
+A partir de los datasets de prueba limpios, se seleccionan frases y se ocultan palabras clave sustituyéndolas por una etiqueta de máscara (\texttt{[MASK]}). Al modelo evaluado se le proporciona la frase modificada y se le instruye mediante un prompt para que devuelva únicamente la frase completa rellenando el espacio enmascarado con el término correcto según el contexto normativo de la lengua.
+
+\subsubsection{Métricas de evaluación léxica}
+
+Para medir el éxito del modelo al recuperar las palabras exactas, la salida generada $\hat{x}$ se contrasta con la frase original de referencia $x$ mediante tres métricas complementarias:
+
+\paragraph{Exactitud estricta (Accuracy).} Mide el porcentaje de frases en las que el modelo recupera la cadena exacta de la referencia, requiriendo una coincidencia total carácter por carácter (incluyendo mayúsculas, minúsculas y tildes):
+
+\[
+\text{Accuracy} = \frac{1}{M} \sum_{i=1}^M \mathbf{1}\{\hat{x}_i = x_i\},
+\]
+
+donde $M$ es el número total de frases evaluadas y $\mathbf{1}\{\dots\}$ es la función indicadora que suma 1 solo si la igualdad es idéntica.
+
+\paragraph{Exactitud insensible a mayúsculas (Accuracy\_lower).} Evalúa el acierto léxico transformando previamente tanto la salida del modelo como la referencia a minúsculas ($\text{lower}(\cdot)$). Esta métrica permite aislar el conocimiento del vocabulario de posibles penalizaciones ortográficas debidas únicamente a la capitalización de la palabra al inicio de la frase o en nombres propios:
+
+\[
+\text{Accuracy\_lower} = \frac{1}{M} \sum_{i=1}^M \mathbf{1}\{\text{lower}(\hat{x}_i) = \text{lower}(x_i)\}.
+\]
+
+En ambos tipos de \emph{accuracy}, un valor más \textbf{alto} indica un mejor rendimiento y una mayor precisión léxica del modelo.
+
+\paragraph{Distancia de Levenshtein.} Como las métricas de acierto binario (\emph{accuracy}) penalizan por igual un fallo por una sola letra que una palabra completamente inventada, se incorpora la distancia de Levenshtein,  que cuantifica el número mínimo de operaciones (inserciones, eliminaciones o sustituciones) necesarias para transformar la salida del modelo en la referencia original:
+\[
+d_{\text{Lev}}(x, \hat{x}).
+\]
+Al tratarse de una distancia, cuanto \textbf{menor} sea el valor, más eficiente habrá sido el modelo al limpiar el texto sin añadir cambios innecesarios. 
+
+Su aplicación en esta tarea nos permite rescatar información valiosa cuando el modelo entiende el contexto y genera la raíz correcta de la palabra, pero comete un pequeño error de flexión o una errata ortográfica. Al medir el error residual de caracteres, un valor más \textbf{bajo} confirmará una mayor aproximación del modelo al vocabulario real.
+
+\subsection{Corrección gramatical mediante introducción de errores}
+\label{correccion-gramatical}
+
+Para evaluar la capacidad del modelo de comprender y producir estructuras correctas en asturiano o aranés, se utiliza un procedimiento de \emph{introducción de errores} (o inyección de fallos). Este enfoque permite generar un entorno de evaluación controlado sin depender de corpus de faltas escasos o inexistentes en estas lenguas.
+
+\subsubsection{Generación del dataset con errores anotados} 
+
+A partir de textos correctos $x$ del dataset de prueba, un modelo más grande (GPT-OSS 120B) \cite{openai2025gptoss120bgptoss20bmodel} introduce errores controlados de forma sintética, generando una versión modificada $x'$ con alteraciones ortográficas, morfológicas o sintácticas debidamente etiquetadas.
+
+Con el siguiente prompt se pide al LLM que genere un número $N$ de errores (un valor aleatorio entre 0 y 4) en la frase dada:
+
+\begin{quote}
+\texttt{"Introduce \{N\} errores en esta frase. Usa los tipos (elige cual aleatoriamente): ort (ortográfico), lex (léxico), add (añadir palabra), reord (reordenar). Marca cada error con <err t=TIPO>...</err>. No cambies el significado general. Devuelve solo la frase anotada:\{Texto original\}"}
+\end{quote}
+
+\begin{tcolorbox}[colback=gray!5,colframe=gray!40, title={Ejemplo de transformación con \emph{error injection}}]
+\textbf{Entrada correcta (x):}\\
+Con fabes y sidrina nun fai falta gasolina.\\
+
+\textbf{Salida con N=4 errores (x'):}\\
+Con <err t=add>siempre </err><err t=ort>fabés</err> y <err t=reord>nun sidrina</err> <err t=lex>nunca</err> fai falta gasolina.
+\end{tcolorbox}
+
+\paragraph{Robustez frente a errores en el etiquetado:} Para generar este dataset modificado fue necesario ajustar cuidadosamente el prompt con el fin de minimizar las alucinaciones del modelo. Aun así, es posible que algunas frases presenten fallos de etiquetado aislados. Sin embargo, dado que este conjunto se utiliza únicamente como un benchmark de tipo comparativo entre modelos y no para entrenarlos, este sesgo potencial afecta por igual a todos los sistemas evaluados. Por lo tanto, la comparación estadística sigue siendo totalmente válida.
+
+\subsubsection{Evaluación de la capacidad gramatical del modelo}
+
+En la fase de evaluación, se le proporciona al modelo la frase con errores $x'$ (limpia de las etiquetas HTML `<err>`, de modo que el modelo debe localizar y corregir los fallos de forma autónoma) y se le solicita que produzca una versión corregida $\hat{x}$. 
+
+La comparación entre la corrección propuesta $\hat{x}$ y el texto original limpio $x$ se evalúa mediante dos bloques de métricas complementarias:
+
+\paragraph{Métricas de similitud textual}
+
+\begin{itemize}
+    \item \textbf{BLEU y chrF:} Aplicados directamente entre $\hat{x}$ y $x$, miden la similitud global y la fidelidad de la corrección a nivel de superficie.
+    \item \textbf{Distancia de Levenshtein:} explicada previamente en la sección \ref{evaluacion-vocabulario}.
+\end{itemize}
+
+\paragraph{Métricas de acierto basadas en la anotación}
+
+Para evaluar de forma específica el éxito del modelo identificando y enmendando los errores inyectados, se calculan la Precisión, el Recall y la métrica $F_1$:
+
+\label{precision-recall-gramatical}
+\[
+\text{Precisión} = \frac{E_{\text{corr}}}{E_{\text{corr}} + E_{\text{nuevos}}}, \qquad
+\text{Recall} = \frac{E_{\text{corr}}}{E_{\text{tot}}}, \qquad
+F_1 = 2 \cdot \frac{\text{Precisión} \cdot \text{Recall}}{\text{Precisión} + \text{Recall}}
+\]
+
+Donde las variables se definen a partir de la comparación entre las modificaciones realizadas por el modelo y las etiquetas de error originales generadas en la fase de inyección:
+\begin{itemize}
+    \item $E_{\text{corr}}$ (\textit{Errores corregidos}): Es el número de modificaciones realizadas por el modelo que coinciden exactamente con la corrección del error inyectado (Verdaderos Positivos).
+    \item $E_{\text{nuevos}}$ (\textit{Errores introducidos}): Es el número de cambios realizados por el modelo en partes que ya eran correctas, introduciendo ruido o fallos nuevos (Falsos Positivos).
+    \item $E_{\text{tot}}$ (\textit{Errores totales}): Es el número total de errores reales inyectados en la frase por el modelo generador (la suma de los fallos que el modelo logró subsanar y los que pasó por alto).
+\end{itemize}
+
+La \textbf{precisión} mide la fiabilidad del sistema (evitar inventar fallos donde no los hay), mientras que el \textbf{recall} mide la cobertura (capacidad de detectar y enmendar todos los errores reales inyectados). La métrica $F_1$ actúa como la media armónica de ambas, penalizando desequilibrios extremos. En las tres métricas, un valor más \textbf{alto} indica un mejor rendimiento del modelo.
+
+\subsection{Justificación del enfoque}
+
+El conjunto de métricas propuesto permite evaluar modelos en lenguas de bajos recursos sin la necesidad de construir tareas supervisadas complejas. 
+
+A través de este diseño, el enfoque evalúa la comprensión y generación sintáctica mediante la \nameref{traduccion-evaluacion}, aprovechando los recursos existentes en otras lenguas, la competencia y robustez gramatical a través de la \nameref{correccion-gramatical}, la comprensión del texto a partir de inferir palabras faltantes \nameref{evaluacion-vocabulario} y, finalmente, la salud de la generación, la cantidad de palabras generadas en el diccionario y el grado de castellanización gracias a las métricas descritas en el \nameref{calidad-lengua}.
+
+Además, todas las métricas seleccionadas son automáticas, reproducibles y fácilmente exportables a otras lenguas minoritarias con escasez de datos, ofreciendo la flexibilidad de aplicar el benchmark de forma modular en función de los recursos disponibles en cada idioma. 
+
+Este enfoque proporciona, en definitiva, una evaluación robusta, cuantitativa y multidimensional del comportamiento de los modelos en asturiano, aranés y gallego, sin depender de datasets específicos ni de tareas complejas de \textit{question answering}.
+
+\subsection{Limitaciones del benchmark}
+
+El benchmark desarrollado resulta adecuado para evaluar modelos en lenguas minoritarias con pocos recursos, pero presenta varias limitaciones importantes.
+
+En primer lugar, depende casi exclusivamente de texto monolingüe y de un número muy reducido de datos paralelos, por lo que las métricas están condicionadas por la representatividad del corpus. Esto puede introducir sesgos hacia ciertos registros o estilos, especialmente en lenguas con escasa presencia digital.
+
+En segundo lugar, las tareas incluidas evalúan únicamente aspectos básicos de la competencia lingüística (corrección, interferencias, traducción), sin cubrir dimensiones más amplias como la coherencia discursiva, la adecuación pragmática o el conocimiento cultural. El benchmark mide si el modelo genera texto correcto, pero no su capacidad para usar la lengua en contextos complejos.
+
+Además, la evaluación es completamente automática y no incorpora validación humana, necesaria para valorar naturalidad, fluidez o variación dialectal, aspectos que las métricas automáticas no capturan adecuadamente.
+
+Por último, al estar diseñado para escenarios de muy bajo recurso, su sensibilidad para detectar mejoras pequeñas es limitada. En modelos más competentes o en lenguas con corpus amplios sería necesario complementarlo con tareas adicionales o con conjuntos de evaluación manualmente elaborados.

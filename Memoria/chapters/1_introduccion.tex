@@ -1,0 +1,85 @@
+\chapter{Introducción}
+\label{ch:introduccion}
+
+En los últimos años, los modelos de lenguaje de gran tamaño (Large Language Model, LLM) se han convertido en una de las tecnologías más influyentes dentro del campo de la Inteligencia Artificial. Su capacidad para comprender y generar texto con un nivel de fluidez cercano al humano ha impulsado su adopción en ámbitos tan diversos como la educación, la administración pública, la industria o la investigación científica. Sin embargo, este avance no ha sido homogéneo para todas las lenguas. Mientras que el inglés, el chino o el castellano cuentan con abundantes recursos y modelos optimizados, otras lenguas con menor presencia digital, como el asturiano, el aranés o incluso el gallego, siguen estando infrarrepresentadas en los sistemas actuales.
+
+Según la UNESCO, alrededor del 40\% de las lenguas del mundo están en peligro de desaparición \cite{unesco_idil_languages}. En este contexto global, la presencia digital es un factor determinante para la vitalidad de una lengua. La falta de recursos tecnológicos y lingüísticos, limita el acceso a herramientas modernas, contribuyendo a la pérdida progresiva de uso y visibilidad, afectando directamente a la preservación cultural.
+
+Este Trabajo de Fin de Grado (TFG) aborda este problema desde una perspectiva aplicada, adaptando un modelo de lenguaje moderno mediante técnicas de \textit{fine-tuning}. Debido a la ausencia de conjuntos de datos de preguntas y respuestas en estas lenguas, y a la imposibilidad de crearlos manualmente, se propone además un nuevo marco de evaluación con menores requisitos de datos, diseñado para medir si dicha adaptación mejora la competencia del modelo en asturiano, aranés y gallego o cualquier otra lengua.
+
+Para ello, se ha desarrollado un proceso completo que abarca la recopilación y limpieza de corpus, la construcción del benchmark, el entrenamiento del modelo y la evaluación comparativa de sus resultados. Asimismo, se ha diseñado una metodología reproducible que pueda servir como base para futuros trabajos en lenguas minoritarias, reduciendo la necesidad de repetir desde cero todo el proceso de experimentación.
+
+A lo largo de este capítulo se presenta el contexto en el que se enmarca el trabajo, los objetivos planteados, la motivación que lo impulsa y la justificación de su relevancia. Finalmente, se describe la estructura del documento para guiar al lector a través de las distintas fases del proyecto.
+
+
+\section{Contexto}
+
+La mayoría de avances recientes en Inteligencia Artificial y el Procesamiento del Lenguaje Natural (PLN) se han centrado en lenguas con abundantes recursos, dejando atrás a aquellas con menor presencia digital. Como se ha mencionado antes, esta brecha tecnológica afecta especialmente a lenguas como el asturiano, el aranés o el gallego, que cuentan con corpus limitados, herramientas escasas y modelos que no han sido entrenados específicamente para ellas.
+
+La falta de datos provoca que los LLM cometan errores frecuentes, como interferencias lingüísticas, pérdida de morfología propia o incapacidad para mantener coherencia sintáctica. Además, la ausencia de conjuntos de datos de evaluación dificulta medir de forma objetiva el rendimiento de los modelos en estas lenguas.
+
+En este contexto, surge la necesidad de desarrollar metodologías que permitan adaptar modelos existentes a lenguas minoritarias con recursos reducidos, así como diseñar mecanismos de evaluación que no dependan de grandes conjuntos de datos supervisados. Este trabajo se enmarca precisamente en esa línea, centrándose en tres lenguas representativas del panorama lingüístico español: asturiano, aranés y gallego.
+
+
+\section{Objetivos}
+
+\subsection{Objetivo general}
+El objetivo principal de este trabajo es \textbf{evaluar y mejorar la capacidad de un LLM para comprender y generar texto en asturiano, aranés y gallego}, mediante técnicas de entrenamiento eficiente y la creación de un benchmark de evaluación específico para lenguas minoritarias.
+
+\subsection{Objetivos específicos}
+\begin{itemize}
+    \item Diseñar y aplicar un proceso de limpieza y normalización de corpus de texto adaptado a lenguas minoritarias.
+    \item Construir un benchmark que permita evaluar métricas alternativas cuando no existen conjuntos de datos de preguntas y respuestas, como la traducción, la corrección lingüística o la castellanización.
+    \item Evaluación de LLMs públicos y su capacidad de hablar las lenguas objetivo.
+    \item Definir un modelo QLoRA en el mejor modelo base para las lenguas seleccionadas.
+    \item Entrenar un modelo QLoRA por cada lengua sobre corpus públicos disponibles y analizar su comportamiento.
+    \item Comparar el rendimiento de los modelos antes y después del entrenamiento.
+    \item Documentar una metodología reproducible que pueda ser utilizada en futuros trabajos.
+\end{itemize}
+
+
+\section{Motivación}
+Este proyecto surge tanto del interés personal por la IA y el PLN y por las lenguas minoritarias como de la convicción de que la tecnología puede, y debe, contribuir a su preservación. Los modelos de lenguaje no solo pueden facilitar su uso cotidiano, sino también aumentar su presencia en entornos digitales, mejorar herramientas educativas y ofrecer a sus hablantes sistemas conversacionales que respeten y reproduzcan adecuadamente su identidad lingüística.
+
+El asturiano, el aranés y el gallego presentan características lingüísticas propias y un valor cultural significativo, pero su representación en los modelos actuales es limitada \cite{Sobocinska_2022}. Mejorar la capacidad de los LLM para comprender y generar estas lenguas no solo facilita su uso cotidiano, sino que contribuye a su normalización y a su transmisión en entornos digitales.
+
+Además, este proyecto supone una oportunidad para explorar técnicas modernas de adaptación de modelos, como QLoRA, y para proponer soluciones prácticas a la falta de recursos, como la creación de un benchmark específico. Esta combinación de interés personal, relevancia social y desafío técnico constituye la base de la motivación del trabajo.
+
+
+\section{Justificación}
+
+La relevancia de este trabajo se fundamenta en tres aspectos principales. En primer lugar, aborda una brecha tecnológica real: la falta de modelos y herramientas para lenguas minoritarias. En segundo lugar, propone una metodología reproducible que permite adaptar modelos existentes sin necesidad de grandes recursos computacionales, lo que facilita su aplicación en contextos académicos o institucionales con recursos limitados.
+
+En tercer lugar, el desarrollo de un marco de pruebas específico permite evaluar de forma objetiva la competencia lingüística de los modelos en estas lenguas, algo que hasta ahora no estaba disponible. Este benchmark puede servir como punto de partida para futuras investigaciones y como herramienta para comparar modelos en condiciones homogéneas.
+
+Asimismo, se anticipa un impacto social y cultural significativo. La falta de recursos tecnológicos en lenguas minoritarias genera una brecha digital que relega a sus hablantes a una posición de desventaja en la sociedad de la información. Al dotar a estas lenguas de herramientas avanzadas de procesamiento del lenguaje natural, se promueve la inclusión digital y se garantiza el derecho de las comunidades a interactuar con las nuevas tecnologías en su propia lengua materna.
+
+Desde la perspectiva cultural, este proyecto contribuye activamente a la preservación, revitalización y difusión del patrimonio lingüístico. La digitalización y la creación de modelos específicos actúan como un mecanismo de resistencia contra la homogeneización cultural, permitiendo que lenguas históricamente vulnerables no queden excluidas de los avances de la IA. De este modo, se fomenta la diversidad cognitiva y se enriquece el ecosistema digital global.
+
+Finalmente, el trabajo se alinea de manera directa con iniciativas nacionales e internacionales, como las directrices de la UNESCO para la salvaguarda del patrimonio inmaterial, que buscan garantizar la presencia activa y sostenible de las lenguas minoritarias en el ámbito digital.
+
+
+\section{Limitaciones}
+
+Este trabajo presenta varias limitaciones derivadas tanto de los recursos disponibles como de la naturaleza del problema. En primer lugar, el tamaño de los corpus utilizados es reducido, lo que limita la capacidad del modelo para aprender patrones complejos. En segundo lugar, las restricciones computacionales impiden entrenar durante un número elevado de pasos o utilizar modelos de mayor tamaño, ya que los modelos de Inteligencia Artificial requieren una capacidad de cómputo considerable.
+
+El marco de pruebas propuesto, aunque útil, no cubre todas las dimensiones posibles de la competencia lingüística y se centra en tareas específicas como la traducción, la corrección y la detección de castellanización.
+
+Por último, el estudio se limita a tres lenguas minoritarias, por lo que los resultados no pueden generalizarse directamente a otras lenguas sin recursos.
+
+
+\section{Estructura del documento}
+Este documento se organiza en los siguientes capítulos:
+
+\begin{itemize}
+    \item \textbf{Capítulo 1}: Introducción, contexto, objetivos y motivación del proyecto.
+    \item \textbf{Capítulo 2}: Marco teórico sobre IA, modelos de lenguaje y técnicas de adaptación.
+    \item \textbf{Capítulo 3}: Estado de la cuestión y análisis de trabajos previos.
+    \item \textbf{Capítulo 4}: Metodología y marco teórico
+    \item \textbf{Capítulo 5}: Análisis Exploratorio de Modelos y Métodos de Adaptación
+    \item \textbf{Capítulo 6}: Limpieza, preparación de datos, entrenamiento del modelo y experimentación.
+    \item \textbf{Capítulo 7}: Métricas para la evaluación del modelo propuesto.
+    \item \textbf{Capítulo 8}: Evaluación de resultados y comparación con modelos base.
+    \item \textbf{Capítulo 9}: Aspectos legales, éticos y sociales.
+    \item \textbf{Capítulo 10}: Conclusiones y líneas futuras de trabajo.
+\end{itemize}

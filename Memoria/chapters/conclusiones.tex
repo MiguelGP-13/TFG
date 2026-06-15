@@ -1,0 +1,36 @@
+\chapter{Conclusiones y trabajo futuro}
+\label{ch:analisis}
+
+A lo largo del proyecto se han obtenido avances relevantes en la adaptación de modelos de lenguaje a lenguas minoritarias, así como una comprensión más clara de las limitaciones y desafíos asociados a este proceso. El análisis conjunto del corpus preparado, de los modelos entrenados y del benchmark desarrollado permite identificar mejoras consistentes en la calidad lingüística, al mismo tiempo que pone de manifiesto aspectos que requieren un tratamiento más profundo, como la preservación de la instructividad o la necesidad de datos más amplios y homogéneos. A partir de esta visión global, se presentan a continuación las conclusiones principales y las líneas de trabajo que podrían guiar futuras investigaciones.
+
+\section{Conclusiones}
+
+El trabajo realizado ha permitido avanzar de manera significativa en la adaptación de modelos de lenguaje a lenguas minoritarias como el asturiano, el aranés y el gallego. A partir de un proceso de recopilación, limpieza y normalización de corpus, se ha conseguido disponer de datos más homogéneos y adecuados para el entrenamiento, reduciendo interferencias lingüísticas y problemas derivados de la fragmentación del texto. Pese a una disponibilidad de recursos limitada, el tratamiento aplicado ha demostrado ser suficiente para entrenar modelos estables y evaluar su comportamiento de forma controlada.
+
+La creación de un benchmark específico ha supuesto una contribución relevante, al ofrecer un conjunto de tareas que permiten evaluar modelos en contextos donde no existen datasets estandarizados. Las pruebas de traducción, corrección lingüística y detección de castellanización han permitido medir competencias fundamentales y comparar de manera objetiva tanto modelos base como modelos ajustados. Si bien el benchmark no cubre todavía todas las dimensiones posibles de evaluación, sí proporciona una base sólida y reutilizable para trabajos posteriores.
+
+El entrenamiento mediante QLoRA ha mostrado mejoras claras en corrección morfológica y adecuación lingüística, especialmente cuando se han incorporado estrategias como la concatenación de ejemplos y el uso de datos instructivos. Las limitaciones de hardware han condicionado la longitud máxima de secuencia y el tamaño de los lotes, lo que ha impedido explorar configuraciones más ambiciosas. Aun así, los resultados obtenidos indican que es posible mejorar modelos generales con un coste computacional reducido y con corpus relativamente pequeños.
+
+El principal problema que se ha encontrado al entrenar es la pérdida del caracter instructivo del modelo, convirtiendose en un modelo que genera texto, pero le cuesta contestar preguntas. Conseguir adaptarlo después o entrenarlo sin perder esa característica sería un estudio de ampliación de este TFG muy interesante.
+
+La comparación entre el modelo antes y después del ajuste fino confirma que el entrenamiento específico por lengua produce avances medibles, aunque no uniformes en todas las tareas. En particular, se observa una reducción consistente de la interferencia con el castellano y una mayor estabilidad en la generación, mientras que aspectos más complejos, como la producción de textos largos o altamente especializados, siguen mostrando limitaciones propias del tamaño del modelo y del volumen de datos disponibles.
+
+Finalmente, el trabajo ha permitido establecer una metodología reproducible que abarca desde la preparación del corpus hasta la evaluación final. Esta metodología, junto con el benchmark y los análisis realizados, constituye un marco de referencia útil para futuras investigaciones orientadas a mejorar el tratamiento automático de lenguas minoritarias. Aunque no todos los aspectos han podido desarrollarse con la profundidad deseada, los resultados obtenidos muestran que es posible avanzar de forma rigurosa y sistemática incluso en escenarios de recursos escasos, y sientan las bases para continuar ampliando la cobertura lingüística y la calidad de los modelos en este ámbito.
+
+Este trabajo demuestra que es posible adaptar LLMs modernos a lenguas minoritarias con recursos extremadamente limitados, y establece un marco reproducible que puede servir como base para futuros desarrollos en preservación lingüística mediante IA.
+
+\section{Trabajo futuro}
+
+De cara a continuar este trabajo, existen varias líneas de mejora que permitirían obtener modelos más robustos y evaluaciones más fiables. En primer lugar, sería deseable repetir la metodología con una mayor capacidad de cómputo, lo que permitiría entrenar con secuencias más largas, tamaños de lote mayores y configuraciones de QLoRA más amplias. Esto abriría la puerta a explorar modelos más pequeños pero entrenados durante más tiempo, así como a estudiar el impacto del tamaño del adaptador en la calidad final del modelo.
+
+Otra línea de mejora se encuentra en el propio \textit{benchmark}. Actualmente, la selección automática de la respuesta correcta puede resultar imprecisa en tareas como la traducción, donde el modelo a veces ofrece la solución en una frase posterior. Sería conveniente desarrollar un sistema más robusto de extracción de la respuesta, por ejemplo mediante un modelo ligero encargado de eliminar explicaciones y conservar únicamente la salida final, o mediante técnicas basadas en \textit{regex} y medidas de similaridad semántica. Esto aumentaría la fiabilidad del marco de evaluación.
+
+También sería importante mejorar la calidad y representatividad de los datos de entrenamiento en cada lengua, especialmente en aquellas con menos recursos. Un corpus más amplio, equilibrado y limpio permitiría reducir interferencias y mejorar la estabilidad del entrenamiento.
+
+En cuanto al diseño de los \textit{prompts} del benchmark, sería útil ajustarlos para fomentar una mayor obediencia y reducir la tendencia del modelo a desviarse hacia explicaciones innecesarias. Asimismo, convendría penalizar explícitamente las respuestas vacías o incompletas, dado que se han observado con cierta frecuencia.
+
+Finalmente, uno de los retos más relevantes identificados es la pérdida de la capacidad instructiva del modelo tras el ajuste fino. Investigar estrategias para preservar dicha instructividad, o para recuperarla posteriormente mediante técnicas adicionales de \textit{alignment} o \textit{instruction tuning}, constituye una línea de trabajo especialmente prometedora, aunque probablemente requiera recursos computacionales superiores a los disponibles en este TFG.
+
+
+
+

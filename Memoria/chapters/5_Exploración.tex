@@ -1,0 +1,59 @@
+\chapter{Fase 1: Análisis Exploratorio de Modelos y Métodos de Adaptación}
+\label{ch:extraccion}
+
+En esta fase se examina el estado actual de los modelos de lenguaje y las metodologías disponibles para extender sus competencias a lenguas con pocos recursos. El objetivo es identificar qué enfoques son los que mejores resultados van a aportar, teniendo en cuenta los datos y recursos de cómputo limitados del proyecto.
+
+% hay que explicar por cada fase de la metodología lo que se ha hecho
+\section{Análisis de los modelos existentes}
+
+Para comenzar el análisis de los modelos existentes, se ha seleccionado un conjunto de modelos que permite cubrir distintos rangos de tamaño y arquitecturas, con el fin de evaluar su comportamiento en las lenguas minoritarias en España. Su elección se ha basado principalmente en el ranking en La leaderboard \cite{grandury2025leaderboard}, observando el rendimiento en las lenguas cooficiales. Se han elegido:
+
+\subsection*{Salamandra-7B}
+Salamandra-7B \cite{gonzalezagirre2025salamandratechnicalreport} se incorpora como modelo de referencia en español gracias a su entrenamiento intensivo en castellano y otras lenguas europeas, lo que le permite ofrecer una cobertura lingüística sólida y un rendimiento competitivo en tareas en español. Su principal fortaleza radica en esta especialización, que lo convierte en un punto de comparación útil para analizar el comportamiento de modelos generalistas en lenguas con recursos limitados. No obstante, su enfoque centrado en el castellano y su tamaño medio pueden traducirse en una menor robustez multilingüe y en limitaciones frente a arquitecturas más recientes optimizadas para eficiencia y razonamiento profundo.
+
+\subsection*{Mistral-7B}
+Mistral-7B \cite{jiang2023mistral} representa un modelo de tamaño medio con una arquitectura especialmente eficiente, capaz de ofrecer un rendimiento por parámetro muy competitivo y una estabilidad notable en tareas generales y multilingües. Su principal fortaleza reside en esta eficiencia, que lo convierte en un punto intermedio sólido para estudiar el escalado de capacidades. Sin embargo, su entrenamiento no está tan orientado a lenguas minoritarias, lo que puede generar variabilidad en escenarios con recursos lingüísticos muy limitados.
+
+\subsection*{Qwen-2.5-7B}
+Qwen-2.5-7B \cite{qwen2.5_2024} se selecciona como modelo compacto que destaca por su excelente relación entre tamaño y rendimiento, apoyado en una arquitectura moderna y un entrenamiento multilingüe amplio. Su principal fortaleza es precisamente esta eficiencia, que permite analizar cómo se comportan modelos ligeros en tareas complejas sin requerir grandes recursos computacionales. Aun así, su menor capacidad puede traducirse en limitaciones en razonamiento profundo, consistencia en tareas largas o robustez en lenguas con muy pocos datos.
+
+\subsection*{Gemma-7B}
+Gemma-7B \cite{gemma2024} se incorpora como modelo mediano equilibrado, caracterizado por un entrenamiento multilingüe de alta calidad y un diseño estable que facilita su uso como referencia en estudios de escalado. Su principal fortaleza es este equilibrio entre eficiencia y capacidad, que lo convierte en un punto intermedio adecuado entre modelos pequeños y grandes. No obstante, su rendimiento en lenguas extremadamente minoritarias o en tareas muy especializadas puede ser menos competitivo que el de modelos de mayor tamaño o con corpus más diversificados.
+
+
+\section{Identificación de las posibles soluciones}
+% Comparativa de opciones técnicas y estrategias
+El objetivo de este TFG es obtener un modelo de lenguaje para cada una de las lenguas estudiadas, capaz de utilizarlas con la mayor fluidez y precisión posible. Para ello, es necesario analizar qué estrategias existen actualmente para dotar a un LLM de nuevas competencias, siguiendo prácticas habituales en el desarrollo y adaptación de modelos multilingües. 
+
+
+\begin{enumerate}
+\item \textbf{Entrenamiento de un modelo desde cero} 
+
+La primera opción sería entrenar un modelo desde cero, utilizando texto en estas lenguas y complementándolo con texto en otras lenguas mayoritarias para disponer de suficientes datos de entrenamiento. GPT‑2, uno de los primeros LLM cuyo rendimiento se aproximaba al de un humano, se entrenó con 40 GB de texto extraído de internet \cite{radford2019language}. Este volumen de entrenamiento es inabarcable con los recursos disponibles y, además, supondría un gasto innecesario.
+
+Actualmente existen modelos de gran calidad, muchos de ellos multilingües. Resulta mucho más eficiente enseñar a esos modelos las lenguas en las que nos enfocamos, aprovechando su conocimiento previo y su capacidad de generar texto.
+
+\item \textbf{Reentrenamiento de modelos existentes}
+
+Viendo inviable e innecesario el entrenamiento de un modelo nuevo, se podría reentrenar un modelo existente, con texto en las lenguas de estudio, de modo que el sistema aprendiera a generar y comprender asturiano, aranés o gallego a partir de ejemplos directos. Esta idea evita el enorme coste computacional de entrenar un modelo desde cero y aprovecha el conocimiento lingüístico general que los LLM ya poseen. Además, existen técnicas como dejar ciertas capas profundas congeladas que permitirían reducir el número de parámetros actualizables, haciendo el proceso más manejable.
+
+Sin embargo, este enfoque presenta limitaciones importantes. La más conocida es el \textit{catastrophic forgetting}, un fenómeno ampliamente documentado en redes neuronales. Cuando un modelo se ajusta a una nueva tarea, puede perder parte de lo aprendido previamente si los parámetros relevantes se modifican en exceso durante el reentrenamiento \cite{Kirkpatrick_2017}. En el contexto de los modelos de lenguaje modernos, se ha comprobado empíricamente que este fenómeno degrada drásticamente las capacidades generales del modelo tras un ajuste fino continuo \cite{luo2023an}. Esto significa en nuestro caso, que un modelo adaptado para mejorar su rendimiento en una lengua minoritaria podría deteriorar su rendimiento en tareas previamente aprendidas. Este riesgo es especialmente relevante en ámbitos donde los corpus disponibles son pequeños y no permiten un ajuste estable. A ello se suma que el \textit{fine-tuning} completo sigue requiriendo grandes recursos computacionales y un control cuidadoso para evitar sobreajuste. Por estas razones, aunque el reentrenamiento total es conceptualmente sencillo, no parece ser la opción más adecuada para este proyecto.
+
+\item \textbf{Adaptación de modelos existentes}
+
+Ante las limitaciones del reentrenamiento completo, la comunidad científica ha desarrollado métodos de adaptación más eficientes, conocidos como \textit{Parameter-Efficient Fine-Tuning} (PEFT). Estos enfoques buscan modificar únicamente una pequeña parte del modelo, manteniendo congelados la mayoría de sus parámetros. Entre las primeras propuestas destacadas se encuentran los \textit{adapters} \cite{houlsby2019parameterefficienttransferlearningnlp}. Su idea consiste en insertar módulos adicionales de reducido tamaño entre las capas del transformador, de modo que solo estos módulos se entrenan mientras el resto del modelo permanece intacto. Este diseño permite adaptar el modelo a nuevas tareas o lenguas sin alterar su conocimiento previo, reduciendo así el riesgo de \textit{catastrophic forgetting}. Posteriormente, se amplió este enfoque con \textit{AdapterFusion}, que permite combinar varios adapters entrenados en distintos dominios o lenguas sin necesidad de reentrenarlos conjuntamente, demostrando la flexibilidad de esta familia de métodos \cite{pfeiffer2021adapterfusionnondestructivetaskcomposition}.
+
+A pesar de su utilidad, los adapters presentan ciertas limitaciones prácticas. Requieren modificar la arquitectura interna del modelo, añadiendo módulos en cada capa, y su rendimiento depende de la compatibilidad con la estructura del transformer original. Para superar estas restricciones surgieron métodos más recientes como LoRA (\textit{Low-Rank Adaptation}) \cite{hu2021loralowrankadaptationlarge}. Esta técnica reduce drásticamente el número de parámetros entrenables y evita los problemas de compatibilidad arquitectónica propios de los adapters tradicionales. Además, su variante QLoRA permite entrenar modelos grandes en hardware modesto mediante cuantización de 4 bits, manteniendo un rendimiento competitivo \cite{dettmers2023qlora}.
+
+En conjunto, los métodos PEFT ofrecen una alternativa mucho más adecuada que el \textit{fine-tuning} completo para lenguas minoritarias. Los adapters aportan modularidad y reutilización, mientras que LoRA y QLoRA destacan por su eficiencia, simplicidad y bajo coste computacional. 
+
+Considerando las limitaciones de datos y recursos de este proyecto, la opción más razonable es emplear LoRA o QLoRA, ya que permiten adaptar el modelo a las lenguas objetivo sin comprometer su rendimiento general ni incurrir en los riesgos asociados al reentrenamiento completo.
+
+
+\end{enumerate}
+
+
+\section{Evaluación de la solución seleccionada}
+
+Tras comparar las distintas alternativas, la solución que se va a implementar es QLoRA. Las técnicas de \textit{fine-tuning} completo quedan descartadas por su elevado coste computacional y por el riesgo de \textit{catastrophic forgetting}, el cual resulta especialmente crítico al adaptar LLMs mediante actualizaciones completas de sus parámetros \cite{luo2023an}, mientras que los métodos PEFT ofrecen una adaptación mucho más eficiente y segura. Dentro de ellos, QLoRA resulta especialmente ventajoso porque permite ajustar modelos de gran tamaño en hardware limitado gracias a la cuantización en 4 bits, manteniendo un rendimiento equivalente al de LoRA tradicional \cite{dettmers2023qlora}. Esta eficiencia es determinante en un contexto como el de este proyecto, donde los recursos son reducidos y los corpus son pequeños. Además, QLoRA, al igual que LoRA, conserva intactos los parámetros originales del modelo, lo que minimiza la pérdida de conocimiento previo y facilita la reproducibilidad. Por todo ello, QLoRA proporciona el mejor equilibrio entre coste, estabilidad y calidad para adaptar un modelo multilingüe a las lenguas estudiadas.
+

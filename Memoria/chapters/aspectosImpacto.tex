@@ -1,0 +1,77 @@
+\chapter{Aspectos legales, éticos y sociales e impacto}
+\label{ch:analisis}
+
+En los últimos años, el desarrollo de modelos de lenguaje de gran tamaño ha avanzado a un ritmo extraordinario, impulsado por la disponibilidad de grandes corpus textuales y por técnicas de entrenamiento cada vez más eficientes. Sin embargo, el uso de datos lingüísticos, especialmente cuando proceden de lenguas minoritarias, plantea una serie de consideraciones legales, éticas y sociales que deben analizarse con detenimiento. Este capítulo examina estos aspectos en relación con el trabajo realizado adaptando modelos mediante QLoRA para mejorar su competencia en asturiano, aranés y gallego, así como en la creación de un benchmark específico para evaluar su rendimiento.
+
+\section{Aspectos legales, éticos y profesionales}
+
+\subsection{Licencias}
+
+El uso de datos textuales para entrenar y evaluar modelos de lenguaje está condicionado por las licencias de los corpus empleados y por las implicaciones derivadas de la generación automática de contenido. En este trabajo se han utilizado distintos conjuntos de datos públicos, cada uno con su marco legal específico.
+
+Los datos de entrenamiento proceden principalmente de \textbf{OPUS‑NLLB v1}, un corpus multilingüe distribuido bajo licencia \textbf{ODC‑By}. Esta licencia permite el uso, modificación y redistribución de los datos siempre que se mantenga la atribución correspondiente. Para el entrenamiento del modelo en gallego se utilizó el corpus NOS, que incluye subcorpus con licencias heterogéneas, como CC BY‑NC‑ND 4.0, Apache 2.0 o CC0, lo que obliga a respetar las restricciones específicas de cada uno.
+
+El corpus ALIA, empleado para evaluación, se distribuye bajo licencia \textbf{CC BY‑SA 4.0}, que permite reutilización y adaptación siempre que se comparta bajo la misma licencia.
+
+Finalmente, los recursos lingüísticos de FreeLing utilizados para español se encuentran bajo \textbf{AGPL}, una licencia copyleft que permite su uso académico siempre que las modificaciones se distribuyan bajo los mismos términos.
+
+Además de los corpus textuales, este trabajo emplea datos generados por modelos de lenguaje, tanto para la creación de errores controlados como para la evaluación automática. En estos casos, la autoría del contenido generado recae en los modelos utilizados, y su uso es compatible con las licencias de las plataformas empleadas. 
+Se han utilizado modelos de IA también para la búsqueda bibliográfica, asistir en la redacción y detección de errores en el código.
+
+Desde una \textbf{perspectiva ética}, el objetivo principal del proyecto es contribuir a la preservación y normalización de lenguas minoritarias mediante la mejora de su representación en modelos de lenguaje. 
+Para ello, en primer lugar, promueve la \textbf{justicia lingüística}, al facilitar que comunidades con menos recursos tecnológicos puedan acceder a herramientas avanzadas que normalmente solo están disponibles para lenguas mayoritarias. En segundo lugar, la metodología utilizada, basada en datos abiertos, técnicas eficientes y documentación transparente, favorece la \textbf{investigación responsable}, ya que permite reproducir y auditar el proceso. En tercer lugar, la creación de un benchmark específico para entrenar modelos con pocos datos, contribuyendo a establecer \textbf{estándares de evaluación claros} y reduciendo la opacidad habitual en el desarrollo de modelos de lenguaje y ayuda a detectar sesgos o errores de forma sistemática. 
+
+\textbf{No obstante, el uso de datos lingüísticos puede introducir riesgos significativos}. Los corpus disponibles para lenguas minoritarias suelen ser reducidos y no siempre representativos de la diversidad dialectal, sociolingüística o estilística de la comunidad. Esto puede generar \textbf{sesgos} en los modelos, tales como:
+\begin{itemize}
+    \item \textbf{Sobrerrepresentación de ciertos registros} (por ejemplo, textos institucionales o literarios) frente al habla cotidiana.
+    \item \textbf{Errores en datos de entrenamiento} si el corpus contiene errores o formas no estandarizadas.
+    \item \textbf{Reproducción de sesgos ideológicos o culturales} presentes en los textos originales, especialmente en corpus extraídos de internet.
+\end{itemize}
+
+Además, la generación automática de contenido plantea el riesgo de que usuarios no expertos tomen como correctas producciones erróneas, lo que podría afectar negativamente a la transmisión intergeneracional de la lengua o a su estandarización.
+
+
+\subsection{Aspectos profesionales}
+
+En cuanto a los \textbf{aspectos profesionales}, este trabajo se enmarca en un contexto académico y metodológico. No se plantea un uso comercial del modelo, sino la demostración de una metodología reproducible para adaptar LLMs a lenguas minoritarias con recursos limitados. La publicación del benchmark y de los datasets derivados permitirá que otros investigadores puedan replicar, mejorar o ampliar el estudio sin necesidad de repetir todo el proceso desde cero.
+
+\section{Impacto social, económico y medioambiental}
+
+El desarrollo de modelos de lenguaje adaptados a lenguas minoritarias tiene implicaciones que van más allá del ámbito técnico. En esta sección se analizan los principales impactos derivados del proyecto, tanto positivos como potenciales riesgos.
+
+\subsection{Impacto social}
+
+El impacto social más relevante de este trabajo está relacionado con la revitalización lingüística. Las lenguas minoritarias como el asturiano o el aranés presentan un riesgo real de desplazamiento frente al castellano o el francés. Según el \textit{UNESCO Atlas of the World's Languages in Danger} \cite{unesco_atlas_2010}, ambas lenguas se encuentran clasificadas como \textit{definitely endangered}, lo que implica que su transmisión intergeneracional es limitada y que su presencia en ámbitos formales y digitales resulta insuficiente. La falta de presencia tecnológica se considera uno de los factores que pueden acelerar la pérdida de vitalidad lingüística, especialmente en contextos donde la digitalización determina el acceso al conocimiento y la participación cultural.
+
+En este sentido, la disponibilidad de herramientas tecnológicas como correctores, traductores o modelos instructivos puede facilitar el uso cotidiano de estas lenguas y aumentar su presencia en entornos digitales, donde actualmente están infrarrepresentadas. La existencia de recursos digitales es un elemento que contribuye a que una lengua pueda participar en la sociedad del conocimiento y mantener su funcionalidad en ámbitos contemporáneos \cite{unesco_diversity_2003}.
+
+La creación de un benchmark específico contribuye a facilitar su estudio y promueve la generación de nuevos recursos lingüísticos. Esto puede tener un efecto positivo en la disponibilidad de herramientas para estas lenguas y favorecer su mantenimiento a largo plazo. La literatura especializada señala que la ausencia de recursos digitales puede conducir a situaciones de \textit{digital language death}, donde la lengua pierde funcionalidad en los espacios tecnológicos actuales \cite{moseley_2012_digital}. La existencia de datos evaluables y comparables permite mitigar este riesgo y fomenta el desarrollo de sistemas más robustos y culturalmente adecuados.
+
+No obstante, también existen riesgos. Un modelo que genere contenido incorrecto puede reforzar formas no normativas o inducir a error a usuarios no expertos. Además, la automatización excesiva puede desplazar prácticas culturales tradicionales asociadas al uso de la lengua. Documentos recientes sobre ética de la inteligencia artificial señalan la importancia de evitar sesgos que afecten negativamente a comunidades vulnerables y de garantizar que los sistemas respeten la diversidad cultural y lingüística \cite{unesco_ai_2021}. Por ello, estas herramientas deben utilizarse como apoyo y no como sustituto del conocimiento lingüístico humano.
+
+En conjunto, este trabajo contribuye a reducir la brecha tecnológica entre lenguas mayoritarias y minoritarias y puede favorecer la mejora de la vitalidad digital de lenguas en riesgo. Además, proporciona un marco evaluativo que permitirá desarrollar herramientas más precisas, éticas y culturalmente adecuadas.
+
+
+\subsection{Impacto económico}
+
+Desde el punto de vista económico, este proyecto se caracteriza por su bajo coste. Se han utilizado modelos y datos abiertos, así como plataformas gratuitas como la API de Groq. El único gasto significativo ha sido el uso de máquinas en la nube durante aproximadamente dos meses y medio.
+
+La elección de \textbf{QLoRA} tiene un impacto económico directo: permite entrenar modelos grandes con un consumo de memoria y energía muy reducido en comparación con un reentrenamiento completo. Esto hace que la metodología sea accesible para instituciones educativas, investigadores independientes o comunidades lingüísticas sin grandes infraestructuras computacionales.
+
+Además, la publicación del benchmark y de los datasets derivados puede reducir costes futuros para otros investigadores, al proporcionar una base sólida sobre la que continuar trabajando sin necesidad de reconstruir todo el pipeline.
+
+\subsection{Impacto medioambiental}
+
+El entrenamiento de modelos de lenguaje tiene un coste energético significativo, especialmente cuando se utilizan arquitecturas de gran tamaño. Sin embargo, en este proyecto se ha optado por técnicas que minimizan dicho impacto. La cuantización a 4 bits y la reducción del número de parámetros entrenables mediante QLoRA disminuyen drásticamente el consumo energético respecto a un entrenamiento completo.
+
+Asimismo, el uso de hardware en la nube durante un periodo limitado y la reutilización de modelos preentrenados contribuyen a reducir la huella de carbono asociada al proyecto. Aunque no se dispone de datos exactos sobre el consumo energético de cada entrenamiento, se puede afirmar que el impacto medioambiental es significativamente menor que el de proyectos de entrenamiento desde cero.
+
+Por último, la metodología propuesta puede servir como referencia para futuros trabajos que busquen equilibrar eficiencia computacional y sostenibilidad.
+
+\subsection*{Contribución a los Objetivos de Desarrollo Sostenible (ODS)}
+
+El trabajo desarrollado contribuye de manera directa al \textbf{ODS 10 (Reducción de las desigualdades)}. Las lenguas minoritarias como el asturiano, el aranés o el gallego presentan una clara desventaja en el ámbito tecnológico debido a su escasa presencia en los corpus utilizados para entrenar modelos de lenguaje. La adaptación de LLMs mediante técnicas eficientes como QLoRA y la creación de un benchmark específico para todas las lenguas minoritarias, permiten reducir esta brecha, favoreciendo un acceso más equitativo a herramientas lingüísticas avanzadas y promoviendo la justicia lingüística.
+
+De forma complementaria, el proyecto también se alinea con el \textbf{ODS 4 (Educación de calidad)}, al generar recursos que pueden emplearse en contextos educativos para apoyar la enseñanza y normalización de estas lenguas y con el \textbf{ODS 11 (Ciudades y comunidades sostenibles)}, al contribuir a la preservación del patrimonio cultural inmaterial.
+
+En conjunto, la metodología propuesta impulsa un desarrollo tecnológico más inclusivo y respetuoso con la diversidad lingüística.

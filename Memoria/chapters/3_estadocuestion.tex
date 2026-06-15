@@ -1,0 +1,49 @@
+\chapter{Estado del Arte}
+\label{ch:soa}
+
+La escasa representación de lenguas minoritarias en los LLMs constituye un desafío relevante, ya que genera desigualdades significativas entre idiomas con abundantes recursos y aquellos con escasa documentación.
+
+Por ello, han surgido múltiples iniciativas para extender el alcance de los LLMs a otras lenguas menos representadas. Entre ellas destaca el modelo multilingüe NLLB de Meta~\cite{nllb2022}, entrenado con datos de 200 lenguas, muchas de ellas con muy pocos recursos escritos. Este modelo ha demostrado un rendimiento superior al de Google Translate en promedio, superándolo por un punto en la métrica chrF++, ampliamente utilizada en traducción automática \cite{nllb2022}.
+
+\section{Lenguas de España}
+
+En España existen cuatro lenguas oficiales. El castellano es la única lengua oficial en todo el territorio nacional, mientras que el catalán, el euskera y el gallego son lenguas cooficiales en sus respectivas comunidades autónomas. El catalán y el euskera se consideran lenguas con altos recursos, pero el gallego, pese a ser lengua cooficial, se considera una lengua de recursos limitados en el ámbito de la traducción automática \cite{nllb2022}.
+
+Además de las lenguas cooficiales, existen otras lenguas reconocidas y protegidas, aunque sin estatus de cooficialidad: el asturiano, el aragonés y el aranés. Estas lenguas presentan una disponibilidad de recursos aún más limitada, lo que dificulta su integración en modelos generativos actuales.
+
+Para fomentar el desarrollo de tecnologías lingüísticas en las lenguas oficiales, el Gobierno de España ha impulsado el proyecto ALIA \cite{ALIA2025}, que tiene como objetivo la creación de modelos y datasets en todas las lenguas cooficiales. Entre sus desarrollos destaca el modelo \textit{ALIA-40B}, capaz de generar texto en las cuatro lenguas oficiales, aunque todavía no está ajustado para seguir instrucciones, por lo que tiene dificultades para mantener conversaciones o responder preguntas \cite{alia40b2025}.
+
+Además, el colectivo SomosNLP ha desarrollado un ranking del rendimiento de los modelos generativos disponibles en el mercado en las lenguas cooficiales de España \cite{grandury2025leaderboard}.
+
+\subsection{Situación por lengua}
+\label{subsection:situacion-por-lengua}
+
+El \textbf{catalán} es, después del castellano, la lengua con mejor cobertura en el ámbito del PLN. Casi todos los modelos comerciales hablan catalán. Además, bajo el proyecto ALIA, el Barcelona Supercomputing Center (BSC), también ha desarrollado modelos específicos para el catalán, como el \textit{salamandra-7b-instruct}, ya preparado para usar y mantener conversaciones o responder preguntas.
+
+Para el \textbf{euskera}, existe un modelo basado en Llama-3.1, el \textit{Latxa 3.1 Instruct 70B}. Este modelo de 70 mil millones de parámetros obtiene un resultado muy similar al de GPT4-Turbo (número de parámetros desconocido), y obtiene mejor rendimiento que todo el resto de modelos de código abierto de su mismo tamaño \cite{etxaniz2024latxa}.
+
+Por último, para el \textbf{gallego} se han entrenado modelos específicos como \textit{Carballo-cerebras-1.3B}. Este modelo ha demostrado una capacidad notable para generar texto de calidad en esta lengua, pero con capacidad de mejora en tareas como la reformulación de frases, donde obtiene peor rendimiento que modelos multilingües de su tamaño, como \textit{Bloom-1.7B} \cite{gamallo2024opengenerativelargelanguage}.
+
+En el caso del \textbf{asturiano}, \textbf{aragonés} y \textbf{aranés}, no se han identificado modelos especializados ni para tareas de traducción ni de generación de texto.
+
+\section{Otros modelos para lenguas minoritarias}
+
+Dado el contexto de recursos limitados y la necesidad de eficiencia computacional, resulta útil revisar enfoques aplicados en otras lenguas de bajos recursos. Por ejemplo, en Salma Khaled et al. \cite{KHALED2025103682} se ha desarrollado un sistema de análisis de sentimiento para variantes del árabe utilizando estrategias de ajuste eficiente como LoRA (Low-Rank Adaptation). Este tipo de técnicas permite adaptar modelos grandes con un coste computacional reducido, lo que las hace especialmente adecuadas para lenguas con escasez de datos y recursos, y por tanto potencialmente replicables en el estudio de las lenguas minoritarias de España.
+
+Otro trabajo relevante en el ámbito de las lenguas minoritarias es el estudio \textit{Open and Closed-Source LLMs for Low-Resource Languages with Zero-Shot, Few-Shot, and Chain-of-Thought Prompting}. En este análisis, los autores comparan modelos abiertos y propietarios en múltiples lenguas minoritarias, evaluando su rendimiento bajo múltiples estrategias de prompting: \textit{zero-shot}, \textit{few-shot} y \textit{chain-of-thought}. El estudio demuestra que, incluso sin datos específicos de entrenamiento, los LLMs pueden ofrecer resultados razonables en lenguas de bajo recurso mediante técnicas de prompting adecuadas \cite{NAZI2025100124}. Sin embargo, también pone de manifiesto que el rendimiento mejora significativamente cuando se dispone de ejemplos en la lengua objetivo, aunque sean pocos, lo que subraya la importancia de recopilar o traducir pequeños conjuntos de datos de alta calidad. 
+
+
+\section{Evaluación de LLMs}
+\label{sec:Evaluacion}
+
+La evaluación de los LLM ha evolucionado rápidamente en los últimos años, impulsada por la necesidad de medir de forma rigurosa sus capacidades en tareas diversas y en múltiples lenguas. Los primeros esfuerzos de evaluación a gran escala se centraron en lenguas de alto recurso, lo que generó marcos metodológicos sólidos pero poco representativos para lenguas minoritarias. Un ejemplo paradigmático es HELM (\textit{Holistic Evaluation of Language Models}), que propone un marco exhaustivo y estandarizado para evaluar LLMs en dimensiones como precisión, robustez, eficiencia o equidad \cite{liang2022helm}. Aunque HELM constituye un hito metodológico, su cobertura lingüística sigue siendo limitada, lo que deja fuera a la mayoría de lenguas de bajo recurso.
+
+Otro referente es BIG-Bench \cite{srivastava2022bigbench}. Un benchmark masivo con más de 200 tareas diseñadas para explorar las capacidades emergentes de los LLMs. Sin embargo, al igual que HELM, BIG-Bench se centra casi exclusivamente en lenguas de alta disponibilidad de datos, lo que evidencia una brecha estructural, los marcos de evaluación más influyentes no contemplan lenguas como el asturiano, el aragonés, el gallego o muchas otras. Esta falta de representación lingüística limita la capacidad de estos benchmarks para ofrecer una evaluación justa y comparativa en contextos multilingües.
+
+En el ámbito multilingüe, FLORES-200 constituye uno de los avances más significativos. Este benchmark, desarrollado en el contexto del proyecto \textit{No Language Left Behind}, permite evaluar sistemas de traducción en 200 lenguas, muchas de ellas de bajo recurso. Aunque su enfoque se centra en la traducción automática, FLORES-200 demuestra que es posible construir recursos multilingües amplios y equilibrados, y demuestra la importancia de disponer de datos paralelos de alta calidad para lenguas minoritarias \cite{nllb2022}. 
+
+En respuesta a estas carencias, han surgido iniciativas específicas para lenguas de la península ibérica. Entre ellas destaca \textit{IberBench} \cite{gonzalez2026iberbench}, un benchmark diseñado para evaluar LLMs en lenguas iberorromances, incluyendo gallego, euskera y catalán. IberBench integra más de un centenar de datasets procedentes de campañas de evaluación previas y tareas adaptadas, abarcando clasificación, análisis de sentimiento, resumen y otras tareas de comprensión. Su principal aportación es proporcionar un marco homogéneo que permite comparar modelos abiertos y cerrados en lenguas tradicionalmente infrarepresentadas.
+
+Por último, se ha analizado el rendimiento de modelos abiertos y propietarios en lenguas de bajo recurso bajo configuraciones \textit{zero-shot}, \textit{few-shot} y \textit{chain-of-thought}. El estudio muestra que, ante la falta de recursos lingüísticos, la comunidad recurre a dos estrategias principales. La primera es la creación manual de datasets en la lengua objetivo. La segunda es la traducción de benchmarks existentes desde lenguas de alto recurso, ya sea mediante traducción humana o automática. Ambas estrategias permiten realizar evaluaciones comparables, pero introducen limitaciones importantes, como sesgos de traducción, pérdida de matices lingüísticos y una cobertura temática reducida \cite{NAZI2025100124}.
+
+En conjunto, estos trabajos evidencian una limitación estructural. La evaluación de LLMs en lenguas minoritarias depende de la creación manual, costosa y poco escalable de nuevos conjuntos de datos. A diferencia de las lenguas mayoritarias, que cuentan con ecosistemas de evaluación consolidados, las lenguas de bajo recurso requieren esfuerzos ad hoc para cada nueva tarea o benchmark. Esta situación subraya la necesidad de desarrollar metodologías multilingüe, que permitan evaluar modelos en un espectro amplio de lenguas sin depender de la construcción manual de datasets para cada una de ellas.
