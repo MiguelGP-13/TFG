@@ -20,14 +20,14 @@ El objetivo es estudiar el comportamiento de modelos modernos en lenguas con poc
 TFG/
 │
 ├── notebooks/                         # Notebooks principales del TFG
-├── 1-datasetGeneration.ipynb      # Generación de datasets (ortografía, huecos, instructivo…)
-├── 2-LLM_Evaluation.ipynb         # Evaluación de modelos base
-├── 3-Train.ipynb                  # Entrenamiento QLoRA
-├── 3.1-GenerateTrainDatasets.ipynb# Generación de datos para entrenamiento
+├── 1-datasetGeneration.ipynb          # Generación de datasets (ortografía, huecos, instructivo…)
+├── 2-LLM_Evaluation.ipynb             # Evaluación de modelos base
+├── 3-Train.ipynb                      # Entrenamiento QLoRA
+├── 3.1-GenerateTrainDatasets.ipynb    # Generación de datos para entrenamiento
 ├── 3.2-Trained_LLM_Evaluation.ipynb
-├── 4-exploreResults.ipynb         # Análisis de resultados
-├── 5-UploadModels.ipynb           # Subida de modelos a HF
-├── Utilidades.ipynb                 # Descarga de corpus
+├── 4-exploreResults.ipynb             # Análisis de resultados
+├── 5-UploadModels.ipynb               # Subida de modelos a HF
+├── Utilidades.ipynb                   # Descarga de corpus
 │
 ├── lowresource_llm_evaluation/        # Paquete Python desarrollado en el TFG
 │   ├── lowresource_llm_evaluation/
