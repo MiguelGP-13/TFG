@@ -19,7 +19,6 @@ El objetivo es estudiar el comportamiento de modelos modernos en lenguas con poc
 ```
 TFG/
 │
-├── notebooks/                         # Notebooks principales del TFG
 ├── 1-datasetGeneration.ipynb          # Generación de datasets (ortografía, huecos, instructivo…)
 ├── 2-LLM_Evaluation.ipynb             # Evaluación de modelos base
 ├── 3-Train.ipynb                      # Entrenamiento QLoRA
@@ -54,9 +53,12 @@ TFG/
 │   ├── Processed/
 │   └── Figures/
 │
-├── Memoria/                           # Figuras utilizadas en el documento del TFG
+├── Figuras para Memoria/              # Figuras utilizadas en el documento del TFG
 │
-├── docs/                              # Documentación auxiliar
+│
+├── Memoria/                           # Memoria en formato Latex y PDF
+│
+├── docs/                              # Documentación relacionada con el código
 │   ├── README.md
 │   ├── RESULTS.md
 │   └── requirements.txt
