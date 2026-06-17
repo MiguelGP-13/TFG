@@ -611,3 +611,4 @@
 \hyphenpenalty=10000
 \exhyphenpenalty=10000
 \usepackage{url}
+\usepackage{inconsolata}
