@@ -1,12 +1,8 @@
-# Datos
-
-Los datos utilizados en este proyecto no están disponibles públicamente, ya que pertenecen a los patrocinadores del proyecto y están sujetos a investigaciones futuras.  
-Fueron puestos a nuestra disposición exclusivamente para el desarrollo de esta tesis.
-
-A continuación se listan los conjuntos de datos generados y publicados en HuggingFace, junto con sus DOI.
-
 Los modelos entrenados y los datos en todas las lenguas y con todas las configuraciones se encuentran disponibles en HuggingFace agrupados en una colección:  
 https://hf.co/collections/MiguelGP-13/tfg
+
+# Datos
+A continuación se listan los conjuntos de datos generados y publicados en HuggingFace, junto con sus DOI.
 
 ## Disponibilidad de datos
 
